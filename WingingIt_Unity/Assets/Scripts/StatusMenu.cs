@@ -8,41 +8,72 @@ public class StatusMenu : MonoBehaviour
 {
     public int hunger = 100, thirst = 100, happiness = 100;
     float tHunger = 60, tThirst = 60, tHappiness = 60;
-    GameObject menuUI;
+    public GameObject menuUI;
     // public float realTime;
     // public DateTime time;
 
     public Slider sliderHunger, sliderThirst, sliderHappiness;
+    public bool isOpen;
 
 
     void Start()
     {
-        
+        CloseMenu();   
     }
 
     void Update()
     {
-        UpdateHunger();
-        UpdateThirst();
-        UpdateHappiness();
+        if(isOpen)
+        {
+            UpdateHunger();
+            UpdateThirst();
+            UpdateHappiness();    
+        }
+        
 
         // realTime = DateTime.Now;
         // time = DateTime.Now;
         // print(time.TimeOfDay);
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if(Physics.Raycast(ray, out hit, 100))
+        
+        if(isOpen)
         {
-            if(hit.collider == gameObject)
+            if(Input.GetMouseButtonDown(0))
             {
-                UseMenu();
+                CloseMenu();
+            }
+        }
+        else
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            Collider col = this.gameObject.GetComponent<Collider>();
+            if(Physics.Raycast(ray, out hit, 100))
+            {
+                if(hit.collider == col && Input.GetMouseButtonDown(0))
+                {
+                    print ("Hit? " + gameObject.name);
+
+                    OpenMenu();
+                }
             }
         }
     }
 
-    void UseMenu()
+    void OpenMenu()
     {
         menuUI.SetActive(true);
+        isOpen = true;
+        sliderHunger.value = hunger;
+        sliderThirst.value = thirst;
+        sliderHunger.value = happiness;
+
+
+
+    }
+    void CloseMenu()
+    {
+        menuUI.SetActive(false);
+        isOpen = false;
     }
 
     void UpdateHunger ()
