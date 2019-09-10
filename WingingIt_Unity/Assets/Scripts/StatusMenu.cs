@@ -10,7 +10,7 @@ public class StatusMenu : MonoBehaviour
     float tHunger = 60, tThirst = 60, tHappiness = 60;
     public GameObject menuUI;
     // public float realTime;
-    // public DateTime time;
+    // public DateTime currTime, lastTime;
     public Text chickenNameUi;
     public String chickenName;
     public Slider sliderHunger, sliderThirst, sliderHappiness;
@@ -29,21 +29,20 @@ public class StatusMenu : MonoBehaviour
         // {
               
         // }
-        
 
         // realTime = DateTime.Now;
-        // time = DateTime.Now;
-        // print(time.TimeOfDay);
-        
+        // currTime = DateTime.Now;
+        // print(currTime.TimeOfDay);
+        UpdateHunger();
+        UpdateThirst();
+        UpdateHappiness();
         if(isOpen)
         {
             if(Input.GetMouseButtonUp(0))
             {
                 CloseMenu();
             }
-            UpdateHunger();
-            UpdateThirst();
-            UpdateHappiness();  
+              
         }
         else
         {
@@ -54,7 +53,7 @@ public class StatusMenu : MonoBehaviour
             {
                 if(hit.collider == col && Input.GetMouseButtonUp(0))
                 {
-                    print ("Hit? " + gameObject.name);
+                    // print ("Hit? " + gameObject.name);
 
                     OpenMenu();
                 }
@@ -81,40 +80,43 @@ public class StatusMenu : MonoBehaviour
         isOpen = false;
     }
 
-    void UpdateHunger ()
+    void UpdateHunger ()        //Constantly updating and checking if the hunger should go down
     {
         tHunger -= Time.deltaTime;
         if(tHunger <= 0)
         {
-            tHunger = 5;
-            hunger -= 10;
+            tHunger = 30;
+            hunger -= 60 * 60;           // how long it should take before it drops, minute
+            sliderHunger.value = hunger;
+
         }
         // print (tHunger);
-        sliderHunger.value = hunger;
 
     }
-    void UpdateThirst ()
+    void UpdateThirst ()    //Constantly updating and checking if the thirst should go down
     {
         tThirst -= Time.deltaTime;
         if(tThirst <= 0)
         {
             tThirst = 5;
-            thirst -= 10;
+            thirst -= 60 * 5;           // how long it should take before it drops, minute
+            sliderThirst.value = thirst;
+
         }
         // print (tThirst);
-        sliderThirst.value = thirst;
 
     }
-    void UpdateHappiness ()
+    void UpdateHappiness ()             //Constantly updating and checking if the happiness should go down
     {
         tHappiness -= Time.deltaTime;
         if(tHappiness <= 0)
         {
-            tHappiness = 5;
-            happiness -= 10;
+            tHappiness = 10;
+            happiness -= 60 * 15;           // how long it should take before it drops, minute
+            sliderHunger.value = happiness;
+
         }
         // print (tHunger);
-        sliderHunger.value = happiness;
 
     }
 }
