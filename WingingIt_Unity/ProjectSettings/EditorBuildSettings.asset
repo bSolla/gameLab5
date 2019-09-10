@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/KineTests/StatusMenuTest.unity
+    guid: d6f1606ca2c09ae4ca007d40a1fcf388
   m_configObjects: {}

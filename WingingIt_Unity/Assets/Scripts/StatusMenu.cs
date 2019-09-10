@@ -11,24 +11,24 @@ public class StatusMenu : MonoBehaviour
     public GameObject menuUI;
     // public float realTime;
     // public DateTime time;
-
+    public Text chickenNameUi;
+    public String chickenName;
     public Slider sliderHunger, sliderThirst, sliderHappiness;
     public bool isOpen;
 
 
     void Start()
     {
-        CloseMenu();   
+        CloseMenu();
+        print (hunger + " " + thirst + " " + happiness);
     }
 
     void Update()
     {
-        if(isOpen)
-        {
-            UpdateHunger();
-            UpdateThirst();
-            UpdateHappiness();    
-        }
+        // if(isOpen)
+        // {
+              
+        // }
         
 
         // realTime = DateTime.Now;
@@ -37,10 +37,13 @@ public class StatusMenu : MonoBehaviour
         
         if(isOpen)
         {
-            if(Input.GetMouseButtonDown(0))
+            if(Input.GetMouseButtonUp(0))
             {
                 CloseMenu();
             }
+            UpdateHunger();
+            UpdateThirst();
+            UpdateHappiness();  
         }
         else
         {
@@ -49,7 +52,7 @@ public class StatusMenu : MonoBehaviour
             Collider col = this.gameObject.GetComponent<Collider>();
             if(Physics.Raycast(ray, out hit, 100))
             {
-                if(hit.collider == col && Input.GetMouseButtonDown(0))
+                if(hit.collider == col && Input.GetMouseButtonUp(0))
                 {
                     print ("Hit? " + gameObject.name);
 
@@ -65,7 +68,9 @@ public class StatusMenu : MonoBehaviour
         isOpen = true;
         sliderHunger.value = hunger;
         sliderThirst.value = thirst;
-        sliderHunger.value = happiness;
+        sliderHappiness.value = happiness;
+        chickenNameUi.text = chickenName;   
+
 
 
 
@@ -82,7 +87,7 @@ public class StatusMenu : MonoBehaviour
         if(tHunger <= 0)
         {
             tHunger = 5;
-            hunger -= 50;
+            hunger -= 10;
         }
         // print (tHunger);
         sliderHunger.value = hunger;
@@ -94,7 +99,7 @@ public class StatusMenu : MonoBehaviour
         if(tThirst <= 0)
         {
             tThirst = 5;
-            thirst -= 50;
+            thirst -= 10;
         }
         // print (tThirst);
         sliderThirst.value = thirst;
@@ -106,7 +111,7 @@ public class StatusMenu : MonoBehaviour
         if(tHappiness <= 0)
         {
             tHappiness = 5;
-            happiness -= 50;
+            happiness -= 10;
         }
         // print (tHunger);
         sliderHunger.value = happiness;
