@@ -72,10 +72,12 @@ public class ChickenController : MonoBehaviour
         }
         else
         {
-            Vector3 lookAtTarget = Vector3.RotateTowards(transform.forward, target, 10000f, 10000f);
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(lookAtTarget), 5/Time.deltaTime);
+            // Vector3 lookAtTarget = Vector3.RotateTowards(transform.forward, target, 5 * Time.deltaTime, 0f);
+            // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(lookAtTarget), 5/Time.deltaTime);
             // transform.rotation = Quaternion.LookRotation(lookAtTarget);
             charController.Move(moveDir.normalized * movementSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.LookRotation(walkingPoints[currWalkPoint].transform.position);
+
         }
 
     }
