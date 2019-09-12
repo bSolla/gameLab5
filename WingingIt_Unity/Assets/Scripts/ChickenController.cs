@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class ChickenController : MonoBehaviour
 {
-    StatusMenu statusMenu;
     public float planeX, planeZ;
     int currWalkPoint;
     public float movementSpeed = 5f;
     public GameObject[] walkingPoints;
+    public GameObject foodBowl;
 
     CharacterController charController;
+    StatusMenu status;
 
     void Start()
     {
         charController = GetComponent<CharacterController>();
+        status = GetComponent<StatusMenu>();
         currWalkPoint = Random.Range(0, walkingPoints.Length);
 
         // planeX = GameObject.FindWithTag("Ground").transform.localScale.x;
@@ -28,7 +30,15 @@ public class ChickenController : MonoBehaviour
 
     void Update()
     {
-        movingPoint();
+        if(status.currState == StatusMenu.State.Normal)
+        {
+            movingPoint();
+
+        }
+        if(status.currState == StatusMenu.State.Hungry)
+        {
+            GettingFood();
+        }
         
         // float dist = Vector3.Distance(transform.position, walkingPoints[walkPoint].transform.position);
         // print ("Dist " +  Mathf.RoundToInt(dist));
@@ -80,5 +90,21 @@ public class ChickenController : MonoBehaviour
 
         }
 
+    }
+    void GettingFood()
+    {
+        Vector3 moveDir = foodBowl.transform.position - transform.position;
+        if(moveDir.magnitude > 1)
+        {
+            charController.Move(moveDir.normalized * movementSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.LookRotation(foodBowl.transform.position);
+
+        }
+        if(foodBowl.GetComponent<FoodBowl>().avaliableFood > 0)
+        {
+            status.hunger ++;
+            foodBowl.GetComponent<FoodBowl>().avaliableFood --;
+        }
+       
     }
 }

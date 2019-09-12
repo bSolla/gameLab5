@@ -6,6 +6,8 @@ using System;
 
 public class StatusMenu : MonoBehaviour
 {
+    public enum State {Normal, Hungry, Thirsty, Sad};
+    public State currState = State.Normal;
     public int hunger = 100, thirst = 100, happiness = 100;
     float tHunger = 60, tThirst = 60, tHappiness = 60;
     public GameObject menuUI;
@@ -14,7 +16,9 @@ public class StatusMenu : MonoBehaviour
     public Text chickenNameUi;
     public String chickenName;
     public Slider sliderHunger, sliderThirst, sliderHappiness;
-    public bool isOpen;
+    bool isOpen;
+
+    // public bool isHungry;
 
 
     void Start()
@@ -25,6 +29,17 @@ public class StatusMenu : MonoBehaviour
 
     void Update()
     {
+
+        switch(currState)
+        {
+            case State.Normal: UpdateNormalState(); break;
+            case State.Hungry: UpdateHungryState(); break;
+            case State.Thirsty: UpdateThirstyState(); break;
+            case State.Sad: UpdateSadState(); break;
+        }
+        
+
+
         // if(isOpen)
         // {
               
@@ -60,6 +75,25 @@ public class StatusMenu : MonoBehaviour
             }
         }
     }
+    void UpdateNormalState()
+    {
+        if(hunger < 20)
+        {
+            currState = State.Hungry;
+        }
+    }
+    void UpdateHungryState()
+    {
+        
+    }
+    void UpdateThirstyState()
+    {
+
+    }
+    void UpdateSadState()
+    {
+
+    }
 
     void OpenMenu()
     {
@@ -90,6 +124,8 @@ public class StatusMenu : MonoBehaviour
             sliderHunger.value = hunger;
 
         }
+
+        
         // print (tHunger);
 
     }

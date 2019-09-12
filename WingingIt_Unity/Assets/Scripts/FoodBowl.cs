@@ -1,18 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FoodBowl : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    public int avaliableFood = 5;
+    public GameObject food;
+
     void Update()
     {
+        if(avaliableFood <= 0)
+        {
+            food.SetActive(false);
+        }
+        else
+        {
+            food.SetActive(true);
+        }
         
     }
 }
