@@ -9,7 +9,7 @@ public class StatusMenu : MonoBehaviour
     public enum State {Normal, Hungry, Thirsty, Sad};
     public State currState = State.Normal;
     public int hunger = 100, thirst = 100, happiness = 100;
-    float tHunger = 60, tThirst = 60, tHappiness = 60;
+    public float tHunger, tThirst, tHappiness;
     public GameObject menuUI;
     // public float realTime;
     // public DateTime currTime, lastTime;
@@ -18,13 +18,21 @@ public class StatusMenu : MonoBehaviour
     public Slider sliderHunger, sliderThirst, sliderHappiness;
     bool isOpen;
 
+    ChickenController chickenController;
+    FoodBowl food;
+
     // public bool isHungry;
 
 
     void Start()
     {
+        chickenController = GetComponent<ChickenController>();
+        food = chickenController.foodBowl.GetComponent<FoodBowl>();
+
         CloseMenu();
-        print (hunger + " " + thirst + " " + happiness);
+        // print (hunger + " " + thirst + " " + happiness);
+
+        tHunger = 10;
     }
 
     void Update()
@@ -81,10 +89,25 @@ public class StatusMenu : MonoBehaviour
         {
             currState = State.Hungry;
         }
+        else
+        {
+            // chickenController.movingPoint();
+
+        }
     }
     void UpdateHungryState()
     {
-        
+        if(food.avaliableFood > 0)
+        {
+            chickenController.GettingFood();
+        }
+        else
+        {
+            if(hunger > 50)
+            {
+                currState = State.Normal;
+            }
+        }
     }
     void UpdateThirstyState()
     {
@@ -117,10 +140,11 @@ public class StatusMenu : MonoBehaviour
     void UpdateHunger ()        //Constantly updating and checking if the hunger should go down
     {
         tHunger -= Time.deltaTime;
-        if(tHunger <= 0)
+        if(tHunger <= 0 && hunger > 10)
         {
-            tHunger = 30;
-            hunger -= 60 * 60;           // how long it should take before it drops, minute
+            tHunger = 10;
+            // tHunger += 60 * 60;             // how long it should take before it drops, minute
+            hunger -= 10;           
             sliderHunger.value = hunger;
 
         }
@@ -134,8 +158,9 @@ public class StatusMenu : MonoBehaviour
         tThirst -= Time.deltaTime;
         if(tThirst <= 0)
         {
-            tThirst = 5;
-            thirst -= 60 * 5;           // how long it should take before it drops, minute
+            tThirst = 10;
+            thirst -= 5;
+            // tThirst -= 60 * 5;           // how long it should take before it drops, minute
             sliderThirst.value = thirst;
 
         }
@@ -148,7 +173,9 @@ public class StatusMenu : MonoBehaviour
         if(tHappiness <= 0)
         {
             tHappiness = 10;
-            happiness -= 60 * 15;           // how long it should take before it drops, minute
+            happiness -= 10;
+            
+            // tHappiness -= 60 * 15;           // how long it should take before it drops, minute
             sliderHunger.value = happiness;
 
         }

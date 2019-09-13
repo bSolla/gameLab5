@@ -9,9 +9,12 @@ public class ChickenController : MonoBehaviour
     public float movementSpeed = 5f;
     public GameObject[] walkingPoints;
     public GameObject foodBowl;
+    public Transform rotatePoint;
 
+    Vector3 target;
     CharacterController charController;
     StatusMenu status;
+    bool canMove = true;
 
     void Start()
     {
@@ -23,6 +26,9 @@ public class ChickenController : MonoBehaviour
         // planeZ = GameObject.FindWithTag("Ground").transform.localScale.z;
 
         walkingPoints = GameObject.FindGameObjectsWithTag("WalkingPoint");
+        target = newWalkingpoint();
+        rotatePoint.transform.position = target;
+
         // walkPoint = Random.Range(0, walkingPoints.Length);
         // print ("Walk point: " + walkPoint);
 
@@ -32,13 +38,15 @@ public class ChickenController : MonoBehaviour
     {
         if(status.currState == StatusMenu.State.Normal)
         {
-            movingPoint();
+            StartCoroutine(movingPoint());
+            RotationPointMovement();
+
 
         }
-        if(status.currState == StatusMenu.State.Hungry)
-        {
-            GettingFood();
-        }
+        // if(status.currState == StatusMenu.State.Hungry)
+        // {
+        //     GettingFood();
+        // }
         
         // float dist = Vector3.Distance(transform.position, walkingPoints[walkPoint].transform.position);
         // print ("Dist " +  Mathf.RoundToInt(dist));
@@ -70,28 +78,84 @@ public class ChickenController : MonoBehaviour
         }
         // transform.Translate(walkPoint, )
 
-    void movingPoint()
+    // public void movingPoint()
+    // {
+    //     Vector3 target = walkingPoints[currWalkPoint].transform.position;
+    //     target.y = transform.position.y;
+    //     Vector3 moveDir = target - transform.position;
+    //     if(moveDir.magnitude < 1f)
+    //     {
+    //         // transform.position = target;
+    //         currWalkPoint = Random.Range(0, walkingPoints.Length);
+    //     }
+    //     else
+    //     {
+    //         // Vector3 lookAtTarget = Vector3.RotateTowards(transform.forward, target, 5 * Time.deltaTime, 0f);
+    //         // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(lookAtTarget), 5/Time.deltaTime);
+    //         // transform.rotation = Quaternion.LookRotation(lookAtTarget);
+    //         charController.Move(moveDir.normalized * movementSpeed * Time.deltaTime);
+    //         transform.rotation = Quaternion.LookRotation(walkingPoints[currWalkPoint].transform.position);
+
+    //     }
+
+    // }
+    public IEnumerator movingPoint()
     {
-        Vector3 target = walkingPoints[currWalkPoint].transform.position;
-        target.y = transform.position.y;
+        // Vector3 target = newWalkingpoint();
+        // target.y = transform.position.y;
         Vector3 moveDir = target - transform.position;
-        if(moveDir.magnitude < 1f)
+        // if(moveDir.magnitude < 1f)
+        // print("Distance " + Vector3.Distance(transform.position, target));
+        // if(Vector3.Distance(transform.position, target) < 0.1f && canMove)
+        // {
+        //     // transform.position = target;
+        //     // currWalkPoint = Random.Range(0, walkingPoints.Length);
+        //     canMove = false;
+        //     yield return new WaitForSeconds(2);
+        //     target = newWalkingpoint();
+        //     canMove = true;
+        //     // newWalkingpoint();
+        // }
+        if(canMove)
         {
-            // transform.position = target;
-            currWalkPoint = Random.Range(0, walkingPoints.Length);
-        }
-        else
-        {
+            if(Vector3.Distance(transform.position, target) < 0.1f)
+            {
+                // transform.position = target;
+                // currWalkPoint = Random.Range(0, walkingPoints.Length);
+                canMove = false;
+                yield return new WaitForSeconds(2);
+                target = newWalkingpoint();
+                canMove = true;
+                // newWalkingpoint();
+            }
             // Vector3 lookAtTarget = Vector3.RotateTowards(transform.forward, target, 5 * Time.deltaTime, 0f);
             // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(lookAtTarget), 5/Time.deltaTime);
             // transform.rotation = Quaternion.LookRotation(lookAtTarget);
             charController.Move(moveDir.normalized * movementSpeed * Time.deltaTime);
-            transform.rotation = Quaternion.LookRotation(walkingPoints[currWalkPoint].transform.position);
+            transform.LookAt(rotatePoint);
 
         }
 
     }
-    void GettingFood()
+    public Vector3 newWalkingpoint()
+    {
+        // print("New target");
+        float xPos = transform.position.x;
+        float newX = Random.Range(xPos - 1, xPos + 1);
+        if(newX > 2) newX = Random.Range(0.0f, 2.0f);
+        if(newX < -2) newX = Random.Range(0.0f, -2.0f);
+
+        float zPos = transform.position.z;
+        float newZ = Random.Range(zPos - 2, zPos + 2);
+        if(newZ > 2) newZ = 2;
+        if(newZ < -2) newZ = -2;
+
+        Vector3 newTarget = new Vector3(newX, transform.position.y, newZ);
+
+        print ("The new target is: " + newTarget);
+        return newTarget;
+    }
+    public void GettingFood()
     {
         Vector3 moveDir = foodBowl.transform.position - transform.position;
         if(moveDir.magnitude > 1)
@@ -106,5 +170,14 @@ public class ChickenController : MonoBehaviour
             foodBowl.GetComponent<FoodBowl>().avaliableFood --;
         }
        
+    }
+
+    private void RotationPointMovement()
+    {
+        float offsetX = rotatePoint.rotation.x - transform.rotation.x;
+        float offsetZ = rotatePoint.position.z - transform.position.z;
+        Vector3 moveDir = (target) - rotatePoint.position;
+        rotatePoint.transform.position = new Vector3(rotatePoint.transform.position.x + offsetX, 0.35f, rotatePoint.transform.position.z + offsetZ);
+        rotatePoint.position += moveDir * 3 * Time.deltaTime; 
     }
 }
