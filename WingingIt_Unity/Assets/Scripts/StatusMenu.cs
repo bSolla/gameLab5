@@ -9,7 +9,7 @@ public class StatusMenu : MonoBehaviour
     public enum State {Normal, Hungry, Thirsty, Sad};
     public State currState = State.Normal;
     public int hunger = 100, thirst = 100, happiness = 100;
-    public float tHunger, tThirst, tHappiness;
+    private float tHunger, tThirst, tHappiness;
     public GameObject menuUI;
     // public float realTime;
     // public DateTime currTime, lastTime;
@@ -20,6 +20,7 @@ public class StatusMenu : MonoBehaviour
 
     ChickenController chickenController;
     FoodBowl food;
+    WaterDispenser water;
 
     // public bool isHungry;
 
@@ -85,14 +86,18 @@ public class StatusMenu : MonoBehaviour
     }
     void UpdateNormalState()
     {
-        if(hunger < 20)
+        if(hunger < 50)
         {
             currState = State.Hungry;
         }
-        else
+        if(thirst < 50)
         {
+            currState = State.Thirsty;
             // chickenController.movingPoint();
-
+        }
+        if(happiness < 50)
+        {
+            currState = State.Sad;
         }
     }
     void UpdateHungryState()
@@ -103,7 +108,7 @@ public class StatusMenu : MonoBehaviour
         }
         else
         {
-            if(hunger > 50)
+            if(hunger >= 50)
             {
                 currState = State.Normal;
             }
@@ -111,11 +116,15 @@ public class StatusMenu : MonoBehaviour
     }
     void UpdateThirstyState()
     {
+        // if()
 
     }
     void UpdateSadState()
     {
-
+        if (hunger > 50 && thirst > 50)
+        {
+            currState = State.Normal;
+        }
     }
 
     void OpenMenu()

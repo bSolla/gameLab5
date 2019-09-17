@@ -9,7 +9,7 @@ public class ChickenController : MonoBehaviour
     public float movementSpeed = 5f;
     public GameObject[] walkingPoints;
     public GameObject foodBowl;
-    public Transform rotatePoint;
+    // public Transform rotatePoint;
 
     Vector3 target;
     CharacterController charController;
@@ -27,7 +27,7 @@ public class ChickenController : MonoBehaviour
 
         walkingPoints = GameObject.FindGameObjectsWithTag("WalkingPoint");
         target = newWalkingpoint();
-        rotatePoint.transform.position = target;
+        // rotatePoint.transform.position = target;
 
         // walkPoint = Random.Range(0, walkingPoints.Length);
         // print ("Walk point: " + walkPoint);
@@ -39,7 +39,7 @@ public class ChickenController : MonoBehaviour
         if(status.currState == StatusMenu.State.Normal)
         {
             StartCoroutine(movingPoint());
-            RotationPointMovement();
+            // RotationPointMovement();
 
 
         }
@@ -123,7 +123,8 @@ public class ChickenController : MonoBehaviour
                 // transform.position = target;
                 // currWalkPoint = Random.Range(0, walkingPoints.Length);
                 canMove = false;
-                yield return new WaitForSeconds(2);
+                float t = Random.Range(0, 10);
+                yield return new WaitForSeconds(t);
                 target = newWalkingpoint();
                 canMove = true;
                 // newWalkingpoint();
@@ -132,7 +133,8 @@ public class ChickenController : MonoBehaviour
             // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(lookAtTarget), 5/Time.deltaTime);
             // transform.rotation = Quaternion.LookRotation(lookAtTarget);
             charController.Move(moveDir.normalized * movementSpeed * Time.deltaTime);
-            transform.LookAt(rotatePoint);
+            // transform.LookAt(rotatePoint);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target - transform.position), 7f * Time.deltaTime);
 
         }
 
@@ -150,9 +152,9 @@ public class ChickenController : MonoBehaviour
         if(newZ > 2) newZ = 2;
         if(newZ < -2) newZ = -2;
 
-        Vector3 newTarget = new Vector3(newX, transform.position.y, newZ);
+        Vector3 newTarget = new Vector3(newX, 0.36f, newZ);
 
-        print ("The new target is: " + newTarget);
+        // print ("The new target is: " + newTarget);
         return newTarget;
     }
     public void GettingFood()
@@ -164,7 +166,7 @@ public class ChickenController : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(foodBowl.transform.position);
 
         }
-        if(foodBowl.GetComponent<FoodBowl>().avaliableFood > 0)
+        if(foodBowl.GetComponent<FoodBowl>().avaliableFood > 0 &&  Vector3.Distance(transform.position, foodBowl.transform.position) < 1f)
         {
             status.hunger ++;
             foodBowl.GetComponent<FoodBowl>().avaliableFood --;
@@ -172,12 +174,13 @@ public class ChickenController : MonoBehaviour
        
     }
 
-    private void RotationPointMovement()
-    {
-        float offsetX = rotatePoint.rotation.x - transform.rotation.x;
-        float offsetZ = rotatePoint.position.z - transform.position.z;
-        Vector3 moveDir = (target) - rotatePoint.position;
-        // rotatePoint.transform.position = new Vector3(rotatePoint.transform.position.x + offsetX, 0.35f, rotatePoint.transform.position.z + offsetZ);
-        rotatePoint.position += moveDir * 6 * Time.deltaTime; 
-    }
+    // private void RotationPointMovement()
+    // {
+    //     float offsetX = rotatePoint.rotation.x - transform.rotation.x;
+    //     float offsetZ = rotatePoint.position.z - transform.position.z;
+    //     Vector3 moveDir = (target) - rotatePoint.position;
+    //     // rotatePoint
+    //     // rotatePoint.transform.position = new Vector3(rotatePoint.transform.position.x + offsetX, 0.35f, rotatePoint.transform.position.z + offsetZ);
+    //     rotatePoint.position += moveDir * 6 * Time.deltaTime; 
+    // }
 }
