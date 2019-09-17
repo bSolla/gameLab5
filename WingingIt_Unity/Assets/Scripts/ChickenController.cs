@@ -177,7 +177,7 @@ public class ChickenController : MonoBehaviour
         float offsetX = rotatePoint.rotation.x - transform.rotation.x;
         float offsetZ = rotatePoint.position.z - transform.position.z;
         Vector3 moveDir = (target) - rotatePoint.position;
-        rotatePoint.transform.position = new Vector3(rotatePoint.transform.position.x + offsetX, 0.35f, rotatePoint.transform.position.z + offsetZ);
-        rotatePoint.position += moveDir * 3 * Time.deltaTime; 
+        // rotatePoint.transform.position = new Vector3(rotatePoint.transform.position.x + offsetX, 0.35f, rotatePoint.transform.position.z + offsetZ);
+        rotatePoint.position += moveDir * 6 * Time.deltaTime; 
     }
 }
