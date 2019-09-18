@@ -86,7 +86,14 @@ public class StatusMenu : MonoBehaviour
     }
     void UpdateNormalState()
     {
-        if(hunger < 50)
+        // float precentChance = (hunger / 100f);
+        // float rndValue = UnityEngine.Random.value; print (rndValue);
+        // if(rndValue <= precentChance)
+        // {
+        //     print ("My chances are: " + precentChance + "%");
+        //     currState = State.Hungry;
+        // }
+        if(hunger < 60)
         {
             currState = State.Hungry;
         }
@@ -102,17 +109,25 @@ public class StatusMenu : MonoBehaviour
     }
     void UpdateHungryState()
     {
-        if(food.avaliableFood > 0)
-        {
+        // if(food.avaliableFood > 0)
+        // {
+        // float precentChance = (food / 100f);
+        // if(Random.value <= precentChance)
+        // {
             chickenController.GettingFood();
-        }
-        else
-        {
+            
+        // }
+            
+
+        // chickenController.GettingFood();
+        // }
+        // else
+        // {
             if(hunger >= 50)
             {
                 currState = State.Normal;
             }
-        }
+        // }
     }
     void UpdateThirstyState()
     {
