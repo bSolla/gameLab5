@@ -17,7 +17,8 @@ public class Egg : MonoBehaviour
 
             FindObjectOfType<CuttingGameManager>().AddPoints(points);
 
-            Destroy(this.gameObject);
+            Destroy(this.gameObject); 
+            //Maybe make an animation with a red panel so it gives a feedback that you have done something wrong
         }
     }
 }
