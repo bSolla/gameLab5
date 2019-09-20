@@ -9,135 +9,89 @@ public class ChickenController : MonoBehaviour
     public float movementSpeed = 5f;
     public GameObject[] walkingPoints;
     public GameObject foodBowl;
-    // public Transform rotatePoint;
 
     Vector3 target;
-    // CharacterController charController;
     StatusMenu status;
-    bool canMove = true;
+    public bool canMove = true, isLifted = false;
+
 
     void Start()
     {
-        // charController = GetComponent<CharacterController>();
         status = GetComponent<StatusMenu>();
-        currWalkPoint = Random.Range(0, walkingPoints.Length);
 
-        // planeX = GameObject.FindWithTag("Ground").transform.localScale.x;
-        // planeZ = GameObject.FindWithTag("Ground").transform.localScale.z;
-
-        walkingPoints = GameObject.FindGameObjectsWithTag("WalkingPoint");
         target = newWalkingpoint();
-        // rotatePoint.transform.position = target;
-
-        // walkPoint = Random.Range(0, walkingPoints.Length);
-        // print ("Walk point: " + walkPoint);
 
     }
 
     void Update()
     {
-        if(status.currState == StatusMenu.State.Normal)
+        if(status.currState == StatusMenu.State.Normal && !isLifted)
         {
             StartCoroutine(movingPoint());
-            // RotationPointMovement();
-
-
         }
-        // if(status.currState == StatusMenu.State.Hungry)
-        // {
-        //     GettingFood();
-        // }
-        
-        // float dist = Vector3.Distance(transform.position, walkingPoints[walkPoint].transform.position);
-        // print ("Dist " +  Mathf.RoundToInt(dist));
-        // if(dist < 0.2f || dist > 3)
-        // {
-        //     // float rndX = Random.Range(0, planeX); print (rndX);
-        //     // float rndZ = Random.Range(0, planeZ);
-        //     // walkPoint = new Vector3(rndX, transform.position.y, rndZ);
-        //     walkPoint = Random.Range(0, walkingPoints.Length);
-        //     print ("New Walk point: " + walkPoint);
-            
-            
-            
-        // }
-        // else
-        // {
-        //     transform.LookAt(walkingPoints[walkPoint].transform);
-        //     Vector3 movement = Vector3.forward * movementSpeed * Time.deltaTime;
-        //     charController.Move(movement);
+        LiftChicken();
+    }
 
-        //     print ("Distance is far");
-        //     // transform.Translate(walkPoint, Space.Self);
-        //     // transform.position -= walkingPoints[walkPoint].transform.position * movementSpeed * Time.deltaTime;
-
-        //     // print ("Walk point " + walkingPoints[walkPoint].transform.position);
-
-
-       
-        }
-        // transform.Translate(walkPoint, )
-
-    // public void movingPoint()
-    // {
-    //     Vector3 target = walkingPoints[currWalkPoint].transform.position;
-    //     target.y = transform.position.y;
-    //     Vector3 moveDir = target - transform.position;
-    //     if(moveDir.magnitude < 1f)
-    //     {
-    //         // transform.position = target;
-    //         currWalkPoint = Random.Range(0, walkingPoints.Length);
-    //     }
-    //     else
-    //     {
-    //         // Vector3 lookAtTarget = Vector3.RotateTowards(transform.forward, target, 5 * Time.deltaTime, 0f);
-    //         // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(lookAtTarget), 5/Time.deltaTime);
-    //         // transform.rotation = Quaternion.LookRotation(lookAtTarget);
-    //         charController.Move(moveDir.normalized * movementSpeed * Time.deltaTime);
-    //         transform.rotation = Quaternion.LookRotation(walkingPoints[currWalkPoint].transform.position);
-
-    //     }
-
-    // }
     public IEnumerator movingPoint()
     {
-        // Vector3 target = newWalkingpoint();
-        // target.y = transform.position.y;
+        
         Vector3 moveDir = target - transform.position;
-        // if(moveDir.magnitude < 1f)
-        // print("Distance " + Vector3.Distance(transform.position, target));
-        // if(Vector3.Distance(transform.position, target) < 0.1f && canMove)
-        // {
-        //     // transform.position = target;
-        //     // currWalkPoint = Random.Range(0, walkingPoints.Length);
-        //     canMove = false;
-        //     yield return new WaitForSeconds(2);
-        //     target = newWalkingpoint();
-        //     canMove = true;
-        //     // newWalkingpoint();
-        // }
+
         if(canMove)
         {
             if(Vector3.Distance(transform.position, target) < 0.1f)
             {
-                // transform.position = target;
-                // currWalkPoint = Random.Range(0, walkingPoints.Length);
+
                 canMove = false;
-                float t = Random.Range(0, 10);
+                float t = Random.Range(0, 2);
                 yield return new WaitForSeconds(t);
                 target = newWalkingpoint();
                 canMove = true;
-                // newWalkingpoint();
             }
-            // Vector3 lookAtTarget = Vector3.RotateTowards(transform.forward, target, 5 * Time.deltaTime, 0f);
-            // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(lookAtTarget), 5/Time.deltaTime);
-            // transform.rotation = Quaternion.LookRotation(lookAtTarget);
-            // charController.Move(moveDir.normalized * movementSpeed * Time.deltaTime);
+
             transform.position += moveDir * 3 * Time.deltaTime;
-            // transform.LookAt(rotatePoint);
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target - transform.position), 7f * Time.deltaTime);
 
         }
+
+    }
+
+    void LiftChicken()
+    {
+        // Ray ray = new Ray();
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        Collider col = this.gameObject.GetComponent<Collider>();
+
+        if(Physics.Raycast(ray, out hit))
+        {
+            if(Input.GetMouseButtonDown(0)  && hit.collider == col)
+            {
+                isLifted = true;
+                
+            }
+            if(Input.GetMouseButtonUp(0))
+            {
+                isLifted = false;
+                target= new Vector3(transform.position.x, 0.1f, transform.position.z);
+
+                transform.position = target;
+            }
+            if(isLifted)
+            {
+                
+                    Vector3 moveDir = new Vector3(hit.point.x, 1f, hit.point.z);
+                    // Vector3 moveDir = hit.point;
+
+                    // print (moveDir);
+
+                    transform.position = moveDir;
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Camera.main.transform.position - transform.position), 7f * Time.deltaTime);
+
+                    
+            }
+        }
+        
 
     }
     public Vector3 newWalkingpoint()
@@ -153,9 +107,8 @@ public class ChickenController : MonoBehaviour
         if(newZ > 2) newZ = 2;
         if(newZ < -2) newZ = -2;
 
-        Vector3 newTarget = new Vector3(newX, 0.36f, newZ);
+        Vector3 newTarget = new Vector3(newX, 0.1f, newZ);
 
-        // print ("The new target is: " + newTarget);
         return newTarget;
     }
     public void GettingFood()
@@ -163,8 +116,7 @@ public class ChickenController : MonoBehaviour
         Vector3 moveDir = foodBowl.transform.position - transform.position;
         if(moveDir.magnitude > 1)
         {
-            // charController.Move(moveDir.normalized * movementSpeed * Time.deltaTime);
-            transform.position += moveDir * 3 * Time.deltaTime;
+            transform.position += moveDir * 2 * Time.deltaTime;
 
             transform.rotation = Quaternion.LookRotation(foodBowl.transform.position);
 
@@ -177,13 +129,4 @@ public class ChickenController : MonoBehaviour
        
     }
 
-    // private void RotationPointMovement()
-    // {
-    //     float offsetX = rotatePoint.rotation.x - transform.rotation.x;
-    //     float offsetZ = rotatePoint.position.z - transform.position.z;
-    //     Vector3 moveDir = (target) - rotatePoint.position;
-    //     // rotatePoint
-    //     // rotatePoint.transform.position = new Vector3(rotatePoint.transform.position.x + offsetX, 0.35f, rotatePoint.transform.position.z + offsetZ);
-    //     rotatePoint.position += moveDir * 6 * Time.deltaTime; 
-    // }
 }
