@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class BerryBehavior : MonoBehaviour
 {
+    [HideInInspector] public bool beingHoveredByMouse = false;
     // Start is called before the first frame update
     void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
     {
         
     }
@@ -19,5 +14,11 @@ public class BerryBehavior : MonoBehaviour
     void OnMouseOver()
     {
         print(gameObject.name);
+        beingHoveredByMouse = true;
+    }
+
+    void OnMouseExit()
+    {
+        beingHoveredByMouse = false;
     }
 }
