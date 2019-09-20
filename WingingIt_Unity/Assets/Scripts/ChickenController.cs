@@ -12,13 +12,13 @@ public class ChickenController : MonoBehaviour
     // public Transform rotatePoint;
 
     Vector3 target;
-    CharacterController charController;
+    // CharacterController charController;
     StatusMenu status;
     bool canMove = true;
 
     void Start()
     {
-        charController = GetComponent<CharacterController>();
+        // charController = GetComponent<CharacterController>();
         status = GetComponent<StatusMenu>();
         currWalkPoint = Random.Range(0, walkingPoints.Length);
 
@@ -132,7 +132,8 @@ public class ChickenController : MonoBehaviour
             // Vector3 lookAtTarget = Vector3.RotateTowards(transform.forward, target, 5 * Time.deltaTime, 0f);
             // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(lookAtTarget), 5/Time.deltaTime);
             // transform.rotation = Quaternion.LookRotation(lookAtTarget);
-            charController.Move(moveDir.normalized * movementSpeed * Time.deltaTime);
+            // charController.Move(moveDir.normalized * movementSpeed * Time.deltaTime);
+            transform.position += moveDir * 3 * Time.deltaTime;
             // transform.LookAt(rotatePoint);
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target - transform.position), 7f * Time.deltaTime);
 
@@ -162,7 +163,9 @@ public class ChickenController : MonoBehaviour
         Vector3 moveDir = foodBowl.transform.position - transform.position;
         if(moveDir.magnitude > 1)
         {
-            charController.Move(moveDir.normalized * movementSpeed * Time.deltaTime);
+            // charController.Move(moveDir.normalized * movementSpeed * Time.deltaTime);
+            transform.position += moveDir * 3 * Time.deltaTime;
+
             transform.rotation = Quaternion.LookRotation(foodBowl.transform.position);
 
         }
