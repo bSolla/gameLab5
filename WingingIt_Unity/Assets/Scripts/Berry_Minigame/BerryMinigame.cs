@@ -41,10 +41,11 @@ public class BerryMinigame : MonoBehaviour
     {
         if (mousePressed)
         {
-            Debug.Log("mouse pressed");
             if (currentBerry < totalBerryCount && berryArray[currentBerry].beingHoveredByMouse)
             {
                 trail.transform.position = berryArray[currentBerry].transform.position;
+                berryArray[currentBerry].ActivateFeedbackParticles();
+
                 currentBerry++;
             }
         }
