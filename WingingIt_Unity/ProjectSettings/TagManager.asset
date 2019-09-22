@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Berry
+  - Manager
   layers:
   - Default
   - TransparentFX

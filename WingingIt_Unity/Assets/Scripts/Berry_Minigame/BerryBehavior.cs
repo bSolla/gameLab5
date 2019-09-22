@@ -17,7 +17,6 @@ public class BerryBehavior : MonoBehaviour
 
     void OnMouseOver()
     {
-        print(gameObject.name);
         beingHoveredByMouse = true;
     }
 

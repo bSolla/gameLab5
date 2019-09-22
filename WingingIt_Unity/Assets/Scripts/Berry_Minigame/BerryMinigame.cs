@@ -12,6 +12,8 @@ public class BerryMinigame : MonoBehaviour
     [SerializeField] GameObject trailPrefab;
     GameObject trail;
 
+    BerryGameManager berryGameManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,9 @@ public class BerryMinigame : MonoBehaviour
         totalBerryCount = berryArray.Length;
 
         trail = Instantiate(trailPrefab, berryArray[0].transform.position, Quaternion.identity);
+        trail.transform.parent = gameObject.transform;
+
+        berryGameManager = GameObject.FindWithTag("Manager").GetComponent<BerryGameManager>();
     }
 
     void Update()
@@ -27,13 +32,14 @@ public class BerryMinigame : MonoBehaviour
         {
             mousePressed = true;
         }
-        else if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0) && currentBerry < totalBerryCount)
         {
             mousePressed = false;
             currentBerry = 0;
 
             Destroy(trail);
             trail = Instantiate(trailPrefab, berryArray[0].transform.position, Quaternion.identity);
+            trail.transform.parent = gameObject.transform;
         }
     }
 
@@ -47,6 +53,11 @@ public class BerryMinigame : MonoBehaviour
                 berryArray[currentBerry].ActivateFeedbackParticles();
 
                 currentBerry++;
+
+                if (currentBerry == totalBerryCount)
+                {
+                    berryGameManager.EndMiniGame(gameObject);
+                }
             }
         }
     }

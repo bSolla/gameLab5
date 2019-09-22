@@ -4,22 +4,18 @@ using UnityEngine;
 
 public class BerryGameManager : MonoBehaviour
 {
-    [SerializeField] GameObject[] berryGroup;
-    GameObject[] berry;
-    [SerializeField] GameObject trailPref;
-    GameObject trail;
-    int arrayPos = 0;
-    bool lastPos=false;
+    [SerializeField] int numberOfPuzzlesPerLevel = 1;
+    int currentLevel = 2;
 
-    // Start is called before the first frame update
+    string levelsFolderPath = "BerryPicking/";
+
+    ParticleSystem endOfPuzzleParticles;
+    
+
     void Start()
     {
-        int num=Random.Range(0,berryGroup.Length); //This is for choosing the levels randomly, putting them all in the scene inactive, if we want a level selection we need to change this
-        berryGroup[num].SetActive(true);
-
-        berry=GameObject.FindGameObjectsWithTag("Berry");
-        trail=Instantiate(trailPref, berry[0].transform.position, Quaternion.identity);
-
+        endOfPuzzleParticles = GetComponentInChildren<ParticleSystem>();
+        endOfPuzzleParticles.playbackSpeed = 2f;
     }
 
     // Update is called once per frame
@@ -28,36 +24,31 @@ public class BerryGameManager : MonoBehaviour
         
     }
 
-    public void BerryClick(GameObject thatBerry)
-    {
-        thatBerry.transform.localScale = new Vector3(0.4f,0.4f,0.4f);
-        StartCoroutine(BerryScale(thatBerry));
 
-        if (thatBerry==berry[arrayPos])
-        {
-            trail.transform.position = berry[arrayPos].transform.position;
-            arrayPos++;
-            if (lastPos)
-            {
-                EndMiniGame();
-            }
-            if (arrayPos == berry.Length)
-            {
-                arrayPos = 0;
-                lastPos = true;
-            }           
-        }
+    IEnumerator ChangeCurrentPuzzle(GameObject currentPuzzle)
+    {
+        endOfPuzzleParticles.Play();
+
+        yield return new WaitForSeconds(3.0f);
+
+        Destroy(currentPuzzle);
+
+        StartMinigame();
     }
 
-    IEnumerator BerryScale(GameObject thisBerry)
+    void StartMinigame()
     {
-        yield return new WaitForSeconds(0.1f);
-        thisBerry.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+        // uncomment when we have more than one puzzle per level
+        //int puzzleNumber = Random.Range(1, numberOfPuzzlesPerLevel + 1);
+        //GameObject berryMinigame = Resources.Load(levelsFolderPath + currentLevel + "/" + puzzleNumber) as GameObject;
 
+        GameObject berryMinigame = Resources.Load(levelsFolderPath + currentLevel + "/1") as GameObject;
+        Instantiate(berryMinigame, transform.position, transform.rotation);
     }
 
-    public void EndMiniGame() //------------------------NEED TO BE DONE-----------------------------
+    public void EndMiniGame(GameObject currentPuzzle)
     {
         print("congrats!!");
+        StartCoroutine(ChangeCurrentPuzzle(currentPuzzle));
     }
 }
