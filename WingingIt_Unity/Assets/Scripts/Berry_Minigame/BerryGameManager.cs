@@ -5,7 +5,7 @@ using UnityEngine;
 public class BerryGameManager : MonoBehaviour
 {
     [SerializeField] int numberOfPuzzlesPerLevel = 1;
-    int currentLevel = 2;
+    int currentLevel = 1;
 
     string levelsFolderPath = "BerryPicking/";
 
@@ -16,6 +16,8 @@ public class BerryGameManager : MonoBehaviour
     {
         endOfPuzzleParticles = GetComponentInChildren<ParticleSystem>();
         endOfPuzzleParticles.playbackSpeed = 2f;
+
+        StartMinigame();
     }
 
     // Update is called once per frame
@@ -33,7 +35,8 @@ public class BerryGameManager : MonoBehaviour
 
         Destroy(currentPuzzle);
 
-        StartMinigame();
+        if (currentLevel <= 3)
+            StartMinigame();
     }
 
     void StartMinigame()
@@ -44,11 +47,12 @@ public class BerryGameManager : MonoBehaviour
 
         GameObject berryMinigame = Resources.Load(levelsFolderPath + currentLevel + "/1") as GameObject;
         Instantiate(berryMinigame, transform.position, transform.rotation);
+
+        currentLevel++;
     }
 
     public void EndMiniGame(GameObject currentPuzzle)
     {
-        print("congrats!!");
         StartCoroutine(ChangeCurrentPuzzle(currentPuzzle));
     }
 }
