@@ -13,6 +13,8 @@ public class ChickenController : MonoBehaviour
     Vector3 target;
     StatusMenu status;
     public bool canMove = true, isLifted = false;
+    float timePressed = 0;
+
 
 
     void Start()
@@ -65,14 +67,22 @@ public class ChickenController : MonoBehaviour
 
         if(Physics.Raycast(ray, out hit))
         {
-            if(Input.GetMouseButtonDown(0)  && hit.collider == col)
+            if(Input.GetMouseButton(0)  && hit.collider == col)
             {
-                isLifted = true;
+                timePressed ++;
+                // print (timePressed);
+
+                if(timePressed > 100)
+                {
+                    isLifted = true;
+
+                }
                 
             }
             if(Input.GetMouseButtonUp(0))
             {
                 isLifted = false;
+                timePressed = 0;
                 target= new Vector3(transform.position.x, 0.1f, transform.position.z);
 
                 transform.position = target;
