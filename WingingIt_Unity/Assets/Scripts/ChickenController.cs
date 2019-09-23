@@ -43,7 +43,7 @@ public class ChickenController : MonoBehaviour
             {
 
                 canMove = false;
-                float t = Random.Range(0, 2);
+                float t = Random.Range(1, 10);
                 yield return new WaitForSeconds(t);
                 target = newWalkingpoint();
                 canMove = true;
