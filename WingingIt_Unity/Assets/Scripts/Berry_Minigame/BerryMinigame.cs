@@ -14,7 +14,8 @@ public class BerryMinigame : MonoBehaviour
 
     BerryGameManager berryGameManager;
 
-    // Start is called before the first frame update
+    EndImageLogic endOfPuzzleImage;
+
     void Start()
     {
         berryArray = gameObject.GetComponentsInChildren<BerryBehavior>();
@@ -24,6 +25,8 @@ public class BerryMinigame : MonoBehaviour
         trail.transform.parent = gameObject.transform;
 
         berryGameManager = GameObject.FindWithTag("Manager").GetComponent<BerryGameManager>();
+
+        endOfPuzzleImage = GetComponentInChildren<EndImageLogic>();
     }
 
     void Update()
@@ -56,6 +59,7 @@ public class BerryMinigame : MonoBehaviour
 
                 if (currentBerry == totalBerryCount)
                 {
+                    endOfPuzzleImage.StartFading();
                     berryGameManager.EndMiniGame(gameObject);
                 }
             }

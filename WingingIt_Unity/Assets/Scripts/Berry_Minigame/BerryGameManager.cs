@@ -10,7 +10,6 @@ public class BerryGameManager : MonoBehaviour
     string levelsFolderPath = "BerryPicking/";
 
     ParticleSystem endOfPuzzleParticles;
-    
 
     void Start()
     {
@@ -20,17 +19,11 @@ public class BerryGameManager : MonoBehaviour
         StartMinigame();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
     IEnumerator ChangeCurrentPuzzle(GameObject currentPuzzle)
     {
         endOfPuzzleParticles.Play();
-
+        
         yield return new WaitForSeconds(3.0f);
 
         Destroy(currentPuzzle);
