@@ -10,10 +10,6 @@ public class EndImageLogic : MonoBehaviour
 
     float opaqueAlpha = 1f;
     float transparentAlpha = 0f;
-
-    [HideInInspector] public bool fadingToOpaque = false;
-    [HideInInspector] public bool fadingToTransparent = false;
-
     
     public void StartFading()
     {
