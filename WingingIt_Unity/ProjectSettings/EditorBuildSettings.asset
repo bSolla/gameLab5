@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/KineTests/StatusMenuTest.unity
-    guid: d6f1606ca2c09ae4ca007d40a1fcf388
-  - enabled: 0
-    path: Assets/Scenes/CuttingMinigame.unity
-    guid: 6364bfbb3583cd748b74197ca4fa09dd
-  - enabled: 0
-    path: Assets/Scenes/CameraTest.unity
-    guid: f37527aeb2acea84fa8ba26409e1fc6c
+    path: Assets/Scenes/Paula/StartMenu.unity
+    guid: 078324154ac1d5146b56d71915f9c112
+  - enabled: 1
+    path: Assets/Scenes/Paula/Outside.unity
+    guid: ec138754bd1d0394db2a76a59c2628ec
+  - enabled: 1
+    path: Assets/Scenes/Paula/Inside.unity
+    guid: 51474b6bdf4f01c43a866ed76e1e6c1a
   m_configObjects: {}

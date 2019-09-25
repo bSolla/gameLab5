@@ -100,7 +100,7 @@ public class StatusMenu : MonoBehaviour
         if(thirst < 50)
         {
             currState = State.Thirsty;
-            // chickenController.movingPoint();
+            // chickenController.movingPoint();  //If its outside maybe going inside to eat (check if its currently in the same scene as the player)
         }
         if(happiness < 50)
         {

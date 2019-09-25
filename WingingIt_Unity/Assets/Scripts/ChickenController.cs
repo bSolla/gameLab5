@@ -16,6 +16,13 @@ public class ChickenController : MonoBehaviour
     float timePressed = 0;
 
 
+    //New things
+    GameManager gm;
+    float timeBetweenChecks=30;
+    float timeNextCheck=30;
+
+    string currentLocation;
+    public string CurrentLocation { get => currentLocation;}
 
     void Start()
     {
@@ -23,6 +30,9 @@ public class ChickenController : MonoBehaviour
 
         target = newWalkingpoint();
 
+        gm = FindObjectOfType<GameManager>();
+
+        currentLocation = "Inside";
     }
 
     void Update()
@@ -32,6 +42,67 @@ public class ChickenController : MonoBehaviour
             StartCoroutine(movingPoint());
         }
         LiftChicken();
+        ChangeLocation();
+    }
+
+    void ChangeLocation()
+    {
+        if (Time.time>timeNextCheck)
+        {
+            timeNextCheck = Time.time + timeBetweenChecks;
+            float randomNum=Random.Range(1, 2);                 //Put more time, depending on how much time we want the chicken to wait until move
+
+            if (randomNum==1)
+            {
+                if (CurrentLocation == gm.CurrentSceneName)
+                {
+                    if (CurrentLocation == "Inside")
+                    {
+                        WalkOutside();
+                    }
+                    else
+                    {
+                        WalkInside();
+                    }
+                }
+                else
+                {
+                    if (CurrentLocation == "Inside")
+                    {
+                        currentLocation = "Outside";                        
+                    }
+                    else
+                    {
+                        currentLocation = "Inside";
+                    }
+                    ActivateChicken();
+                }
+            }
+        }
+    }
+
+    public void DesactivateChicken()
+    {
+        //Desactivate the Mesh and make it stop moving
+        GetComponent<MeshRenderer>().enabled = false;
+    }
+
+    public void ActivateChicken()
+    {
+        //Activate whatever you desactivate in the other method
+        GetComponent<MeshRenderer>().enabled = true;
+    }
+
+    void WalkOutside()
+    {
+        currentLocation = "Outside";//Write the part when it walks until x point and disapears
+        DesactivateChicken();
+    }
+
+    void WalkInside()
+    {
+        currentLocation = "Inside";//Write the part when it walks until x point and disapears
+        DesactivateChicken();
     }
 
     public IEnumerator movingPoint()
