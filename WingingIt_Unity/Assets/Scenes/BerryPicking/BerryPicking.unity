@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3e5c59a1b8816248957a0d8ef91ecf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfPuzzlesPerLevel: 1
+  numberOfPuzzlesPerLevel: 3
 --- !u!1 &347949862
 GameObject:
   m_ObjectHideFlags: 0

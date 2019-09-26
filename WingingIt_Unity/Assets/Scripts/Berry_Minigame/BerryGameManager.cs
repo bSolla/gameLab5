@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BerryGameManager : MonoBehaviour
 {
-    [SerializeField] int numberOfPuzzlesPerLevel = 1;
+    [SerializeField] int numberOfPuzzlesPerLevel = 3;
     int currentLevel = 1;
 
     string levelsFolderPath = "BerryPicking/";
@@ -34,11 +34,10 @@ public class BerryGameManager : MonoBehaviour
 
     void StartMinigame()
     {
-        // uncomment when we have more than one puzzle per level
-        //int puzzleNumber = Random.Range(1, numberOfPuzzlesPerLevel + 1);
-        //GameObject berryMinigame = Resources.Load(levelsFolderPath + currentLevel + "/" + puzzleNumber) as GameObject;
+        int puzzleNumber = Random.Range(1, numberOfPuzzlesPerLevel + 1);
+        GameObject berryMinigame = Resources.Load(levelsFolderPath + currentLevel + "/" + puzzleNumber) as GameObject;
 
-        GameObject berryMinigame = Resources.Load(levelsFolderPath + currentLevel + "/1") as GameObject;
+        //GameObject berryMinigame = Resources.Load(levelsFolderPath + currentLevel + "/1") as GameObject;
         Instantiate(berryMinigame, transform.position, transform.rotation);
 
         currentLevel++;
