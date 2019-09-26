@@ -1,26 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using System;
 
-public class StatusMenu : MonoBehaviour
+public class ChickenStatus : MonoBehaviour
 {
-    public enum State {Normal, Hungry, Thirsty, Sad};
+    public enum State { Normal, Hungry, Thirsty, Sad };
     public State currState = State.Normal;
     public int hunger = 100, thirst = 100, happiness = 100;
     private float tHunger, tThirst, tHappiness;
-    GameObject menuUI;
+    StatusMenuUI menuUI;
     // public float realTime;
     // public DateTime currTime, lastTime;
-    Text chickenNameUi;
-    public String chickenName;
-    Slider sliderHunger, sliderThirst, sliderHappiness;
+    public string chickenName;
     bool isOpen;
 
     ChickenController chickenController;
     FoodBowl food;
-    public FoodBowl Food { get => food;}
+    public FoodBowl Food { get => food; }
     WaterDispenser water;
 
     // public bool isHungry;
@@ -28,34 +24,26 @@ public class StatusMenu : MonoBehaviour
 
     GameManager gm;
 
-   
+
 
     void Start()
     {
         gm = FindObjectOfType<GameManager>();
 
         chickenController = GetComponent<ChickenController>();
-        //food = chickenController.foodBowl.GetComponent<FoodBowl>();
-
-        CloseMenu();
-        // print (hunger + " " + thirst + " " + happiness);
 
         tHunger = 10;
     }
 
     public void SearchReferences()
     {
-        menuUI = GameObject.Find("Canvas/StatusMenu");
-        chickenNameUi = GameObject.Find("Canvas/StatusMenu/Panel/Name").GetComponent<Text>();
-        sliderHunger = GameObject.Find("Canvas/StatusMenu/Panel/HungerSlider").GetComponent<Slider>();
-        sliderThirst = GameObject.Find("Canvas/StatusMenu/Panel/ThirstSlider").GetComponent<Slider>();
-        sliderHappiness = GameObject.Find("Canvas/StatusMenu/Panel/HappinessSlider").GetComponent<Slider>();
+        menuUI = GameObject.FindObjectOfType<StatusMenuUI>();
 
         if (gm == null) //--------------It should be another way to fix this---------- This is here because this method is called before the start method, so there's not gm reference yet
         {
             gm = FindObjectOfType<GameManager>();
         }
-        if (gm.CurrentSceneName=="Outside") //Actually it has to be in the inside, so we have to change this in the new scene
+        if (gm.CurrentSceneName == "Outside") //Actually it has to be in the inside, so we have to change this in the new scene
         {
             food = FindObjectOfType<FoodBowl>();
         }
@@ -64,19 +52,22 @@ public class StatusMenu : MonoBehaviour
     void Update()
     {
 
-        switch(currState)
+        switch (currState)
         {
             case State.Normal: UpdateNormalState(); break;
             case State.Hungry: UpdateHungryState(); break;
             case State.Thirsty: UpdateThirstyState(); break;
             case State.Sad: UpdateSadState(); break;
         }
-        
 
+        if (Input.GetMouseButtonUp(1))
+        {
+            print(currState);
+        }
 
         // if(isOpen)
         // {
-              
+
         // }
 
         // realTime = DateTime.Now;
@@ -85,30 +76,25 @@ public class StatusMenu : MonoBehaviour
         UpdateHunger();
         UpdateThirst();
         UpdateHappiness();
-        if(isOpen)
-        {
-            if(Input.GetMouseButtonUp(0))
-            {
-                CloseMenu();
-            }
-              
-        }
-        else
+
+
+        if (Input.GetMouseButtonUp(0) && !menuUI.Panel.activeSelf && !chickenController.isLifted) 
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            Collider col = this.gameObject.GetComponent<Collider>();
-            if(Physics.Raycast(ray, out hit, 100))
-            {
-                if(hit.collider == col && Input.GetMouseButtonUp(0))
-                {
-                    // print ("Hit? " + gameObject.name);
 
-                    OpenMenu();
+            if (Physics.Raycast(ray, out hit, 100))
+            {
+                if (hit.collider == this.gameObject.GetComponent<Collider>())
+                {
+                    menuUI.OpenMenu(this);
                 }
-            }
+            }           
         }
     }
+
+
+
     void UpdateNormalState()
     {
         // float precentChance = (hunger / 100f);
@@ -118,20 +104,21 @@ public class StatusMenu : MonoBehaviour
         //     print ("My chances are: " + precentChance + "%");
         //     currState = State.Hungry;
         // }
-        if(hunger < 60)
+        if (hunger < 60)
         {
             currState = State.Hungry;
         }
-        if(thirst < 50)
+        if (thirst < 50)
         {
             currState = State.Thirsty;
             // chickenController.movingPoint();  //---------If its outside maybe going inside to eat (check if its currently in the same scene as the player)--------
         }
-        if(happiness < 50)
+        if (happiness < 50)
         {
             currState = State.Sad;
         }
     }
+
     void UpdateHungryState()
     {
         // if(food.avaliableFood > 0)
@@ -139,23 +126,22 @@ public class StatusMenu : MonoBehaviour
         // float precentChance = (food / 100f);
         // if(Random.value <= precentChance)
         // {
-        if (gm.CurrentSceneName=="Outside")                 //------------It has to be inside in the end-------------
-        {
-            chickenController.GettingFood();
-        }
-           
-            
+
+        chickenController.GettingFood();
+
+
+
         // }
-            
+
 
         // chickenController.GettingFood();
         // }
         // else
         // {
-            if(hunger >= 50)
-            {
-                currState = State.Normal;
-            }
+        if (hunger >= 50)
+        {
+            currState = State.Normal;
+        }
         // }
     }
     void UpdateThirstyState()
@@ -171,68 +157,37 @@ public class StatusMenu : MonoBehaviour
         }
     }
 
-    void OpenMenu()
-    {
-        menuUI.SetActive(true);
-        isOpen = true;
-        sliderHunger.value = hunger;
-        sliderThirst.value = thirst;
-        sliderHappiness.value = happiness;
-        chickenNameUi.text = chickenName;   
-
-
-
-
-    }
-    void CloseMenu()
-    {
-        menuUI.SetActive(false);
-        isOpen = false;
-    }
-
-    void UpdateHunger ()        //Constantly updating and checking if the hunger should go down
+    void UpdateHunger()        //Constantly updating and checking if the hunger should go down
     {
         tHunger -= Time.deltaTime;
-        if(tHunger <= 0 && hunger > 10)
+        if (tHunger <= 0 && hunger > 10)
         {
             tHunger = 10;
             // tHunger += 60 * 60;             // how long it should take before it drops, minute
-            hunger -= 10;           
-            sliderHunger.value = hunger;
-
+            hunger -= 10;
         }
-
-        
-        // print (tHunger);
-
     }
-    void UpdateThirst ()    //Constantly updating and checking if the thirst should go down
+
+    void UpdateThirst()    //Constantly updating and checking if the thirst should go down
     {
         tThirst -= Time.deltaTime;
-        if(tThirst <= 0)
+        if (tThirst <= 0)
         {
             tThirst = 10;
             thirst -= 5;
             // tThirst -= 60 * 5;           // how long it should take before it drops, minute
-            sliderThirst.value = thirst;
-
         }
-        // print (tThirst);
-
     }
-    void UpdateHappiness ()             //Constantly updating and checking if the happiness should go down
+
+    void UpdateHappiness()             //Constantly updating and checking if the happiness should go down
     {
         tHappiness -= Time.deltaTime;
-        if(tHappiness <= 0)
+        if (tHappiness <= 0)
         {
             tHappiness = 10;
             happiness -= 10;
-            
+
             // tHappiness -= 60 * 15;           // how long it should take before it drops, minute
-            sliderHunger.value = happiness;
-
         }
-        // print (tHunger);
-
     }
 }

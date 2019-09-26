@@ -8,10 +8,9 @@ public class ChickenController : MonoBehaviour
     int currWalkPoint;
     public float movementSpeed = 5f;
     public GameObject[] walkingPoints;
-    public GameObject foodBowl;
 
     Vector3 target;
-    StatusMenu status;
+    ChickenStatus status;
     public bool canMove = true, isLifted = false;
     float timePressed = 0;
 
@@ -21,12 +20,17 @@ public class ChickenController : MonoBehaviour
     float timeBetweenChecks=30;
     float timeNextCheck=30;
 
+    bool walkingToDoor;
+    Vector3 doorPoint;
+    public Vector3 DoorPoint { get => doorPoint; set => doorPoint = value; }
+
     string currentLocation;
     public string CurrentLocation { get => currentLocation;}
+    
 
     void Start()
     {
-        status = GetComponent<StatusMenu>();
+        status = GetComponent<ChickenStatus>();
 
         target = newWalkingpoint();
 
@@ -37,9 +41,13 @@ public class ChickenController : MonoBehaviour
 
     void Update()
     {
-        if(status.currState == StatusMenu.State.Normal && !isLifted)
+        if(status.currState ==ChickenStatus.State.Normal && !isLifted)
         {
             StartCoroutine(movingPoint());
+            if (walkingToDoor)
+            {
+                WalkToDoor();
+            }
         }
         LiftChicken();
         ChangeLocation();
@@ -47,7 +55,7 @@ public class ChickenController : MonoBehaviour
 
     void ChangeLocation()
     {
-        if (Time.time>timeNextCheck)
+        if (Time.time>timeNextCheck && !isLifted)
         {
             timeNextCheck = Time.time + timeBetweenChecks;
             float randomNum=Random.Range(1, 2);                 //Put more time, depending on how much time we want the chicken to wait until move
@@ -56,15 +64,12 @@ public class ChickenController : MonoBehaviour
             {
                 if (CurrentLocation == gm.CurrentSceneName)
                 {
-                    if (CurrentLocation == "Inside")
-                    {
-                        WalkOutside();
-                    }
-                    else
-                    {
-                        WalkInside();
-                    }
+                    target = DoorPoint;
+                    canMove = true;
+                    walkingToDoor = true;
+                    print("something");
                 }
+
                 else
                 {
                     if (CurrentLocation == "Inside")
@@ -85,25 +90,35 @@ public class ChickenController : MonoBehaviour
     {
         //Desactivate the Mesh and make it stop moving
         GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<CapsuleCollider>().enabled = false;
     }
 
     public void ActivateChicken()
     {
         //Activate whatever you desactivate in the other method
+        this.transform.position = DoorPoint;
+        canMove = true;
         GetComponent<MeshRenderer>().enabled = true;
+        GetComponent<CapsuleCollider>().enabled = true;
     }
 
-    void WalkOutside()
+    void WalkToDoor()
     {
-        currentLocation = "Outside";//Write the part when it walks until x point and disapears
-        DesactivateChicken();
+        if (Vector3.Distance(transform.position, DoorPoint) < 0.1f)
+        {
+            DesactivateChicken();
+            if (CurrentLocation == "Inside")
+            {
+                currentLocation = "Outside";
+            }
+            else
+            {
+                currentLocation = "Inside";
+            }
+        }      
     }
 
-    void WalkInside()
-    {
-        currentLocation = "Inside";//Write the part when it walks until x point and disapears
-        DesactivateChicken();
-    }
+
 
     public IEnumerator movingPoint()
     {
@@ -131,50 +146,50 @@ public class ChickenController : MonoBehaviour
 
     void LiftChicken()
     {
-        // Ray ray = new Ray();
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        Collider col = this.gameObject.GetComponent<Collider>();
-
-        if(Physics.Raycast(ray, out hit))
+        if (Input.GetMouseButton(0))
         {
-            if(Input.GetMouseButton(0)  && hit.collider == col)
-            {
-                timePressed ++;
-                // print (timePressed);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
 
-                if(timePressed > 100)
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider == this.gameObject.GetComponent<Collider>()&&!isLifted)
                 {
-                    isLifted = true;
+                    timePressed += Time.deltaTime;
 
+                    if (timePressed > 1)
+                    {
+                        isLifted = true;
+
+                    }
                 }
-                
             }
-            if(Input.GetMouseButtonUp(0))
+
+            if (isLifted)
             {
-                isLifted = false;
-                timePressed = 0;
-                target= new Vector3(transform.position.x, 0.1f, transform.position.z);
+                Vector3 moveDir = new Vector3(hit.point.x, 0.5f, hit.point.z);
+                // Vector3 moveDir = hit.point;
 
-                transform.position = target;
-            }
-            if(isLifted)
-            {
-                
-                    Vector3 moveDir = new Vector3(hit.point.x, 1f, hit.point.z);
-                    // Vector3 moveDir = hit.point;
-
-                    // print (moveDir);
-
-                    transform.position = moveDir;
+                transform.position = moveDir;
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Camera.main.transform.position - transform.position), 7f * Time.deltaTime);
-
-                    
             }
         }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            isLifted = false;
+            timePressed = 0;
+            target= new Vector3(transform.position.x, 0.1f, transform.position.z);
+
+            transform.position = target;
+        }
+
+
+        
         
 
     }
+
     public Vector3 newWalkingpoint()
     {
         // print("New target");
@@ -192,21 +207,36 @@ public class ChickenController : MonoBehaviour
 
         return newTarget;
     }
+
     public void GettingFood()
     {
-        Vector3 moveDir = foodBowl.transform.position - transform.position;
-        if(moveDir.magnitude > 1)
+        if (gm.CurrentSceneName=="Outside")//-------------------------------------------------should be inside - change all the strings to Inside when we change the location
         {
-            transform.position += moveDir * 2 * Time.deltaTime;
+            if (currentLocation=="Outside")
+            {
+                Vector3 moveDir = status.Food.transform.position - transform.position;
+                if (moveDir.magnitude > 1)
+                {
+                    transform.position += moveDir * 2 * Time.deltaTime;
 
-            transform.rotation = Quaternion.LookRotation(foodBowl.transform.position);
+                    transform.rotation = Quaternion.LookRotation(status.Food.transform.position);
+
+                }
+                if (status.Food.avaliableFood > 0 && Vector3.Distance(transform.position, status.Food.transform.position) < 1f)
+                {
+                    status.hunger++;
+                    status.Food.avaliableFood--;
+                }
+            }
+
+            else
+            {
+                currentLocation = "Outside";
+                ActivateChicken();
+            }
 
         }
-        if(foodBowl.GetComponent<FoodBowl>().avaliableFood > 0 &&  Vector3.Distance(transform.position, foodBowl.transform.position) < 1f)
-        {
-            status.hunger ++;
-            foodBowl.GetComponent<FoodBowl>().avaliableFood --;
-        }
+
        
     }
 

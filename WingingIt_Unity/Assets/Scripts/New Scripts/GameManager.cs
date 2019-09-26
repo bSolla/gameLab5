@@ -51,8 +51,11 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                chick.GetComponent<ChickenController>().DesactivateChicken();
+                chick.GetComponent<ChickenController>().DesactivateChicken();    
             }
+
+            chick.GetComponent<ChickenController>().DoorPoint = GameObject.Find("DoorPoint").transform.position;
+            chick.GetComponent<ChickenStatus>().SearchReferences();
         }     
     }
 
