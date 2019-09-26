@@ -35,6 +35,8 @@ public class Spawn : MonoBehaviour
                 Vector2 dir = this.transform.position-f.transform.position + new Vector3(0, Random.Range(-1, 1),0); //Calcular la direccion
                 f.GetComponent<Rigidbody2D>().AddForce(dir*Random.Range(minForce,maxForce)*0.1f,ForceMode2D.Impulse);
 
+                //f.GetComponentInChildren<Rigidbody>().rotation = Quaternion.identity;----------------------------------------Busca una forma de que roten las cosas con sentido
+
                 Destroy(f,2);
             }
         }

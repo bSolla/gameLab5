@@ -11,10 +11,10 @@ public class Fruit : MonoBehaviour
     {
         if (other.tag=="Knife")
         {
-            Vector3 dir = (other.transform.position - this.transform.position).normalized;
-            Quaternion rot = Quaternion.LookRotation(dir);
+            //Vector3 dir = (other.transform.position - this.transform.position).normalized;
+            //Quaternion rot = Quaternion.LookRotation(dir);
 
-            GameObject slices= Instantiate(slicePref,this.transform.position, rot);
+            GameObject slices= Instantiate(slicePref,this.transform.position, Quaternion.identity);//rot
             Destroy(slices, 1.5f);
 
             FindObjectOfType<CuttingGameManager>().AddPoints(points);
