@@ -6,7 +6,8 @@ using UnityEngine;
 public class EggDrop : MonoBehaviour
 {   
     public DateTime currentTime, oldTime;
-    public GameObject commonEggPrefab, rareEggPrefab, legendaryEggPrefab;
+    public GameObject eggPrefab;
+    Vector3 dropTrans;
     public bool dropEgg;
     
 
@@ -14,6 +15,7 @@ public class EggDrop : MonoBehaviour
     {
         print (System.DateTime.Now);
         oldTime = DateTime.Now;
+        
     }
 
     void Update()
@@ -30,22 +32,24 @@ public class EggDrop : MonoBehaviour
     private void CheckNewTime()
     {
         currentTime = DateTime.Now;
-
-        if(oldTime.Date < currentTime.Date)
+        if(GameObject.FindGameObjectWithTag("Egg") == null)
         {
-            return;
-        }
-        else
-        {
-            if(oldTime.Hour < currentTime.Hour)
+            if(oldTime.Date < currentTime.Date)
             {
-                DropAnEgg();
+                return;
             }
             else
             {
-                if(currentTime.Minute - oldTime.Minute >= 5f)
+                if(oldTime.Hour < currentTime.Hour)
                 {
                     DropAnEgg();
+                }
+                else
+                {
+                    if(currentTime.Minute - oldTime.Minute >= 0.9f || Input.GetKeyDown(KeyCode.E))
+                    {
+                        DropAnEgg();
+                    }
                 }
             }
         }
@@ -53,33 +57,16 @@ public class EggDrop : MonoBehaviour
     }
     private void DropAnEgg()
     {
+
         dropEgg = false;
         oldTime = currentTime;
+        
+        dropTrans = GameObject.FindGameObjectWithTag("Chicken").transform.position;
+        dropTrans = new Vector3 (dropTrans.x +2, 0.5f, dropTrans.z +2);
+        
+        GameObject newEgg = Instantiate (eggPrefab, dropTrans, transform.rotation);
 
-        float whatEgg = UnityEngine.Random.value;
-        if(whatEgg >= 0.4f)      //Common - 60% Drop rate
-        {
-            print ("I dropped a common egg");
-            GameObject newEgg = Instantiate (commonEggPrefab, transform.position, transform.rotation);
-            newEgg.GetComponent<WhatEgg>().whatEgg = 1;
-        }
-        if(whatEgg > 0.1f && whatEgg < 0.4f)        // Rare - 30% Drop rate
-        {
-            print ("I dropped a rare egg");
-            GameObject newEgg = Instantiate (rareEggPrefab, transform.position, transform.rotation);
-            newEgg.GetComponent<WhatEgg>().whatEgg = 2;
-
-
-
-        }
-        if(whatEgg <= 0.1f)             //Legendary - 10% drop rate
-        {
-            print ("I dropped a legendary egg");
-            GameObject newEgg = Instantiate (legendaryEggPrefab, transform.position, transform.rotation);
-            newEgg.GetComponent<WhatEgg>().whatEgg = 3;
-
-
-        }
+        
     }
     // private float whatEgg()
     // {

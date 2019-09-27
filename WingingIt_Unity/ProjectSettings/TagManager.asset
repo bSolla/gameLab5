@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - WalkingPoint
+  - Chicken
+  - Egg
   layers:
   - Default
   - TransparentFX

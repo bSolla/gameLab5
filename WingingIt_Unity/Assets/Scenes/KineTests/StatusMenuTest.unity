@@ -2628,6 +2628,7 @@ GameObject:
   m_Component:
   - component: {fileID: 921544322}
   - component: {fileID: 921544323}
+  - component: {fileID: 921544324}
   m_Layer: 0
   m_Name: EggController
   m_TagString: Untagged
@@ -2661,13 +2662,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64b2c509cb34a5c4b946872448a050c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  commonEggPrefab: {fileID: 5169484645382410418, guid: 664ffd913ee225241bbe64f3b0274a47,
-    type: 3}
-  rareEggPrefab: {fileID: 5169484645382410418, guid: 664ffd913ee225241bbe64f3b0274a47,
-    type: 3}
-  legendaryEggPrefab: {fileID: 5169484645382410418, guid: 664ffd913ee225241bbe64f3b0274a47,
+  eggPrefab: {fileID: 5169484645382410418, guid: 664ffd913ee225241bbe64f3b0274a47,
     type: 3}
   dropEgg: 0
+--- !u!114 &921544324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921544321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3b9ec21127aeb14ba42c862437fc16a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &924664703
 GameObject:
   m_ObjectHideFlags: 0
@@ -3667,7 +3676,7 @@ GameObject:
   - component: {fileID: 1241205234}
   m_Layer: 0
   m_Name: Chicken
-  m_TagString: Untagged
+  m_TagString: Chicken
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

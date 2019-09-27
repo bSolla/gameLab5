@@ -9,9 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5169484645382410419}
+  - component: {fileID: 7478305466690631694}
+  - component: {fileID: 3872787019789513688}
   m_Layer: 0
-  m_Name: CommonEgg
-  m_TagString: Untagged
+  m_Name: Egg
+  m_TagString: Egg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,6 +33,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7478305466690631694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5169484645382410418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce154bbd87c944e4c82e01710972dd7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatEgg: 0
+  commonMat:
+  - {fileID: 2100000, guid: f58e5192cb1fe9b40accd920b76b5cef, type: 2}
+  rareMat:
+  - {fileID: 2100000, guid: c9364c3b4ef78534288590b98d50dc06, type: 2}
+  legendaryMat:
+  - {fileID: 2100000, guid: f27caf0cb9e8ce3488e017864bddcbe9, type: 2}
+--- !u!136 &3872787019789513688
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5169484645382410418}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.39621818
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &5169484645599875079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -113,6 +148,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.003957957
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 77c32a169f0aae8439345fc1cba5f19a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f12d1a09f893d284d82d008e1e00d291, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77c32a169f0aae8439345fc1cba5f19a, type: 3}
 --- !u!4 &200135494041385757 stripped
