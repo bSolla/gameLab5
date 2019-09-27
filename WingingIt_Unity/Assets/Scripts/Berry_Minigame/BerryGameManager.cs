@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BerryGameManager : MonoBehaviour
 {
@@ -11,10 +12,16 @@ public class BerryGameManager : MonoBehaviour
 
     ParticleSystem endOfPuzzleParticles;
 
+    Text endOfGameText;
+    [SerializeField] string endMessage = "You got food!!";
+
     void Start()
     {
         endOfPuzzleParticles = GetComponentInChildren<ParticleSystem>();
         endOfPuzzleParticles.playbackSpeed = 2f;
+
+        endOfGameText = GetComponentInChildren<Text>();
+        endOfGameText.text = "";
 
         StartMinigame();
     }
@@ -30,6 +37,11 @@ public class BerryGameManager : MonoBehaviour
 
         if (currentLevel <= 3)
             StartMinigame();
+        else
+        {
+            yield return new WaitForSeconds(0.5f);
+            endOfGameText.text = endMessage;
+        }
     }
 
     void StartMinigame()
@@ -37,7 +49,6 @@ public class BerryGameManager : MonoBehaviour
         int puzzleNumber = Random.Range(1, numberOfPuzzlesPerLevel + 1);
         GameObject berryMinigame = Resources.Load(levelsFolderPath + currentLevel + "/" + puzzleNumber) as GameObject;
 
-        //GameObject berryMinigame = Resources.Load(levelsFolderPath + currentLevel + "/1") as GameObject;
         Instantiate(berryMinigame, transform.position, transform.rotation);
 
         currentLevel++;
