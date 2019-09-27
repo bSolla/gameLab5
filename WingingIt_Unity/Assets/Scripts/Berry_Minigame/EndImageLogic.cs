@@ -1,22 +1,36 @@
-﻿using System.Collections;
+﻿//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                           A U T H O R  &  N O T E S
+//                          coded by Len, september 2019
+//  simple logic for the end of puzzle image that allows it to fade in and out
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class EndImageLogic : MonoBehaviour
 {
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                                V A R I A B L E S 
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     [SerializeField] float timeSpentFading = 1.5f;
 
     Color spriteColor;
 
     float opaqueAlpha = 1f;
     float transparentAlpha = 0f;
-    
+
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                                  M E T H O D S 
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    // public method (used from external classes) to start the fading process
     public void StartFading()
     {
         StartCoroutine(FadeTo(timeSpentFading));
     }
 
 
+    // manages the fade in and out, taking the fading time into account
     IEnumerator FadeTo(float aTime)
     {
         // from transparent to opaque

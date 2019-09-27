@@ -1,10 +1,20 @@
-﻿using System.Collections;
+﻿//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                           A U T H O R  &  N O T E S
+//                          coded by Len, september 2019
+//  controls which puzzle is instantiated, and keeps track of current level of difficulty
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class BerryGameManager : MonoBehaviour
 {
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                                V A R I A B L E S 
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     [SerializeField] int numberOfPuzzlesPerLevel = 3;
     int currentLevel = 1;
 
@@ -15,6 +25,10 @@ public class BerryGameManager : MonoBehaviour
     Text endOfGameText;
     [SerializeField] string endMessage = "You got food!!";
 
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                                  M E T H O D S 
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    // caches variables and sets initial values, then starts first puzzle
     void Start()
     {
         endOfPuzzleParticles = GetComponentInChildren<ParticleSystem>();
@@ -27,6 +41,9 @@ public class BerryGameManager : MonoBehaviour
     }
 
 
+    // coroutine that mamages the puzzle change: plays the end of puzzle particles, waits 
+    // and checks if it's the last level of difficulty or not. If not, loads the next level
+    // if it is the last, displays "you got food!"
     IEnumerator ChangeCurrentPuzzle(GameObject currentPuzzle)
     {
         endOfPuzzleParticles.Play();
@@ -44,6 +61,9 @@ public class BerryGameManager : MonoBehaviour
         }
     }
 
+
+    // deals with puzzle selection automatically. Picks a random number between 1 and numberOfPuzzlesPerLevel,
+    // loads it from the resources folder and instantiates it, increasing the currentLevel counter
     void StartMinigame()
     {
         int puzzleNumber = Random.Range(1, numberOfPuzzlesPerLevel + 1);
@@ -54,6 +74,8 @@ public class BerryGameManager : MonoBehaviour
         currentLevel++;
     }
 
+
+    // public setter method, used from outside this class. Starts the ChangeCurrentPuzzle coroutine
     public void EndMiniGame(GameObject currentPuzzle)
     {
         StartCoroutine(ChangeCurrentPuzzle(currentPuzzle));

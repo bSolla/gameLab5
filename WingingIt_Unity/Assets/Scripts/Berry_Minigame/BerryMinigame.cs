@@ -1,9 +1,20 @@
-﻿using System.Collections;
+﻿//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                           A U T H O R  &  N O T E S
+//                          coded by Len, september 2019
+//  manages the puzzle itself, delegating individual berry checks to BerryBehavior but 
+//  controling trails/lines and puzzle end behaviors
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BerryMinigame : MonoBehaviour
 {
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                                V A R I A B L E S 
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     private bool mousePressed = false;
     private int currentBerry = 0;
     private int totalBerryCount = 0;
@@ -17,6 +28,10 @@ public class BerryMinigame : MonoBehaviour
     EndImageLogic endOfPuzzleImage;
     LineRenderer followMouseLine;
 
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                                  M E T H O D S 
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    // caching of variables and initial settings
     void Start()
     {
         berryArray = gameObject.GetComponentsInChildren<BerryBehavior>();
@@ -33,6 +48,9 @@ public class BerryMinigame : MonoBehaviour
         followMouseLine.SetColors(Color.clear, Color.clear);
     }
 
+
+    // deals with the mouse input: if it's down, it sets the mousePressed bool to true
+    // if its up and you've not reached the last berry, it restarts the trail and berry count
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -52,6 +70,11 @@ public class BerryMinigame : MonoBehaviour
         }
     }
 
+
+    // uses the mousePressed bool: if it is pressed, checks "do we have berries left? is the proper berry
+    // being hovered by the mouse?" Passing the check updates the rainbow trail and the white trail, and
+    // adds to the current berry count.
+    // if it's the last berry, it makes the white trail invisible and starts the end of game feedback
     void FixedUpdate()
     {
         if (mousePressed)
