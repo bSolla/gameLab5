@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 860380204660762692}
   - component: {fileID: 860380204660762695}
   - component: {fileID: 860380204660762694}
-  - component: {fileID: 860380204660762697}
+  - component: {fileID: 314654039364592315}
   m_Layer: 0
   m_Name: Eggplant
   m_TagString: Untagged
@@ -70,8 +70,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &860380204660762697
-CircleCollider2D:
+--- !u!60 &314654039364592315
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -83,9 +83,27 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.4996376, y: -0.5181315}
-  serializedVersion: 2
-  m_Radius: 0.7178848
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.25364766, y: 0.62589866}
+      - {x: -0.33505535, y: 0.56244075}
+      - {x: -0.2979024, y: -0.13322061}
+      - {x: -0.14088249, y: -0.73661023}
+      - {x: 0.49590468, y: -1.2767363}
+      - {x: 1.3238761, y: -1.2492433}
+      - {x: 1.4091204, y: -0.68833905}
+      - {x: 0.8685564, y: -0.376105}
+      - {x: 0.32297635, y: 0.23661044}
 --- !u!1001 &860380203695335993
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -156,17 +174,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: be62fd42679e18d449fdcdad27bf1df1,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 54.44205
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: be62fd42679e18d449fdcdad27bf1df1,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 54.44205
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: be62fd42679e18d449fdcdad27bf1df1,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 54.44205
+      value: 45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be62fd42679e18d449fdcdad27bf1df1, type: 3}

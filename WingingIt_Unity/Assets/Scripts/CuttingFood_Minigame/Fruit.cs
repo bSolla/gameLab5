@@ -6,6 +6,20 @@ public class Fruit : MonoBehaviour
 {
     [SerializeField] GameObject slicePref;
     [SerializeField] float points=10;
+    float speedRotate;
+
+    private void Start()
+    {
+        float num = Random.Range(0, 2);
+        if (num == 1)
+        { speedRotate = Random.Range(30, 60);}
+        else { speedRotate = Random.Range(-60, -30);}
+    }
+
+    private void Update()
+    {
+        transform.Rotate(Vector3.forward * speedRotate * Time.deltaTime);
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -14,7 +28,7 @@ public class Fruit : MonoBehaviour
             //Vector3 dir = (other.transform.position - this.transform.position).normalized;
             //Quaternion rot = Quaternion.LookRotation(dir);
 
-            GameObject slices= Instantiate(slicePref,this.transform.position, Quaternion.identity);//rot
+            GameObject slices= Instantiate(slicePref,this.transform.position, this.transform.rotation);//rot
             Destroy(slices, 1.5f);
 
             FindObjectOfType<CuttingGameManager>().AddPoints(points);

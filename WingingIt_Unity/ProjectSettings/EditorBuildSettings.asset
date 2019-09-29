@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/KineTests/StatusMenuTest.unity
-    guid: d6f1606ca2c09ae4ca007d40a1fcf388
+    path: Assets/Scenes/Minigames/CuttingMinigame.unity
+    guid: 6364bfbb3583cd748b74197ca4fa09dd
   m_configObjects: {}

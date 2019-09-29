@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1736171441763329813}
   - component: {fileID: 1736171441763329814}
   - component: {fileID: 1736171441763329815}
-  - component: {fileID: 1736171441763329816}
+  - component: {fileID: 8423589410600302370}
   m_Layer: 0
   m_Name: Cucumber
   m_TagString: Untagged
@@ -70,8 +70,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &1736171441763329816
-CircleCollider2D:
+--- !u!60 &8423589410600302370
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -83,9 +83,26 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.10760689}
-  serializedVersion: 2
-  m_Radius: 0.6076069
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.4037538, y: 0.8123921}
+      - {x: -0.7997991, y: 0.9562141}
+      - {x: -0.972969, y: 0.72498286}
+      - {x: -0.6661967, y: 0.30901697}
+      - {x: 0.4311362, y: -0.852803}
+      - {x: 0.77642787, y: -0.9518383}
+      - {x: 0.9493379, y: -0.69955224}
+      - {x: 0.8086266, y: -0.41345018}
 --- !u!1001 &2338289936896974540
 PrefabInstance:
   m_ObjectHideFlags: 0
