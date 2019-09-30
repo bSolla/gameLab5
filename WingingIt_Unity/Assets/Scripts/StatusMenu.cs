@@ -28,6 +28,8 @@ public class StatusMenu : MonoBehaviour
     ChickenController chickenController;
     FoodBowl food;
     WaterDispenser water;
+    PettingController petting;
+
 
     // public bool isHungry;
 
@@ -40,6 +42,8 @@ public class StatusMenu : MonoBehaviour
         chickenController = GetComponent<ChickenController>();
         food = chickenController.foodBowl.GetComponent<FoodBowl>();
         water = chickenController.waterBowl.GetComponent<WaterDispenser>();
+        petting = GetComponent<PettingController>();
+
 
         CloseMenu();
 
@@ -102,7 +106,7 @@ public class StatusMenu : MonoBehaviour
         {
             currState = State.Thirsty;
         }
-        if(happiness < 50)
+        if(happiness < 30 && (hunger > 20 && thirst > 20))
         {
             currState = State.Sad;
         }
@@ -127,7 +131,7 @@ public class StatusMenu : MonoBehaviour
     }
     void UpdateSadState()
     {
-        if (happiness > 50)
+        if (happiness > 50 || hunger<20 || thirst<20)
         {
             currState = State.Normal;
         }
@@ -142,6 +146,8 @@ public class StatusMenu : MonoBehaviour
         sliderHappiness.value = happiness;
         chickenNameUi.text = chickenName;   
 
+        petting.pettable = true;
+        // petting.timer = 4; 
 
 
 
@@ -150,6 +156,8 @@ public class StatusMenu : MonoBehaviour
     {
         menuUI.SetActive(false);
         isOpen = false;
+        petting.pettable = false;
+
     }
 
     void UpdateHunger ()        //Constantly updating and checking if the hunger should go down
@@ -183,11 +191,11 @@ public class StatusMenu : MonoBehaviour
         tHappiness -= Time.deltaTime;
         if(tHappiness <= 0)
         {
-            tHappiness = 10;
+            tHappiness = 60;
             happiness -= 10;
             
             // tHappiness -= 60 * 15;           // how long it should take before it drops, minute
-            sliderHunger.value = happiness;
+            sliderHappiness.value = happiness;
 
         }
 

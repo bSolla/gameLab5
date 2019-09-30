@@ -21,8 +21,12 @@ public class ChickenController : MonoBehaviour
 
     Vector3 target;
     StatusMenu status;
+    PettingController petting;
+
     public bool canMove = true, isLifted = false;
     float timePressed = 0;
+
+
 
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -35,6 +39,9 @@ public class ChickenController : MonoBehaviour
 
         target = newWalkingpoint();
 
+        petting = GetComponent<PettingController>();
+
+
     }
 
     void Update()
@@ -43,7 +50,10 @@ public class ChickenController : MonoBehaviour
         {
             StartCoroutine(movingPoint());
         }
-        LiftChicken();
+        if (!petting.pettable)
+        {
+            LiftChicken();
+        }
     }
 
     public IEnumerator movingPoint()
