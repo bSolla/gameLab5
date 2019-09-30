@@ -1,15 +1,29 @@
-﻿// using System.Collections;
+﻿// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                                                      A U T H O R & N O T E S
+//                                                coded by: Kine - September 2019
+//                                  System that makes a chicken drop an egg after x-amount of time.
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+// using System.Collections;
 // using System.Collections.Generic;
 using System;
 using UnityEngine;
 
 public class EggDrop : MonoBehaviour
 {   
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                                                      V A R I A B L E S
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     public DateTime currentTime, oldTime;
     public GameObject eggPrefab;
     Vector3 dropTrans;
     public bool dropEgg;
     
+
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                                                      F U N C T I O N S
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     void Start()
     {
@@ -29,6 +43,8 @@ public class EggDrop : MonoBehaviour
 
         
     }
+
+    // Checking the systems time to see if an egg should be dropped. If yes, DropAnEgg function get's called
     private void CheckNewTime()
     {
         currentTime = DateTime.Now;
@@ -55,6 +71,8 @@ public class EggDrop : MonoBehaviour
         }
 
     }
+
+    // Instantiates an egg, also tells the EggPickUp script that this is the new egg.
     private void DropAnEgg()
     {
 
@@ -65,6 +83,7 @@ public class EggDrop : MonoBehaviour
         dropTrans = new Vector3 (dropTrans.x +2, 0.5f, dropTrans.z +2);
         
         GameObject newEgg = Instantiate (eggPrefab, dropTrans, transform.rotation);
+        GetComponent<EggPickUp>().eggCol = newEgg.GetComponent<Collider>();
 
         
     }

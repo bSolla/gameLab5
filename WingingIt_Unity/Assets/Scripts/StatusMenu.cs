@@ -1,11 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                                                      A U T H O R & N O T E S
+//                                                coded by: Kine - September 2019
+//                              Placeholder script for food. Also stores the amount of food avaliable in the bowl.
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 using UnityEngine;
 using UnityEngine.UI;
 using System;
 
 public class StatusMenu : MonoBehaviour
 {
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                                                      V A R I A B L E S
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
     public enum State {Normal, Hungry, Thirsty, Sad};
     public State currState = State.Normal;
     public int hunger = 100, thirst = 100, happiness = 100;
@@ -24,14 +31,17 @@ public class StatusMenu : MonoBehaviour
 
     // public bool isHungry;
 
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                                                      F U N C T I O N S
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     void Start()
     {
         chickenController = GetComponent<ChickenController>();
         food = chickenController.foodBowl.GetComponent<FoodBowl>();
+        water = chickenController.waterBowl.GetComponent<WaterDispenser>();
 
         CloseMenu();
-        // print (hunger + " " + thirst + " " + happiness);
 
         tHunger = 10;
     }
@@ -77,8 +87,6 @@ public class StatusMenu : MonoBehaviour
             {
                 if(hit.collider == col && Input.GetMouseButtonUp(0))
                 {
-                    // print ("Hit? " + gameObject.name);
-
                     OpenMenu();
                 }
             }
@@ -86,21 +94,13 @@ public class StatusMenu : MonoBehaviour
     }
     void UpdateNormalState()
     {
-        // float precentChance = (hunger / 100f);
-        // float rndValue = UnityEngine.Random.value; print (rndValue);
-        // if(rndValue <= precentChance)
-        // {
-        //     print ("My chances are: " + precentChance + "%");
-        //     currState = State.Hungry;
-        // }
-        if(hunger < 60)
+        if(hunger < 25)
         {
             currState = State.Hungry;
         }
-        if(thirst < 50)
+        if(thirst < 25)
         {
             currState = State.Thirsty;
-            // chickenController.movingPoint();
         }
         if(happiness < 50)
         {
@@ -109,34 +109,25 @@ public class StatusMenu : MonoBehaviour
     }
     void UpdateHungryState()
     {
-        // if(food.avaliableFood > 0)
-        // {
-        // float precentChance = (food / 100f);
-        // if(Random.value <= precentChance)
-        // {
-            chickenController.GettingFood();
-            
-        // }
-            
+        chickenController.GettingFood();
 
-        // chickenController.GettingFood();
-        // }
-        // else
-        // {
-            if(hunger >= 50)
-            {
-                currState = State.Normal;
-            }
-        // }
+        if(hunger >= 100 || (food.avaliableFood <= 0 && hunger >= 50))
+        {
+            currState = State.Normal;
+        }
     }
     void UpdateThirstyState()
     {
-        // if()
+        chickenController.GettingWater();
+        if(thirst >= 100 || (water.waterAvaliable <= 0 && thirst >= 50))
+        {
+            currState = State.Normal;
+        }
 
     }
     void UpdateSadState()
     {
-        if (hunger > 50 && thirst > 50)
+        if (happiness > 50)
         {
             currState = State.Normal;
         }
@@ -172,10 +163,6 @@ public class StatusMenu : MonoBehaviour
             sliderHunger.value = hunger;
 
         }
-
-        
-        // print (tHunger);
-
     }
     void UpdateThirst ()    //Constantly updating and checking if the thirst should go down
     {
@@ -203,7 +190,6 @@ public class StatusMenu : MonoBehaviour
             sliderHunger.value = happiness;
 
         }
-        // print (tHunger);
 
     }
 }

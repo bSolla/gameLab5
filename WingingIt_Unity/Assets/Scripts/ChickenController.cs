@@ -1,14 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                                                      A U T H O R & N O T E S
+//                                                coded by: Kine - September 2019
+//                              Chicken movement and waypoints the chicken should go to(Random points, food bowl etc.)
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+using System.Collections;
 using UnityEngine;
 
 public class ChickenController : MonoBehaviour
 {
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                                                      V A R I A B L E S
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    
     public float planeX, planeZ;
     int currWalkPoint;
     public float movementSpeed = 5f;
     public GameObject[] walkingPoints;
-    public GameObject foodBowl;
+    public GameObject foodBowl, waterBowl;
 
     Vector3 target;
     StatusMenu status;
@@ -16,6 +25,9 @@ public class ChickenController : MonoBehaviour
     float timePressed = 0;
 
 
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                                                      F U N C T I O N S
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     void Start()
     {
@@ -131,10 +143,31 @@ public class ChickenController : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(foodBowl.transform.position);
 
         }
-        if(foodBowl.GetComponent<FoodBowl>().avaliableFood > 0 &&  Vector3.Distance(transform.position, foodBowl.transform.position) < 1f)
+        if(foodBowl.GetComponent<FoodBowl>().avaliableFood > 0 &&  Vector3.Distance(transform.position, foodBowl.transform.position) < 4.0f)
         {
             status.hunger ++;
             foodBowl.GetComponent<FoodBowl>().avaliableFood --;
+        }
+       
+    }
+    public void GettingWater()
+    {
+
+        WaterDispenser waterDispenser = waterBowl.GetComponent<WaterDispenser>();
+        Vector3 moveDir = waterBowl.transform.position - transform.position;
+        if(moveDir.magnitude > 1)
+        {
+            transform.position += moveDir * 2 * Time.deltaTime;
+
+            transform.rotation = Quaternion.LookRotation(foodBowl.transform.position);
+
+        }
+        else if(waterDispenser.waterAvaliable > 0 && Vector3.Distance(transform.position, foodBowl.transform.position) < 4.0f)
+        {
+        print ("Here");
+
+            status.thirst ++;
+            waterDispenser.waterAvaliable --;
         }
        
     }
