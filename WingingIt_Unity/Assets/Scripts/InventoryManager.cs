@@ -1,9 +1,19 @@
-﻿using System.Collections;
+﻿//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                  A U T H O R  &  N O T E S
+//              coded by Teresa, September 2019
+//     handles how the inventory looks and adding items to it
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+
 public class InventoryManager : MonoBehaviour
 {
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                      V A R I A B L E S
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     private RectTransform inventoryRect;
     private float inventoryWidth, inventoryHeight;
     public int slots;
@@ -20,19 +30,19 @@ public class InventoryManager : MonoBehaviour
         set { emptySlot = value; }
     } */
 
-
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                             M E T H O D S
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     void Start()
     {
         CreateLayout();
     }
 
-    void Update()
-    {
-        
-    }
 
     private void CreateLayout ()
     {
+        // generates the layout of the inventory
+        // slots, rows, padding and slotsize can be set in the inspector
         allSlots = new List<GameObject>();
         emptySlot = slots;
         inventoryWidth = (slots / rows) * (slotSize + slotPaddingLeft) + slotPaddingLeft;
@@ -57,7 +67,6 @@ public class InventoryManager : MonoBehaviour
                 allSlots.Add(newSlot);
             }
         }
-
     }
 
     public bool AddItem(Item item)
@@ -65,6 +74,7 @@ public class InventoryManager : MonoBehaviour
         Debug.Log ("running the additem function");
         if (item.maxSize == 1)
         {
+            // places an item in an empty slot if you can only have one of this item in a stack
             PlaceEmpty(item);
             return true;
         }
@@ -76,7 +86,8 @@ public class InventoryManager : MonoBehaviour
                 if (!temp.isEmpty)
                 {
                     if (temp.CurrentItem.type == item.type && temp.isAvailable)
-                    {
+                    {   
+                        // places an item you already have in a stack
                         temp.AddItem(item);
                         return true;
                     }
@@ -92,7 +103,8 @@ public class InventoryManager : MonoBehaviour
 
     private bool PlaceEmpty(Item item)
     {
-        Debug.Log ("placing into empty slot");
+        // places an item in an empty slot
+        //Debug.Log ("placing into empty slot");
         if (emptySlot > 0)
         {
             foreach (GameObject slot in allSlots)
@@ -106,7 +118,6 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
-
         return false;
     }
     

@@ -1,11 +1,19 @@
-﻿using System.Collections;
+﻿//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                  A U T H O R  &  N O T E S
+//              coded by Teresa, September 2019
+//  handles the inventory slots - changes sprite, text, initiates item use
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class Slot : MonoBehaviour
 {
-
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                      V A R I A B L E S
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     private Stack <Item> items;
     public Text stackText;
     public Sprite slotEmpty;
@@ -24,7 +32,10 @@ public class Slot : MonoBehaviour
     {
         get {return items.Peek(); }
     }
-    // Start is called before the first frame update
+
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                             M E T H O D S
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     void Start()
     {
         items = new Stack<Item>();
@@ -41,14 +52,10 @@ public class Slot : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void AddItem(Item item)
     {
+        // adds item to slot, changes stack count if applicable
         items.Push(item);
         if (items.Count > 1)
         {
@@ -60,6 +67,7 @@ public class Slot : MonoBehaviour
 
     private void ChangeSprite (Sprite neutral, Sprite highlight)
     {
+        // changes sprite
         GetComponent<Image>().sprite = neutral;
         SpriteState st = new SpriteState();
         st.highlightedSprite = highlight;
@@ -71,13 +79,11 @@ public class Slot : MonoBehaviour
     {
         Debug.Log("did a click");
         UseItemInSlot();
-        // clicked the slot, in inventory this should be used to select/use the item,
-        // but in the shop this should be used to attempt to buy the item.
-        // easiest way is probably to make two seperate (but very similar) scripts
     }
 
     private void UseItemInSlot()
     {
+        // use selected item
         if (!isEmpty)
         {
             items.Pop().UseItem();
