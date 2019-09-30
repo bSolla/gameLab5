@@ -15,7 +15,6 @@ public class PettingController : MonoBehaviour
 //                             V A R I A B L E S
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     private StatusMenu stat;
-    public Slider happinessSlider;
     public float timer = 4;
     public bool pettable;
     public ParticleSystem heartParticles;
