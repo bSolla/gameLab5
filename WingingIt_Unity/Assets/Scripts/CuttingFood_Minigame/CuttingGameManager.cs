@@ -42,6 +42,7 @@ public class CuttingGameManager : MonoBehaviour
         }
     }
 
+
     public void AddPoints(float points)
     {
         score += points;

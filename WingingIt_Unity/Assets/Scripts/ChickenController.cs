@@ -16,13 +16,9 @@ public class ChickenController : MonoBehaviour
 
     void Update()
     {
-        
-        print (walkPoint);
         if(Vector3.Distance(transform.position, walkPoint) > 0.0001f)
         {
-            print ("Distance is far");
-            transform.Translate(walkPoint, Space.Self);
-            
+            transform.Translate(walkPoint, Space.Self);           
         }
         else
         {
