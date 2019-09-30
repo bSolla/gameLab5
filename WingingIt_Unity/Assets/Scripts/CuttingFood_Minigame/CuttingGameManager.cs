@@ -45,6 +45,8 @@ public class CuttingGameManager : MonoBehaviour
     public void AddPoints(float points)
     {
         score += points;
+        if (score<0)
+        { score = 0;}
         scoreText.text = score.ToString();
     }
 }
