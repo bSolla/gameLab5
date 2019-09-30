@@ -14,6 +14,7 @@ public class ChickenController : MonoBehaviour
     StatusMenu status;
     public bool canMove = true, isLifted = false;
     float timePressed = 0;
+    PettingController petting;
 
 
 
@@ -22,6 +23,7 @@ public class ChickenController : MonoBehaviour
         status = GetComponent<StatusMenu>();
 
         target = newWalkingpoint();
+        petting = GetComponent<PettingController>();
 
     }
 
@@ -31,7 +33,10 @@ public class ChickenController : MonoBehaviour
         {
             StartCoroutine(movingPoint());
         }
-        LiftChicken();
+        if (!petting.pettable)
+        {
+            LiftChicken();
+        }
     }
 
     public IEnumerator movingPoint()
