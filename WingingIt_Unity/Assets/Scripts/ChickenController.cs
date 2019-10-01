@@ -15,6 +15,8 @@ public class ChickenController : MonoBehaviour
     public bool canMove = true, isLifted = false;
     float timePressed = 0;
 
+    public bool hasHome;
+
 
 
     void Start()
