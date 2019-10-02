@@ -1,7 +1,7 @@
 ﻿//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 //                     A U T H O R  &  N O T E S
-//                  coded by Teresa, September 2019
-//             handles which chicken the nest is assigned to
+//                  coded by Teresa, September/October 2019
+//             handles which chicken a nest is assigned to
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 using System.Collections;
 using System.Collections.Generic;
@@ -27,19 +27,20 @@ public GameObject[] nests;
     void Update()
     {
         chickenToAssign = GameObject.FindGameObjectWithTag("Chicken");
-        if (!chickenToAssign.GetComponent<ChickenController>().hasHome)
+        if (chickenToAssign)
         {
-            AssignHome();
+            if (!chickenToAssign.GetComponent<ChickenController>().hasHome)
+            {
+                AssignHome();
+            }
         }
+        
 
-        if (chickenToAssign = null)
-        {
-            Debug.Log ("no homeless chickens! yay!");
-        }
     }
 
     public void AssignHome ()
     {
+        //looks for an empty nest and assigns a homeless chicken to it
         Debug.Log ("assigning a home for a homeless chicken :3");
 
         foreach (GameObject nest in nests)
