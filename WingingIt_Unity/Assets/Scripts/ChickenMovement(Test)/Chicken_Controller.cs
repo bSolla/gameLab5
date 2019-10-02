@@ -1,9 +1,19 @@
-﻿using System.Collections;
+﻿//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                           A U T H O R  &  N O T E S
+//                          coded by Kine and Paula, september 2019
+//              controls the chicken movement in the plane and between scenes
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Chicken_Controller : MonoBehaviour
 {
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    //                                V A R I A B L E S 
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
     public float planeX, planeZ;
     int currWalkPoint;
     public float movementSpeed = 5f;
@@ -26,7 +36,11 @@ public class Chicken_Controller : MonoBehaviour
 
     string currentLocation;
     public string CurrentLocation { get => currentLocation;}
-    
+
+
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    //                                  M E T H O D S 
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     void Start()
     {
@@ -38,6 +52,7 @@ public class Chicken_Controller : MonoBehaviour
 
         currentLocation = "Inside";
     }
+
 
     void Update()
     {
@@ -52,6 +67,7 @@ public class Chicken_Controller : MonoBehaviour
         LiftChicken();
         ChangeLocation();
     }
+
 
     void ChangeLocation()
     {
@@ -86,6 +102,7 @@ public class Chicken_Controller : MonoBehaviour
         }
     }
 
+
     public void DesactivateChicken()
     {
         //Desactivate the Mesh and make it stop moving
@@ -101,6 +118,7 @@ public class Chicken_Controller : MonoBehaviour
         GetComponent<MeshRenderer>().enabled = true;
         GetComponent<CapsuleCollider>().enabled = true;
     }
+
 
     void WalkToDoor()
     {
@@ -144,6 +162,7 @@ public class Chicken_Controller : MonoBehaviour
 
     }
 
+
     void LiftChicken()
     {
         if (Input.GetMouseButton(0))
@@ -177,18 +196,21 @@ public class Chicken_Controller : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            isLifted = false;
+            StartCoroutine(DelayLiftChicken());
             timePressed = 0;
             target= new Vector3(transform.position.x, 0.1f, transform.position.z);
 
             transform.position = target;
         }
-
-
-        
-        
-
     }
+    //This is a delay until the end of the frame so the menu doesn't open when you stop lifting the chicken
+    IEnumerator DelayLiftChicken()
+    {
+        yield return new WaitForEndOfFrame();
+        isLifted = false;
+    }
+
+
 
     public Vector3 newWalkingpoint()
     {

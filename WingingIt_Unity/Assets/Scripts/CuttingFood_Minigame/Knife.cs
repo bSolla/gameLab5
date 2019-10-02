@@ -1,9 +1,19 @@
-﻿using System.Collections;
+﻿//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                           A U T H O R  &  N O T E S
+//                          coded by Paula, september 2019
+//              controls when you are cutting and activates and desactivates the collider
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Knife : MonoBehaviour
 {
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    //                                V A R I A B L E S 
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
     bool isCutting = false;
     Rigidbody2D rb;
     Camera cam;
@@ -17,6 +27,11 @@ public class Knife : MonoBehaviour
 
     float minVel = 0.003f;
 
+
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    //                                  M E T H O D S 
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
     private void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
@@ -25,12 +40,13 @@ public class Knife : MonoBehaviour
     }
 
 
+    //Calculates the position of the mouse and checks the input
     void Update()
     {
         newPos = cam.ScreenToWorldPoint(Input.mousePosition);
         rb.position = newPos;
 
-        if (Input.GetMouseButtonDown(0)) //Esto tendría que ser tactil
+        if (Input.GetMouseButtonDown(0)) 
         {
             StartCutting();
         }
@@ -47,9 +63,12 @@ public class Knife : MonoBehaviour
         prevPos = newPos;
     }
 
+
+    //If the velocity while holding the button is enough it enables the collider
     private void UpdateCut()
     {
         float velocity = (newPos - prevPos).magnitude * Time.deltaTime;
+
         if(velocity>minVel)
         {
             coll.enabled = true;
@@ -57,10 +76,10 @@ public class Knife : MonoBehaviour
         else
         {
             coll.enabled = false;
-        }
-        
+        }        
     }
 
+    //Instantiate the trail and change the bool to true
     private void StartCutting()
     {
         isCutting = true;
@@ -69,6 +88,7 @@ public class Knife : MonoBehaviour
         currentTrial = Instantiate(trialPref, this.transform);        
     }
 
+    //Destroys the trail and change the bool to false
     private void StopCutting()
     {
         isCutting = false;

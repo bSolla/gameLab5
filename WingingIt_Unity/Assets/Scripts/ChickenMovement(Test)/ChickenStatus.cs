@@ -1,9 +1,19 @@
-﻿using System.Collections;
+﻿//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                           A U T H O R  &  N O T E S
+//                          coded by Kine and Paula, september 2019
+//                       controls the stats of the chicken
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ChickenStatus : MonoBehaviour
 {
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    //                                V A R I A B L E S 
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
     public enum State { Normal, Hungry, Thirsty, Sad };
     public State currState = State.Normal;
     public int hunger = 100, thirst = 100, happiness = 100;
@@ -24,7 +34,9 @@ public class ChickenStatus : MonoBehaviour
 
     GameManager gm;
 
-
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    //                                  M E T H O D S 
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     void Start()
     {
@@ -34,6 +46,7 @@ public class ChickenStatus : MonoBehaviour
 
         tHunger = 10;
     }
+
 
     public void SearchReferences()
     {
@@ -48,6 +61,7 @@ public class ChickenStatus : MonoBehaviour
             food = FindObjectOfType<FoodBowl>();
         }
     }
+
 
     void Update()
     {

@@ -1,9 +1,19 @@
-﻿using System.Collections;
+﻿//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                           A U T H O R  &  N O T E S
+//                          coded by Paula, september 2019
+//              spawns a randomly gameobjects from an array and applies force
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    //                                V A R I A B L E S 
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
     [SerializeField] GameObject[] food;
     [SerializeField] Transform[] spawnPoints;
 
@@ -19,6 +29,11 @@ public class Spawn : MonoBehaviour
     float timeAct;
 
 
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    //                                  M E T H O D S 
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    //Calculates random number of elements to spawn each time and a random time for the next spawns, when it spawns a random gameobject from the array it also applies force to it
     void Update()
     {
         if (timeAct>=timeNext)
@@ -34,8 +49,6 @@ public class Spawn : MonoBehaviour
 
                 Vector2 dir = this.transform.position-f.transform.position + new Vector3(0, Random.Range(-1, 1),0); //Calcular la direccion
                 f.GetComponent<Rigidbody2D>().AddForce(dir*Random.Range(minForce,maxForce)*0.1f,ForceMode2D.Impulse);
-
-                //f.GetComponentInChildren<Rigidbody>().rotation = Quaternion.identity;----------------------------------------Busca una forma de que roten las cosas con sentido
 
                 Destroy(f,2);
             }

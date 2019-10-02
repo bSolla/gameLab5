@@ -1,10 +1,20 @@
-﻿using System.Collections;
+﻿//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                           A U T H O R  &  N O T E S
+//                          coded by Paula, september 2019
+//              controls the time and the score of the game
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CuttingGameManager : MonoBehaviour
 {
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    //                                V A R I A B L E S 
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
     [SerializeField] float time = 30;
     [SerializeField] GameObject panel;
     [SerializeField] Text timeText;
@@ -13,13 +23,12 @@ public class CuttingGameManager : MonoBehaviour
     float score = 0;
     bool gameRunning = true;
 
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    //                                  M E T H O D S 
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-    // Update is called once per frame
+    //Controls the timer, when the time is over ends the game
     void Update()
     {
         if (gameRunning)
@@ -37,12 +46,15 @@ public class CuttingGameManager : MonoBehaviour
 
                 panel.SetActive(true);
                 gameRunning = false;
-            }
 
+                FindObjectOfType<GameManager>().CutMinigame = true;
+                FindObjectOfType<GameManager>().CuttingScore = score;
+            }
         }
     }
 
 
+    //This method is called from other script to change the score each time something is cut
     public void AddPoints(float points)
     {
         score += points;
