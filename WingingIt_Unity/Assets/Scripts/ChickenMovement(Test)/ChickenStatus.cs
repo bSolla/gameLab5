@@ -18,7 +18,7 @@ public class ChickenStatus : MonoBehaviour
     public State currState = State.Normal;
     public int hunger = 100, thirst = 100, happiness = 100;
     private float tHunger, tThirst, tHappiness;
-    StatusMenuUI menuUI;
+    public StatusMenuUI menuUI;
     // public float realTime;
     // public DateTime currTime, lastTime;
     public string chickenName;
@@ -28,6 +28,8 @@ public class ChickenStatus : MonoBehaviour
     FoodBowl food;
     public FoodBowl Food { get => food; }
     WaterDispenser water;
+    PettingController petting;
+
 
     // public bool isHungry;
 
@@ -45,6 +47,9 @@ public class ChickenStatus : MonoBehaviour
         chickenController = GetComponent<Chicken_Controller>();
 
         tHunger = 10;
+
+        petting = GetComponent<PettingController>();
+
     }
 
 
@@ -141,7 +146,7 @@ public class ChickenStatus : MonoBehaviour
         // if(Random.value <= precentChance)
         // {
 
-        chickenController.GettingFood();
+        // chickenController.GettingFood();
 
 
 
@@ -152,7 +157,7 @@ public class ChickenStatus : MonoBehaviour
         // }
         // else
         // {
-        if (hunger >= 50)
+        if (hunger >= 100 || (food.avaliableFood <= 0 && hunger >= 50))
         {
             currState = State.Normal;
         }
@@ -161,11 +166,16 @@ public class ChickenStatus : MonoBehaviour
     void UpdateThirstyState()
     {
         // if()
+        // chickenController.GettingWater();
+        if(thirst >= 100 || (water.waterAvaliable <= 0 && thirst >= 50))
+        {
+            currState = State.Normal;
+        }
 
     }
     void UpdateSadState()
     {
-        if (hunger > 50 && thirst > 50)
+        if (happiness > 50 || hunger<20 || thirst<20)
         {
             currState = State.Normal;
         }
@@ -198,7 +208,7 @@ public class ChickenStatus : MonoBehaviour
         tHappiness -= Time.deltaTime;
         if (tHappiness <= 0)
         {
-            tHappiness = 10;
+            tHappiness = 60;
             happiness -= 10;
 
             // tHappiness -= 60 * 15;           // how long it should take before it drops, minute

@@ -1,56 +1,48 @@
 ﻿// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 //                                                      A U T H O R & N O T E S
 //                                                coded by: Kine - September 2019
-//                      A place the chickens can go to drink water. Also stores the amount of water in the dispenser
+//                                  When you click on the egg, it gives some feedback before disapearing.
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // Placeholder
 
-
-public class WaterDispenser : MonoBehaviour
+public class EggPickUp : MonoBehaviour
 {
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 //                                                      V A R I A B L E S
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-public int waterAvaliable = 10;
-public GameObject water;
-public Text waterAvaliableText;
+
+    public Collider eggCol;
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 //                                                      F U N C T I O N S
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
-        waterAvaliableText.text = "Water: " + waterAvaliable.ToString();
-        if(waterAvaliable <= 0)
-        {
-            water.SetActive(false);
-            waterAvaliable = 0;
-        }
-        else
-        {
-            water.SetActive(true);
-        }
-        fillWater();
+        StartCoroutine(PickUpEgg());
     }
-    private void fillWater()
+
+    // An Ienumerator that gives player feedback for the pickup before destroying the egg.
+    private IEnumerator PickUpEgg()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        Collider col = this.gameObject.GetComponent<Collider>();
-        if(Physics.Raycast(ray, out hit, 100))
+        // EggCol is given by the EggDrop script.
+        if(eggCol != null && Physics.Raycast(ray, out hit, 100))   
         {
-            if(hit.collider == col && Input.GetMouseButtonUp(0) && waterAvaliable < 100)
+            // eggCol = GameObject.FindGameObjectWithTag("Egg").GetComponentInChildren<Collider>();;
+            if(hit.collider == eggCol && Input.GetMouseButtonDown(0))
             {
-                waterAvaliable += 10;
+                print("I touch the egg");
+                eggCol.gameObject.transform.localScale*=2;
+                eggCol.gameObject.transform.position = new Vector3(0, 5, 0);
+                yield return new WaitForSeconds(1);
+                Destroy(eggCol.gameObject);
+
             }
         }
     }

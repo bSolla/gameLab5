@@ -21,6 +21,7 @@ public class Chicken_Controller : MonoBehaviour
 
     Vector3 target;
     ChickenStatus status;
+    PettingController petting;
     public bool canMove = true, isLifted = false;
     float timePressed = 0;
 
@@ -51,6 +52,9 @@ public class Chicken_Controller : MonoBehaviour
         gm = FindObjectOfType<GameManager>();
 
         currentLocation = "Inside";
+
+        petting = GetComponent<PettingController>();
+
     }
 
 
@@ -64,7 +68,10 @@ public class Chicken_Controller : MonoBehaviour
                 WalkToDoor();
             }
         }
-        LiftChicken();
+        if (!petting.pettable)
+        {
+            LiftChicken();
+        }
         ChangeLocation();
     }
 
