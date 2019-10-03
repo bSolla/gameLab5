@@ -13,7 +13,7 @@ public class StatusMenu : MonoBehaviour
     public GameObject menuUI;
     // public float realTime;
     // public DateTime currTime, lastTime;
-    public Text chickenNameUi;
+    private Text chickenNameUi;
     public String chickenName;
     public Slider sliderHunger, sliderThirst, sliderHappiness;
     bool isOpen;
@@ -27,6 +27,11 @@ public class StatusMenu : MonoBehaviour
 
     void Start()
     {
+        menuUI = GameObject.Find("Canvas/StatusMenu");
+        chickenNameUi = GameObject.Find("Name").GetComponent<Text>();
+        sliderHappiness = GameObject.Find("HappinessSlider").GetComponent<Slider>();
+        sliderHunger = GameObject.Find("Hunger slider").GetComponent<Slider>();
+        sliderThirst = GameObject.Find("ThirstSlider").GetComponent<Slider>();
         chickenController = GetComponent<ChickenController>();
         food = chickenController.foodBowl.GetComponent<FoodBowl>();
 
@@ -34,6 +39,11 @@ public class StatusMenu : MonoBehaviour
         // print (hunger + " " + thirst + " " + happiness);
 
         tHunger = 10;
+    }
+
+    void Awake()
+    {
+        
     }
 
     void Update()

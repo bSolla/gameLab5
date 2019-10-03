@@ -24,6 +24,7 @@ public class ChickenController : MonoBehaviour
         status = GetComponent<StatusMenu>();
 
         target = newWalkingpoint();
+        foodBowl = GameObject.Find("FoodBowl");
 
     }
 

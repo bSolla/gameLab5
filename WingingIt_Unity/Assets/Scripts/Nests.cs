@@ -15,4 +15,20 @@ public class Nests : MonoBehaviour
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     public bool occupied;
     public GameObject myChicken; 
+    public GameObject chickenToSpawn;
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                           M E T H O D S
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    public void OnMouseDown()
+    {
+        if (!occupied)
+        {
+            newChicken();
+        }
+    }
+
+    public void newChicken()
+    {
+        Instantiate (chickenToSpawn, new Vector3(0,2,0), Quaternion.identity);
+    }
 }
