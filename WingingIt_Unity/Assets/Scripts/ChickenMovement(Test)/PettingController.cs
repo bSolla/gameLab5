@@ -14,7 +14,7 @@ public class PettingController : MonoBehaviour
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 //                             V A R I A B L E S
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    private ChickenStatus stat;
+    public ChickenStatus stat;
     public float timer = 4;
     public bool pettable;
     public ParticleSystem heartParticles;
@@ -31,7 +31,9 @@ public class PettingController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pettable = stat.menuUI.Panel.activeSelf;
+        
+        pettable = stat.menuUI.isMenuOpen;
+        
 
         //resets the timer, starts the heart particles and ups the happiness stat
         if (timer <= 0)

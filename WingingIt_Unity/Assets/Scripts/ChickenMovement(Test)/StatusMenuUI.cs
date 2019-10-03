@@ -15,11 +15,13 @@ public class StatusMenuUI : MonoBehaviour
     //                                V A R I A B L E S 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-    Slider hungerSlider, thirstSlider, happinessSlider;
+    public Slider hungerSlider, thirstSlider, happinessSlider;
     Text nameText;
     GameObject panel;
     public GameObject Panel { get => panel;}
     float delay=0;
+
+    public bool isMenuOpen;
 
     ChickenStatus currentChicken;
 
@@ -31,12 +33,8 @@ public class StatusMenuUI : MonoBehaviour
     {
         panel = transform.Find("Panel").gameObject;
 
-        hungerSlider=transform.Find("Panel/HungerSlider").GetComponent<Slider>();
-        thirstSlider = transform.Find("Panel/ThirstSlider").GetComponent<Slider>();
-        happinessSlider = transform.Find("Panel/HappinessSlider").GetComponent<Slider>();
-        nameText = transform.Find("Panel/Name").GetComponent<Text>();
-
         Panel.SetActive(false);
+        isMenuOpen = false;
     }
 
     // Update is called once per frame
@@ -55,6 +53,10 @@ public class StatusMenuUI : MonoBehaviour
                 CloseMenu();
             }
         }
+        if(hungerSlider == null || thirstSlider == null || happinessSlider == null || nameText == null)
+        {
+            FindSliders();
+        }
     }
 
     public void OpenMenu(ChickenStatus chick)
@@ -68,5 +70,15 @@ public class StatusMenuUI : MonoBehaviour
     void CloseMenu()
     {
         Panel.SetActive(false);
+        isMenuOpen = false;
+
+    }
+    
+    void FindSliders()
+    {
+        hungerSlider=transform.Find("Panel/HungerSlider").GetComponent<Slider>();
+        thirstSlider = transform.Find("Panel/ThirstSlider").GetComponent<Slider>();
+        happinessSlider = transform.Find("Panel/HappinessSlider").GetComponent<Slider>();
+        nameText = transform.Find("Panel/Name").GetComponent<Text>();
     }
 }

@@ -95,9 +95,15 @@ public class ChickenStatus : MonoBehaviour
         UpdateHunger();
         UpdateThirst();
         UpdateHappiness();
+        if (menuUI == null)
+        {
+            menuUI = GameObject.Find("StatusMenu").GetComponent<StatusMenuUI>();        // Should be done in a cleaner way!
 
+        }
 
-        if (Input.GetMouseButtonUp(0) && !menuUI.Panel.activeSelf && !chickenController.isLifted) 
+        // if (Input.GetMouseButtonUp(0) && !menuUI.Panel.activeSelf && !chickenController.isLifted) 
+        if (Input.GetMouseButtonUp(0) && !chickenController.isLifted) 
+
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;

@@ -14,7 +14,7 @@ public class Chicken_Controller : MonoBehaviour
     //                                V A R I A B L E S 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-    public float planeX, planeZ;
+    // public float planeX, planeZ;
     int currWalkPoint;
     public float movementSpeed = 5f;
     public GameObject[] walkingPoints;

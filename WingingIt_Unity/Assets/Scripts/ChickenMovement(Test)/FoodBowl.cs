@@ -8,8 +8,8 @@ public class FoodBowl : MonoBehaviour
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     public int avaliableFood = 5;
-    public GameObject food;
-    public Text foodAvaliableText;
+    // public GameObject food;
+    // public Text foodAvaliableText;
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     //                                  M E T H O D S 
@@ -17,16 +17,16 @@ public class FoodBowl : MonoBehaviour
 
     void Update()
     {
-        foodAvaliableText.text = "Food: " + avaliableFood;
+        // foodAvaliableText.text = "Food: " + avaliableFood;
         
-        if(avaliableFood <= 0)
-        {
-            food.SetActive(false);
-        }
-        else
-        {
-            food.SetActive(true);
-        }
+        // if(avaliableFood <= 0)
+        // {
+        //     food.SetActive(false);
+        // }
+        // else
+        // {
+        //     food.SetActive(true);
+        // }
 
         if (Input.GetMouseButtonUp(0) && avaliableFood <= 100)
         {
