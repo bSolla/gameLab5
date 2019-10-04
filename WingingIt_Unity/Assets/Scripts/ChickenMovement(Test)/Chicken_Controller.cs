@@ -27,13 +27,14 @@ public class Chicken_Controller : MonoBehaviour
 
 
     //New things
-    GameManager gm;
     float timeBetweenChecks=30;
     float timeNextCheck=30;
 
-    bool walkingToDoor;
+    [HideInInspector]public bool walkingToDoor;
+    Transform door;
     Vector3 doorPoint;
     public Vector3 DoorPoint { get => doorPoint; set => doorPoint = value; }
+    Vector3 spawnPoint;
 
     string currentLocation;
     public string CurrentLocation { get => currentLocation;}
@@ -43,24 +44,26 @@ public class Chicken_Controller : MonoBehaviour
     //                                  M E T H O D S 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+    void Awake()
+    {
+        currentLocation = "Inside";
+    }
+
     void Start()
     {
         status = GetComponent<ChickenStatus>();
 
         target = newWalkingpoint();
 
-        gm = FindObjectOfType<GameManager>();
-
-        currentLocation = "Inside";
-
         petting = GetComponent<PettingController>();
 
+        CacheDoor();
     }
 
 
     void Update()
     {
-        if(status.currState ==ChickenStatus.State.Normal && !isLifted)
+        if(!isLifted && status.currState == ChickenStatus.State.Normal)
         {
             StartCoroutine(movingPoint());
             if (walkingToDoor)
@@ -72,73 +75,75 @@ public class Chicken_Controller : MonoBehaviour
         {
             LiftChicken();
         }
-        ChangeLocation();
+        TryForChangingLocation();
     }
 
 
-    void ChangeLocation()
+    void TryForChangingLocation()
     {
-        if (Time.time>timeNextCheck && !isLifted)
+        if (Time.time > timeNextCheck && !isLifted)
         {
             timeNextCheck = Time.time + timeBetweenChecks;
-            float randomNum=Random.Range(1, 2);                 //Put more time, depending on how much time we want the chicken to wait until move
+            float randomNum = Random.Range(1, 2);                 //Put more time, depending on how much time we want the chicken to wait until move
 
-            if (randomNum==1)
+            if (randomNum == 1)
             {
-                if (CurrentLocation == gm.CurrentSceneName)
+                if (CurrentLocation == GameManager.instance.CurrentSceneName)
                 {
                     target = DoorPoint;
                     canMove = true;
                     walkingToDoor = true;
-                    print("something");
-                }
-
-                else
-                {
-                    if (CurrentLocation == "Inside")
-                    {
-                        currentLocation = "Outside";                        
-                    }
-                    else
-                    {
-                        currentLocation = "Inside";
-                    }
-                    this.transform.position = DoorPoint;
-                    ActivateChicken();
+                    print("Change location -> passes the random number check -> the current location of the chicken is the same as the current scene");
                 }
             }
         }
     }
 
 
-    public void DesactivateChicken()
+    //Deactivate the Mesh and make it stop moving
+    public void DeactivateChicken()
     {
-        //Desactivate the Mesh and make it stop moving
         GetComponent<MeshRenderer>().enabled = false;
         GetComponent<CapsuleCollider>().enabled = false;
+        canMove = false;
     }
 
+
+    //Activate whatever you desactivate in the other method
     public void ActivateChicken()
     {
-        //Activate whatever you desactivate in the other method
+        CacheDoor();
+        gameObject.transform.position = spawnPoint;
+
         canMove = true;
         GetComponent<MeshRenderer>().enabled = true;
         GetComponent<CapsuleCollider>().enabled = true;
     }
 
 
+    void CacheDoor()
+    {
+        door = GameObject.FindGameObjectWithTag("Door").transform;
+        spawnPoint = door.GetChild(0).GetComponent<Transform>().position;
+        spawnPoint.y = 0f;
+        doorPoint = new Vector3(door.position.x, 0, door.position.z);
+    }
+
+
     void WalkToDoor()
     {
-        if (Vector3.Distance(transform.position, DoorPoint) < 0.1f)
+        if (Vector3.Distance(transform.position, DoorPoint) < 0.5f)
         {
-            DesactivateChicken();
+            DeactivateChicken();
             if (CurrentLocation == "Inside")
             {
                 currentLocation = "Outside";
+                walkingToDoor = false;
             }
             else
             {
                 currentLocation = "Inside";
+                walkingToDoor = false;
             }
         }      
     }
@@ -239,14 +244,14 @@ public class Chicken_Controller : MonoBehaviour
 
     public void GettingFood()
     {
-        if (gm.CurrentSceneName=="Outside")//-------------------------------------------------should be inside - change all the strings to Inside when we change the location
+        if (GameManager.instance.CurrentSceneName=="Outside")//-------------------------------------------------should be inside - change all the strings to Inside when we change the location
         {
             if (currentLocation=="Outside")
             {
                 Vector3 moveDir = status.Food.transform.position - transform.position;
                 if (moveDir.magnitude > 1)
                 {
-                    transform.position += moveDir * 2 * Time.deltaTime;
+                    transform.position += moveDir * Time.deltaTime;
 
                     transform.rotation = Quaternion.LookRotation(status.Food.transform.position);
 
@@ -265,8 +270,10 @@ public class Chicken_Controller : MonoBehaviour
             }
 
         }
-
-       
+        else
+        {
+            walkingToDoor = true;
+        }
     }
 
 }

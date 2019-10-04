@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Chicken
+  - Berry
+  - Door
   layers:
   - Default
   - TransparentFX
