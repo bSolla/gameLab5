@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2562248997079129268}
   - component: {fileID: 2562248997079129269}
   - component: {fileID: 2562248997079129267}
+  - component: {fileID: 7108951516015408636}
   - component: {fileID: 422778013}
   - component: {fileID: 3941364487644015285}
   - component: {fileID: 8187594737821042068}
@@ -112,6 +113,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planeX: 5
   planeZ: 5
+--- !u!114 &7108951516015408636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2562248997079129264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ff1b6ce922276c44bfca4854f3e0dd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eggPrefab: {fileID: 0}
+  dropEgg: 0
 --- !u!114 &422778013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,6 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af969e3a77f24ea41915fb7563636cf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stat: {fileID: 0}
   timer: 4
   pettable: 0
   heartParticles: {fileID: 4091194680225050898}
@@ -157,10 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b08a48e77ab354c977716a284bf3a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planeX: 0
-  planeZ: 0
   movementSpeed: 5
-  walkingPoints: []
   canMove: 1
   isLifted: 0
 --- !u!1001 &1100102917679305247
