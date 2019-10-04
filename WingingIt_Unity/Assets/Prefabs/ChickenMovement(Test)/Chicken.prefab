@@ -125,4 +125,5 @@ MonoBehaviour:
   hunger: 85
   thirst: 70
   happiness: 100
+  menuUI: {fileID: 0}
   chickenName: Chonky Floofersen

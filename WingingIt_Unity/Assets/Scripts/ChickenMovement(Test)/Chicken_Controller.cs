@@ -10,9 +10,9 @@ using UnityEngine;
 
 public class Chicken_Controller : MonoBehaviour
 {
-    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    //                                V A R I A B L E S 
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                                V A R I A B L E S 
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     public float planeX, planeZ;
     int currWalkPoint;
@@ -20,47 +20,51 @@ public class Chicken_Controller : MonoBehaviour
     public GameObject[] walkingPoints;
 
     Vector3 target;
-    ChickenStatus status;
+    ChickenStatus chickenStatus;
     PettingController petting;
     public bool canMove = true, isLifted = false;
     float timePressed = 0;
 
 
     //New things
-    GameManager gm;
-    float timeBetweenChecks=30;
-    float timeNextCheck=30;
+    float timeBetweenChecks=60;
+    float timeNextCheck=60;
 
-    bool walkingToDoor;
+    [HideInInspector]public bool walkingToDoor;
+    Transform door;
     Vector3 doorPoint;
     public Vector3 DoorPoint { get => doorPoint; set => doorPoint = value; }
+    Vector3 spawnPoint;
 
     string currentLocation;
     public string CurrentLocation { get => currentLocation;}
 
 
-    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    //                                  M E T H O D S 
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                                  M E T H O D S 
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    void Awake()
+    {
+        currentLocation = "Outside";
+    }
+
 
     void Start()
     {
-        status = GetComponent<ChickenStatus>();
+        chickenStatus = GetComponent<ChickenStatus>();
 
         target = newWalkingpoint();
 
-        gm = FindObjectOfType<GameManager>();
-
-        currentLocation = "Inside";
-
         petting = GetComponent<PettingController>();
 
+        CacheDoor();
     }
 
 
     void Update()
     {
-        if(status.currState ==ChickenStatus.State.Normal && !isLifted)
+        if(chickenStatus.currState ==ChickenStatus.State.Normal && !isLifted)
         {
             StartCoroutine(movingPoint());
             if (walkingToDoor)
@@ -72,11 +76,11 @@ public class Chicken_Controller : MonoBehaviour
         {
             LiftChicken();
         }
-        ChangeLocation();
+        TryForChangeLocation();
     }
 
 
-    void ChangeLocation()
+    void TryForChangeLocation()
     {
         if (Time.time>timeNextCheck && !isLifted)
         {
@@ -85,86 +89,88 @@ public class Chicken_Controller : MonoBehaviour
 
             if (randomNum==1)
             {
-                if (CurrentLocation == gm.CurrentSceneName)
+                if (CurrentLocation == GameManager.instance.CurrentSceneName)
                 {
                     target = DoorPoint;
                     canMove = true;
                     walkingToDoor = true;
-                    print("something");
-                }
-
-                else
-                {
-                    if (CurrentLocation == "Inside")
-                    {
-                        currentLocation = "Outside";                        
-                    }
-                    else
-                    {
-                        currentLocation = "Inside";
-                    }
-                    ActivateChicken();
+                    print("Change location -> passes the random number check -> the current location of the chicken is the same as the current scene");
                 }
             }
         }
     }
 
 
-    public void DesactivateChicken()
+    public void DeactivateChicken()
     {
-        //Desactivate the Mesh and make it stop moving
+        //Deactivate the Mesh and make it stop moving
         GetComponent<MeshRenderer>().enabled = false;
         GetComponent<CapsuleCollider>().enabled = false;
+        canMove = false;
     }
 
     public void ActivateChicken()
     {
-        //Activate whatever you desactivate in the other method
-        this.transform.position = DoorPoint;
+        //Activate whatever you deactivate in the other method
+        CacheDoor();
+        gameObject.transform.position = spawnPoint;
+
         canMove = true;
         GetComponent<MeshRenderer>().enabled = true;
         GetComponent<CapsuleCollider>().enabled = true;
     }
 
 
+    void CacheDoor()
+    {
+        door = GameObject.FindGameObjectWithTag("Door").transform;
+        spawnPoint = door.GetChild(0).GetComponent<Transform>().position;
+        spawnPoint.y = 0f;
+        doorPoint = new Vector3(door.position.x, 0, door.position.z);
+    }
+
+
     void WalkToDoor()
     {
-        if (Vector3.Distance(transform.position, DoorPoint) < 0.1f)
+        if (Vector3.Distance(transform.position, doorPoint) < 1f)
         {
-            DesactivateChicken();
+            DeactivateChicken();
             if (CurrentLocation == "Inside")
             {
                 currentLocation = "Outside";
+                walkingToDoor = false;
+                Debug.Log("changed chicken location to outside");
             }
             else
             {
                 currentLocation = "Inside";
+                walkingToDoor = false;
+                Debug.Log("changed chicken location to inside");
             }
-        }      
+        }
     }
-
 
 
     public IEnumerator movingPoint()
     {
-        
         Vector3 moveDir = target - transform.position;
 
         if(canMove)
         {
             if(Vector3.Distance(transform.position, target) < 0.1f)
             {
-
                 canMove = false;
+
                 float t = Random.Range(1, 10);
                 yield return new WaitForSeconds(t);
+
                 target = newWalkingpoint();
+
                 canMove = true;
             }
 
             transform.position += moveDir * 3 * Time.deltaTime;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target - transform.position), 7f * Time.deltaTime);
-
         }
 
     }
@@ -179,7 +185,7 @@ public class Chicken_Controller : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.collider == this.gameObject.GetComponent<Collider>()&&!isLifted)
+                if (!isLifted && hit.collider == this.gameObject.GetComponent<Collider>())
                 {
                     timePressed += Time.deltaTime;
 
@@ -210,13 +216,14 @@ public class Chicken_Controller : MonoBehaviour
             transform.position = target;
         }
     }
+
+
     //This is a delay until the end of the frame so the menu doesn't open when you stop lifting the chicken
     IEnumerator DelayLiftChicken()
     {
         yield return new WaitForEndOfFrame();
         isLifted = false;
     }
-
 
 
     public Vector3 newWalkingpoint()
@@ -239,34 +246,33 @@ public class Chicken_Controller : MonoBehaviour
 
     public void GettingFood()
     {
-        if (gm.CurrentSceneName=="Outside")//-------------------------------------------------should be inside - change all the strings to Inside when we change the location
+        if (GameManager.instance.CurrentSceneName=="Outside")//-------------------------------------------------should be inside - change all the strings to Inside when we change the location
         {
             if (currentLocation=="Outside")
             {
-                Vector3 moveDir = status.Food.transform.position - transform.position;
+                Vector3 moveDir = chickenStatus.Food.transform.position - transform.position;
                 if (moveDir.magnitude > 1)
                 {
-                    transform.position += moveDir * 2 * Time.deltaTime;
+                    transform.position += moveDir * Time.deltaTime;
 
-                    transform.rotation = Quaternion.LookRotation(status.Food.transform.position);
+                    transform.rotation = Quaternion.LookRotation(chickenStatus.Food.transform.position);
 
                 }
-                if (status.Food.avaliableFood > 0 && Vector3.Distance(transform.position, status.Food.transform.position) < 1f)
+                if (chickenStatus.Food.avaliableFood > 0 && Vector3.Distance(transform.position, chickenStatus.Food.transform.position) < 1f)
                 {
-                    status.hunger++;
-                    status.Food.avaliableFood--;
+                    chickenStatus.hunger++;
+                    chickenStatus.Food.avaliableFood--;
                 }
             }
-
             else
             {
                 currentLocation = "Outside";
                 ActivateChicken();
             }
-
         }
-
-       
+        else
+        {
+            walkingToDoor = true;
+        }
     }
-
 }

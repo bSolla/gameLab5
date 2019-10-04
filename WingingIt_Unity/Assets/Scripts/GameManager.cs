@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     //                                V A R I A B L E S 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+    public static GameManager instance = null;
+
     [SerializeField] GameObject chickenGroup;
 
     string currentSceneName;
@@ -55,38 +57,49 @@ public class GameManager : MonoBehaviour
     //When the game starts search the chickens in the first scene and add it to the list (this is only for testing the scenes we have now)
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
-
-        chickensList = new List<GameObject>();
-        GameObject[] array = GameObject.FindGameObjectsWithTag("Chicken");
-
-        foreach (GameObject chick in array)
+        if (instance == null)
         {
-            chickensList.Add(chick);
-        }
+            instance = this;
 
-        chickenGroup.SetActive(false);
+            DontDestroyOnLoad(this.gameObject);
+
+            SceneManager.sceneLoaded += this.OnLoadCallback;
+
+            chickensList = new List<GameObject>();
+            GameObject[] array = GameObject.FindGameObjectsWithTag("Chicken");
+
+            foreach (GameObject chick in array)
+            {
+                chickensList.Add(chick);
+            }
+
+            chickenGroup.SetActive(false);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
 
-    //Each time a level is load the manager checks if we are in the coop or not and activate the chickens if they are suposed to be there
-    private void OnLevelWasLoaded(int level)
+    void OnLoadCallback(Scene scene, LoadSceneMode sceneMode)
     {
-        currentSceneName = SceneManager.GetActiveScene().name;
-
-        if (CurrentSceneName == "Inside"|| CurrentSceneName == "Outside")                 //Put the names of the scenes we are using here!!!!!!!
+        currentSceneName = scene.name;
+        if (CurrentSceneName == "Inside" || CurrentSceneName == "Outside")                 //Put the names of the scenes we are using here!!!!!!!
         {
             chickenGroup.SetActive(true);
-            ActivateChickens();
         }
         else
         {
             chickenGroup.SetActive(false);
-        }    
+        }
+
+        ActivateChickensToggle();
     }
 
+
     //This method check the current location of the chickens and call the method ActivateChicken in the ones which are in the current scene
-    void ActivateChickens()
+    void ActivateChickensToggle()
     {
         foreach (GameObject chick in chickensList)
         {
@@ -96,10 +109,11 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                chick.GetComponent<Chicken_Controller>().DesactivateChicken();
+                chick.GetComponent<Chicken_Controller>().DeactivateChicken();
+                Debug.Log("deactivating chickens from GameManager");
             }
 
-            chick.GetComponent<Chicken_Controller>().DoorPoint = GameObject.Find("DoorPoint").transform.position;
+            //chick.GetComponent<Chicken_Controller>().DoorPoint = GameObject.Find("DoorPoint").transform.position;
             chick.GetComponent<ChickenStatus>().SearchReferences();
         }
     }
