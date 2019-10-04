@@ -25,14 +25,20 @@ public class GameManager : MonoBehaviour
 
     // S T A T E   V A R I A B L E S
 
-    bool bushIsFull;
-    int foodAmount;
+    bool bushIsFull=true;
+    int foodAmount=50;
     int waterAmount;
+
+    Chicken_Controller chickInBush;
+    bool berryMinigame;
+    public bool BerryMinigame { get => berryMinigame; set => berryMinigame = value; }
+    public Chicken_Controller ChickInBush { get => chickInBush; set => chickInBush = value; }
 
     bool cutMinigame=false;
     float cuttingScore;
     public bool CutMinigame { get => cutMinigame; set => cutMinigame = value; }
     public float CuttingScore { get => cuttingScore; set => cuttingScore = value; }
+
 
 
     /*To do:
@@ -43,7 +49,7 @@ public class GameManager : MonoBehaviour
      * 
      * Make them be the same when we come back to the scene
      * 
-     * Show the results of the minigammes (more food, bush empty...)
+     * Show the results of the minigammes (more food, bush empty...)            Everything done but water
      */
 
 
@@ -82,7 +88,9 @@ public class GameManager : MonoBehaviour
         else
         {
             chickenGroup.SetActive(false);
-        }    
+        }
+
+        LoadStatsBetweenScenes();
     }
 
     //This method check the current location of the chickens and call the method ActivateChicken in the ones which are in the current scene
@@ -115,19 +123,24 @@ public class GameManager : MonoBehaviour
 
         if (CurrentSceneName == "Outside")
         {
+            if (berryMinigame)
+            {
+                berryMinigame = false;
+
+                ChickInBush.GetComponent<ChickenStatus>().hunger += 30;         //Put the value we want to feed the chicken with the minigame
+            }
+
             if (cutMinigame)
             {
                 cutMinigame = false;
-                //foodAmount += cuttingScore / 4;                           CHANGE FLOAT TO INT SO WE CAN ADD IT
-
+                
+                foodAmount += (int)cuttingScore / 5;                   
             }
 
             FindObjectOfType<BerryBush>().bushFull = bushIsFull;
             FindObjectOfType<FoodBowl>().avaliableFood = foodAmount;
+            FindObjectOfType<FoodBowl>().AddFood(0);
             //waterAmount
-
-            //If you come back from minigame add the food
-            
         }
     }
 

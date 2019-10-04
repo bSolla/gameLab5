@@ -38,7 +38,9 @@ public class BerryBush : MonoBehaviour
         {
             if (chickLifted && !currentChick.isLifted)
             {
-                bushFull = false; 
+                bushFull = false;
+                FindObjectOfType<GameManager>().BerryMinigame = true;
+                FindObjectOfType<GameManager>().ChickInBush = currentChick;
                 GetComponent<ChangingScenes>().GoToScene("BerryPicking");
             }
         }        

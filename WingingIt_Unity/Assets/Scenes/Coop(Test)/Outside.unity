@@ -3811,7 +3811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: CuttingMinigame
-  clickable: 1
+  clickable: 0
 --- !u!1 &1558670813
 GameObject:
   m_ObjectHideFlags: 0
@@ -5668,6 +5668,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Center.y
       value: 0.059515476
+      objectReference: {fileID: 0}
+    - target: {fileID: 896680219416128024, guid: 68b62e0efece2d240b6a5b49305ae25a,
+        type: 3}
+      propertyPath: bushFull
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68b62e0efece2d240b6a5b49305ae25a, type: 3}

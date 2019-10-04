@@ -16,9 +16,7 @@ public class FoodBowl : MonoBehaviour
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     void Update()
-    {
-        foodAvaliableText.text = "Food: " + avaliableFood;
-        
+    {     
         if(avaliableFood <= 0)
         {
             food.SetActive(false);
@@ -33,6 +31,7 @@ public class FoodBowl : MonoBehaviour
             fillFood();
         }
     }
+
     void fillFood()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -42,8 +41,18 @@ public class FoodBowl : MonoBehaviour
         {
             if(hit.collider == col)
             {
-                avaliableFood += 10;
+                GetComponent<ChangingScenes>().GoToScene("CuttingMinigame");
             }
         }
+    }
+
+    public void AddFood(int food)
+    {
+        avaliableFood += food;
+        if (avaliableFood>100)
+        {
+            avaliableFood = 100;
+        }
+        foodAvaliableText.text = "Food: " + avaliableFood;
     }
 }

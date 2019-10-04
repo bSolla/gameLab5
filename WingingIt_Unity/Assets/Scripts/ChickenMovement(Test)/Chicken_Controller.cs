@@ -103,6 +103,7 @@ public class Chicken_Controller : MonoBehaviour
                     {
                         currentLocation = "Inside";
                     }
+                    this.transform.position = DoorPoint;
                     ActivateChicken();
                 }
             }
@@ -120,7 +121,6 @@ public class Chicken_Controller : MonoBehaviour
     public void ActivateChicken()
     {
         //Activate whatever you desactivate in the other method
-        this.transform.position = DoorPoint;
         canMove = true;
         GetComponent<MeshRenderer>().enabled = true;
         GetComponent<CapsuleCollider>().enabled = true;
@@ -254,7 +254,7 @@ public class Chicken_Controller : MonoBehaviour
                 if (status.Food.avaliableFood > 0 && Vector3.Distance(transform.position, status.Food.transform.position) < 1f)
                 {
                     status.hunger++;
-                    status.Food.avaliableFood--;
+                    status.Food.AddFood(-1);
                 }
             }
 
