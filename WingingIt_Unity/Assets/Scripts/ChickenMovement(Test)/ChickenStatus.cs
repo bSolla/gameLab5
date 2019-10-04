@@ -26,8 +26,10 @@ public class ChickenStatus : MonoBehaviour
 
     Chicken_Controller chickenController;
     FoodBowl food;
-    public FoodBowl Food { get => food; }
     WaterDispenser water;
+    public FoodBowl Food { get => food; }
+    public WaterDispenser Water {get => water; }
+    // WaterDispenser water;
     PettingController petting;
 
 
@@ -61,9 +63,10 @@ public class ChickenStatus : MonoBehaviour
         {
             gm = FindObjectOfType<GameManager>();
         }
-        if (gm.CurrentSceneName == "Outside") //Actually it has to be in the inside, so we have to change this in the new scene
+        if (gm.CurrentSceneName == "Inside") //Actually it has to be in the inside, so we have to change this in the new scene
         {
             food = FindObjectOfType<FoodBowl>();
+            water = FindObjectOfType<WaterDispenser>();
         }
     }
 
@@ -152,7 +155,7 @@ public class ChickenStatus : MonoBehaviour
         // if(Random.value <= precentChance)
         // {
 
-        // chickenController.GettingFood();
+        chickenController.GettingFood();
 
 
 
@@ -163,7 +166,8 @@ public class ChickenStatus : MonoBehaviour
         // }
         // else
         // {
-        if (hunger >= 100 || (food.avaliableFood <= 0 && hunger >= 50))
+        // if (hunger >= 100 || (food.avaliableFood <= 0 && hunger >= 50))
+        if (hunger >= 100 || hunger >= 50)
         {
             currState = State.Normal;
         }
@@ -172,8 +176,8 @@ public class ChickenStatus : MonoBehaviour
     void UpdateThirstyState()
     {
         // if()
-        // chickenController.GettingWater();
-        if(thirst >= 100 || (water.waterAvaliable <= 0 && thirst >= 50))
+        chickenController.GettingWater();
+        if(thirst >= 100 || thirst >= 50)
         {
             currState = State.Normal;
         }

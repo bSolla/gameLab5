@@ -110,6 +110,8 @@ public class GameManager : MonoBehaviour
     {
         if (CurrentSceneName == "Inside")
         {
+            FindObjectOfType<FoodBowl>().avaliableFood = foodAmount;
+            FindObjectOfType<WaterDispenser>().waterAvaliable = waterAmount;
 
         }
 
@@ -123,7 +125,6 @@ public class GameManager : MonoBehaviour
             }
 
             FindObjectOfType<BerryBush>().bushFull = bushIsFull;
-            FindObjectOfType<FoodBowl>().avaliableFood = foodAmount;
             //waterAmount
 
             //If you come back from minigame add the food
@@ -136,13 +137,14 @@ public class GameManager : MonoBehaviour
     {
         if (CurrentSceneName=="Inside")
         {
+            foodAmount = FindObjectOfType<FoodBowl>().avaliableFood;
+            waterAmount = FindObjectOfType<WaterDispenser>().waterAvaliable;
 
         }
 
         if (CurrentSceneName=="Outside")
         {
             bushIsFull = FindObjectOfType<BerryBush>().bushFull;
-            foodAmount = FindObjectOfType<FoodBowl>().avaliableFood;
             //waterAmount
         }
     }

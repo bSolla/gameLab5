@@ -15,9 +15,9 @@ public class Chicken_Controller : MonoBehaviour
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     // public float planeX, planeZ;
-    int currWalkPoint;
+    // int currWalkPoint;
     public float movementSpeed = 5f;
-    public GameObject[] walkingPoints;
+    // public GameObject[] walkingPoints;
 
     Vector3 target;
     ChickenStatus status;
@@ -239,9 +239,9 @@ public class Chicken_Controller : MonoBehaviour
 
     public void GettingFood()
     {
-        if (gm.CurrentSceneName=="Outside")//-------------------------------------------------should be inside - change all the strings to Inside when we change the location
+        if (gm.CurrentSceneName=="Inside")
         {
-            if (currentLocation=="Outside")
+            if (currentLocation=="Inside")
             {
                 Vector3 moveDir = status.Food.transform.position - transform.position;
                 if (moveDir.magnitude > 1)
@@ -267,6 +267,37 @@ public class Chicken_Controller : MonoBehaviour
         }
 
        
+    }
+    public void GettingWater()
+    {
+
+        if (gm.CurrentSceneName=="Inside")
+        {
+            if (currentLocation=="Inside")
+            {
+                Vector3 moveDir = status.Water.transform.position - transform.position;
+                if(moveDir.magnitude > 1)
+                {
+                    transform.position += moveDir * 2 * Time.deltaTime;
+
+                    transform.rotation = Quaternion.LookRotation(status.Water.transform.position);
+
+                }
+                else if(status.Water.waterAvaliable > 0 && Vector3.Distance(transform.position, status.Water.transform.position) < 4.0f)
+                {
+                print ("Here");
+
+                    status.thirst ++;
+                    status.Water.waterAvaliable --;
+                }
+       
+            }
+            else
+            {
+                currentLocation = "Outside";
+
+            }
+        }
     }
 
 }

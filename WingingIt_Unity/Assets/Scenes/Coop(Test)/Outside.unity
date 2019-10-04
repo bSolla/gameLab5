@@ -1741,6 +1741,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 272db618bc735cf41bb12afa6a5a858b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hungerSlider: {fileID: 0}
+  thirstSlider: {fileID: 0}
+  happinessSlider: {fileID: 0}
   isMenuOpen: 0
 --- !u!1001 &968396618
 PrefabInstance:
@@ -1753,6 +1756,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: water
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: d3e0be44610df3f4da16b6f9e335262e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: d3e0be44610df3f4da16b6f9e335262e,
         type: 3}
@@ -2812,6 +2820,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: feeder (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: a2d4ddf8e0a214e46881cea971e837a9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: a2d4ddf8e0a214e46881cea971e837a9,
         type: 3}

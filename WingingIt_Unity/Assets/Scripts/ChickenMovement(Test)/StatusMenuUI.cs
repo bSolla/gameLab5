@@ -76,9 +76,9 @@ public class StatusMenuUI : MonoBehaviour
     
     void FindSliders()
     {
-        hungerSlider=transform.Find("Panel/HungerSlider").GetComponent<Slider>();
-        thirstSlider = transform.Find("Panel/ThirstSlider").GetComponent<Slider>();
-        happinessSlider = transform.Find("Panel/HappinessSlider").GetComponent<Slider>();
-        nameText = transform.Find("Panel/Name").GetComponent<Text>();
+        hungerSlider= panel.transform.GetChild(0).GetComponent<Slider>();
+        thirstSlider = panel.transform.GetChild(1).GetComponent<Slider>();
+        happinessSlider = panel.transform.GetChild(2).GetComponent<Slider>();
+        nameText = panel.transform.GetChild(3).GetComponent<Text>();
     }
 }
