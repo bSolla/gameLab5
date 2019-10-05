@@ -10,12 +10,12 @@ using UnityEngine;
 
 public class ChickenStatus : MonoBehaviour
 {
-//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-//                                V A R I A B L E S 
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    //                                V A R I A B L E S 
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-    public enum State { Normal, Hungry, Thirsty, Sad };
-    public State currState = State.Normal;
+    public enum ChickenState { Normal, Hungry, Thirsty, Sad };
+    public ChickenState currState = ChickenState.Normal;
     public int hunger = 100, thirst = 100, happiness = 100;
     private float timerHunger, timerThirst, timerHappiness;
     bool updateState = true;
@@ -32,13 +32,9 @@ public class ChickenStatus : MonoBehaviour
     WaterDispenser water;
     PettingController petting;
 
-
-    // public bool isHungry;
-
-
-//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-//                                  M E T H O D S 
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    //                                  M E T H O D S 
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     void Start()
     {
@@ -54,7 +50,7 @@ public class ChickenStatus : MonoBehaviour
     public void SearchReferences()
     {
         menuUI = GameObject.FindObjectOfType<StatusMenuUI>();
-        
+
         if (GameManager.instance.CurrentSceneName == "Outside") //Actually it has to be in the inside, so we have to change this in the new scene
         {
             food = FindObjectOfType<FoodBowl>();
@@ -66,18 +62,19 @@ public class ChickenStatus : MonoBehaviour
 
     void Update()
     {
+
         switch (currState)
         {
-            case State.Normal:
+            case ChickenState.Normal:
                 UpdateNormalState();
                 break;
-            case State.Hungry:
+            case ChickenState.Hungry:
                 UpdateHungryState();
                 break;
-            case State.Thirsty:
+            case ChickenState.Thirsty:
                 UpdateThirstyState();
                 break;
-            case State.Sad:
+            case ChickenState.Sad:
                 UpdateSadState();
                 break;
         }
@@ -128,16 +125,16 @@ public class ChickenStatus : MonoBehaviour
         // }
         if (updateState && hunger < 60)
         {
-            currState = State.Hungry;
+            currState = ChickenState.Hungry;
         }
-        //if (thirst < 50)
-        //{
-        //    currState = State.Thirsty;
-        //    // chickenController.movingPoint();  //---------If its outside maybe going inside to eat (check if its currently in the same scene as the player)--------
-        //}
+        if (thirst < 50)
+        {
+            currState = ChickenState.Thirsty;
+            // chickenController.movingPoint();  //---------If its outside maybe going inside to eat (check if its currently in the same scene as the player)--------
+        }
         if (happiness < 50)
         {
-            currState = State.Sad;
+            currState = ChickenState.Sad;
         }
     }
 
@@ -146,7 +143,7 @@ public class ChickenStatus : MonoBehaviour
         if (food == null)
         {
             chickenController.walkingToDoor = true;
-            currState = State.Normal;
+            currState = ChickenState.Normal;
             updateState = false;
         }
         else
@@ -158,37 +155,14 @@ public class ChickenStatus : MonoBehaviour
 
             if (hunger >= 100 || (food.avaliableFood <= 0 && hunger >= 50))
             {
-                currState = State.Normal;
+                currState = ChickenState.Normal;
             }
         }
-        // if(food.avaliableFood > 0)
-        // {
-        // float precentChance = (food / 100f);
-        // if(Random.value <= precentChance)
-        // {
-
-        // chickenController.GettingFood();
-
-
-
-        // }
-
-
-        // chickenController.GettingFood();
-        // }
-        // else
-        // {
-        //if (hunger >= 100 || (food.avaliableFood <= 0 && hunger >= 50))
-        //{
-        //    currState = State.Normal;
-        //}
-        // }
     }
 
 
     void UpdateThirstyState()
     {
-        
         if (water == null)
         {
             Debug.Log("There is no water in this scene");
@@ -197,21 +171,18 @@ public class ChickenStatus : MonoBehaviour
         {
             if (thirst >= 100 || (water.waterAvaliable <= 0 && thirst >= 50))
             {
-                currState = State.Normal;
+                currState = ChickenState.Normal;
             }
         }
 
     }
-
-
     void UpdateSadState()
     {
         if (happiness > 50 || hunger<20 || thirst<20)
         {
-            currState = State.Normal;
+            currState = ChickenState.Normal;
         }
     }
-
 
     void UpdateHunger()        //Constantly updating and checking if the hunger should go down
     {
