@@ -79,7 +79,8 @@ public class EggDrop : MonoBehaviour
         dropEgg = false;
         oldTime = currentTime;
         
-        dropTrans = GameObject.FindGameObjectWithTag("Chicken").transform.position;
+        // dropTrans = GameObject.FindGameObjectWithTag("Chicken").transform.position;
+        dropTrans = this.gameObject.transform.GetChild(0).GetChild(0).gameObject.transform.position;
         dropTrans = new Vector3 (dropTrans.x +2, 0.5f, dropTrans.z +2);
         
         GameObject newEgg = Instantiate (eggPrefab, dropTrans, transform.rotation);

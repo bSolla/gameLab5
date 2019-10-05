@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     public string CurrentSceneName { get => currentSceneName;}
 
 
-    List<GameObject> chickensList;
+    public List<GameObject> chickensList;
 
     // S T A T E   V A R I A B L E S
 

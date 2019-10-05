@@ -42,11 +42,11 @@ public class FoodBowl : MonoBehaviour
         {
             if(hit.collider == col)
             {
-                if(this.gameObject.tag == "CuttingMinigame")
+                if(this.gameObject.tag == "VegetableFeeder")
                 {
                     GetComponent<ChangingScenes>().GoToScene("CuttingMinigame");
                 }
-                else
+                else if(this.gameObject.name == "Feeder")
                 {
                     avaliableFood += 10;
 
