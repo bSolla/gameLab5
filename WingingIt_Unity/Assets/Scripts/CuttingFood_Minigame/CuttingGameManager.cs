@@ -47,8 +47,8 @@ public class CuttingGameManager : MonoBehaviour
                 panel.SetActive(true);
                 gameRunning = false;
 
-                FindObjectOfType<GameManager>().CutMinigame = true;
-                FindObjectOfType<GameManager>().CuttingScore = score;
+                GameManager.instance.CutMinigame = true;
+                GameManager.instance.CuttingScore = score;
             }
         }
     }

@@ -269,7 +269,46 @@ public class Chicken_Controller : MonoBehaviour
         if(newZ > 2) newZ = 2;
         if(newZ < -2) newZ = -2;
 
+        if(GameManager.instance.CurrentSceneName == "Inside")
+        {
+            if(newX > 4.8f)
+            {
+                newX = 4;
+            }
+            if(newX < -4.8f)
+            {
+                newX = -4;
+            }
+            if(newZ > 3.4f)
+            {
+                newZ = 3;
+            }
+            if(newZ < -5)
+            {
+                newZ = -4.5f;
+            }
+        }
+        if(GameManager.instance.CurrentSceneName == "Outside")
+        {
+            if(newX > 2.3f)
+            {
+                newX = 2;
+            }
+            if(newX < -4.3f)
+            {
+                newX = -4;
+            }
+            if(newZ > 7f)
+            {
+                newZ = 6.5f;
+            }
+            if(newZ < -7)
+            {
+                newZ = -6.5f;
+            }
+        }    
         Vector3 newTarget = new Vector3(newX, 0.1f, newZ);
+
 
         return newTarget;
     }

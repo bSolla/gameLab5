@@ -31,8 +31,11 @@ public class PettingController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        pettable = stat.menuUI.isMenuOpen;
+        if(stat.menuUI != null)
+        {
+            pettable = stat.menuUI.isMenuOpen;
+
+        }
         
 
         //resets the timer, starts the heart particles and ups the happiness stat

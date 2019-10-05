@@ -47,8 +47,9 @@ public class EggDrop : MonoBehaviour
     // Checking the systems time to see if an egg should be dropped. If yes, DropAnEgg function get's called
     private void CheckNewTime()
     {
+        // string currScene = GetComponent<GameManager>().currentSceneName;
         currentTime = DateTime.Now;
-        if(GameObject.FindGameObjectWithTag("Egg") == null)
+        if(GameObject.FindGameObjectWithTag("Egg") == null && (GameManager.instance.CurrentSceneName == "Outside" || GameManager.instance.CurrentSceneName == "Inside"))
         {
             if(oldTime.Date < currentTime.Date)
             {

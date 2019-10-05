@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject chickenGroup;
 
-    string currentSceneName;
+    public string currentSceneName;
     public string CurrentSceneName { get => currentSceneName;}
 
 
@@ -147,7 +147,9 @@ public class GameManager : MonoBehaviour
             {
                 cutMinigame = false;
                 
-                foodAmount += (int)cuttingScore / 5;                   
+                foodAmount += (int)cuttingScore / 5;    
+                FindObjectOfType<FoodBowl>().avaliableFood = foodAmount;
+                FindObjectOfType<FoodBowl>().AddFood(0);               
             }
 
             FindObjectOfType<BerryBush>().bushFull = bushIsFull;

@@ -62,9 +62,10 @@ public class ChickenStatus : MonoBehaviour
     {
         menuUI = GameObject.FindObjectOfType<StatusMenuUI>();
 
-        if (GameManager.instance.CurrentSceneName == "Outside") //Actually it has to be in the inside, so we have to change this in the new scene
+        if (GameManager.instance.CurrentSceneName == "Inside") //Actually it has to be in the inside, so we have to change this in the new scene
         {
             food = FindObjectOfType<FoodBowl>();
+            water = FindObjectOfType<WaterDispenser>();
         }
 
         updateState = true;
@@ -180,6 +181,7 @@ public class ChickenStatus : MonoBehaviour
         // if()
         if (water == null)
         {
+            // chickenController.walkingToDoor = true;            
             Debug.Log("There is no water in this scene");
         }
         else

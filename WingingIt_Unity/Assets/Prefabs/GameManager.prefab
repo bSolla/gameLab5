@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chickenGroup: {fileID: 8933451334696015888}
+  currentSceneName: 
+  chickensList: []
 --- !u!114 &7378787747254130539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,9 +105,96 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6374582812028331911}
+  - {fileID: 2175949972437165102}
   m_Father: {fileID: 8933451334184571414}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &4448546099122403480
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8933451334696015889}
+    m_Modifications:
+    - target: {fileID: 2562248997079129264, guid: 13f9862879fe21346bfe40dd18e013cb,
+        type: 3}
+      propertyPath: m_Name
+      value: Chicken (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2562248997079129270, guid: 13f9862879fe21346bfe40dd18e013cb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2562248997079129270, guid: 13f9862879fe21346bfe40dd18e013cb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2562248997079129270, guid: 13f9862879fe21346bfe40dd18e013cb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2562248997079129270, guid: 13f9862879fe21346bfe40dd18e013cb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2562248997079129270, guid: 13f9862879fe21346bfe40dd18e013cb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2562248997079129270, guid: 13f9862879fe21346bfe40dd18e013cb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2562248997079129270, guid: 13f9862879fe21346bfe40dd18e013cb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2562248997079129270, guid: 13f9862879fe21346bfe40dd18e013cb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2562248997079129270, guid: 13f9862879fe21346bfe40dd18e013cb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2562248997079129270, guid: 13f9862879fe21346bfe40dd18e013cb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2562248997079129270, guid: 13f9862879fe21346bfe40dd18e013cb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091194680225050896, guid: 13f9862879fe21346bfe40dd18e013cb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 422778013, guid: 13f9862879fe21346bfe40dd18e013cb, type: 3}
+      propertyPath: chickenName
+      value: Chickira Chickira
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2562248997079129267, guid: 13f9862879fe21346bfe40dd18e013cb, type: 3}
+    - {fileID: 7108951516015408636, guid: 13f9862879fe21346bfe40dd18e013cb, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 13f9862879fe21346bfe40dd18e013cb, type: 3}
+--- !u!4 &2175949972437165102 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2562248997079129270, guid: 13f9862879fe21346bfe40dd18e013cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 4448546099122403480}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8933451333764315953
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -177,6 +266,14 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 422778013, guid: 13f9862879fe21346bfe40dd18e013cb, type: 3}
+      propertyPath: hunger
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 422778013, guid: 13f9862879fe21346bfe40dd18e013cb, type: 3}
+      propertyPath: thirst
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2562248997079129267, guid: 13f9862879fe21346bfe40dd18e013cb, type: 3}

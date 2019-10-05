@@ -16,7 +16,7 @@ public class WaterDispenser : MonoBehaviour
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 public int waterAvaliable = 10;
 // public GameObject water;
-// public Text waterAvaliableText;
+public Text waterAvaliableText;
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 //                                                      F U N C T I O N S
@@ -29,7 +29,7 @@ public int waterAvaliable = 10;
 
     void Update()
     {
-        // waterAvaliableText.text = "Water: " + waterAvaliable.ToString();
+        waterAvaliableText.text = "Water: " + waterAvaliable.ToString();
         if(waterAvaliable < 0)
         {
             // water.SetActive(false);
