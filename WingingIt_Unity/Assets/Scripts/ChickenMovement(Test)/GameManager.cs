@@ -170,6 +170,8 @@ public class GameManager : MonoBehaviour
         if (CurrentSceneName=="Outside")
         {
             bushIsFull = FindObjectOfType<BerryBush>().bushFull;
+            foodAmount = FindObjectOfType<FoodBowl>().avaliableFood;
+
             //waterAmount
         }
     }
