@@ -65,6 +65,7 @@ public class StatusMenuUI : MonoBehaviour
         Panel.SetActive(true);
         nameText.text = currentChicken.chickenName;
         delay = 0.5f;
+        isMenuOpen = true;
     }
 
     void CloseMenu()

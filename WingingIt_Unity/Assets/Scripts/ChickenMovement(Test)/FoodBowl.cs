@@ -42,8 +42,26 @@ public class FoodBowl : MonoBehaviour
         {
             if(hit.collider == col)
             {
-                avaliableFood += 10;
+                if(this.gameObject.tag == "CuttingMinigame")
+                {
+                    GetComponent<ChangingScenes>().GoToScene("CuttingMinigame");
+                }
+                else
+                {
+                    avaliableFood += 10;
+
+                }
             }
         }
+    }
+    public void AddFood(int food)
+    {
+        avaliableFood += food;
+        if (avaliableFood>100)
+        {
+            avaliableFood = 100;
+        }
+        // foodAvaliableText.text = "Food: " + avaliableFood;
+
     }
 }

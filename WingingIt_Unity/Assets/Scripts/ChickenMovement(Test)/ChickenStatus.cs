@@ -17,7 +17,10 @@ public class ChickenStatus : MonoBehaviour
     public enum State { Normal, Hungry, Thirsty, Sad };
     public State currState = State.Normal;
     public int hunger = 100, thirst = 100, happiness = 100;
-    private float tHunger, tThirst, tHappiness;
+    private float timerHunger, timerThirst, timerHappiness;
+    bool updateState = true;
+
+
     public StatusMenuUI menuUI;
     // public float realTime;
     // public DateTime currTime, lastTime;
@@ -36,7 +39,7 @@ public class ChickenStatus : MonoBehaviour
     // public bool isHungry;
 
 
-    GameManager gm;
+    // GameManager gm;
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     //                                  M E T H O D S 
@@ -44,11 +47,11 @@ public class ChickenStatus : MonoBehaviour
 
     void Start()
     {
-        gm = FindObjectOfType<GameManager>();
+        // gm = FindObjectOfType<GameManager>();
 
         chickenController = GetComponent<Chicken_Controller>();
 
-        tHunger = 10;
+        timerHunger = 10;
 
         petting = GetComponent<PettingController>();
 
@@ -59,15 +62,12 @@ public class ChickenStatus : MonoBehaviour
     {
         menuUI = GameObject.FindObjectOfType<StatusMenuUI>();
 
-        if (gm == null) //--------------It should be another way to fix this---------- This is here because this method is called before the start method, so there's not gm reference yet
-        {
-            gm = FindObjectOfType<GameManager>();
-        }
-        if (gm.CurrentSceneName == "Inside") //Actually it has to be in the inside, so we have to change this in the new scene
+        if (GameManager.instance.CurrentSceneName == "Outside") //Actually it has to be in the inside, so we have to change this in the new scene
         {
             food = FindObjectOfType<FoodBowl>();
-            water = FindObjectOfType<WaterDispenser>();
         }
+
+        updateState = true;
     }
 
 
@@ -76,10 +76,18 @@ public class ChickenStatus : MonoBehaviour
 
         switch (currState)
         {
-            case State.Normal: UpdateNormalState(); break;
-            case State.Hungry: UpdateHungryState(); break;
-            case State.Thirsty: UpdateThirstyState(); break;
-            case State.Sad: UpdateSadState(); break;
+            case State.Normal:
+                UpdateNormalState();
+                break;
+            case State.Hungry:
+                UpdateHungryState();
+                break;
+            case State.Thirsty:
+                UpdateThirstyState();
+                break;
+            case State.Sad:
+                UpdateSadState();
+                break;
         }
 
         if (Input.GetMouseButtonUp(1))
@@ -105,8 +113,7 @@ public class ChickenStatus : MonoBehaviour
         }
 
         // if (Input.GetMouseButtonUp(0) && !menuUI.Panel.activeSelf && !chickenController.isLifted) 
-        if (Input.GetMouseButtonUp(0) && !chickenController.isLifted) 
-
+        if (Input.GetMouseButtonUp(0) && !menuUI.Panel.activeSelf && !chickenController.isLifted) 
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -132,7 +139,7 @@ public class ChickenStatus : MonoBehaviour
         //     print ("My chances are: " + precentChance + "%");
         //     currState = State.Hungry;
         // }
-        if (hunger < 60)
+        if (updateState && hunger < 60)
         {
             currState = State.Hungry;
         }
@@ -149,37 +156,43 @@ public class ChickenStatus : MonoBehaviour
 
     void UpdateHungryState()
     {
-        // if(food.avaliableFood > 0)
-        // {
-        // float precentChance = (food / 100f);
-        // if(Random.value <= precentChance)
-        // {
-
-        chickenController.GettingFood();
-
-
-
-        // }
-
-
-        // chickenController.GettingFood();
-        // }
-        // else
-        // {
-        // if (hunger >= 100 || (food.avaliableFood <= 0 && hunger >= 50))
-        if (hunger >= 100 || hunger >= 50)
+        if (food == null)
         {
+            chickenController.walkingToDoor = true;
             currState = State.Normal;
+            updateState = false;
         }
-        // }
+        else
+        {
+            if (food.avaliableFood > 0)
+            {
+                chickenController.GettingFood();
+            }
+
+            if (hunger >= 100 || (food.avaliableFood <= 0 && hunger >= 50))
+            {
+                currState = State.Normal;
+            }
+        }
     }
     void UpdateThirstyState()
     {
         // if()
-        chickenController.GettingWater();
-        if(thirst >= 100 || thirst >= 50)
+        if (water == null)
         {
-            currState = State.Normal;
+            Debug.Log("There is no water in this scene");
+        }
+        else
+        {
+            if (thirst >= 100 || (water.waterAvaliable <= 0 && thirst >= 50))
+            {
+                currState = State.Normal;
+            }
+            else
+            {
+                chickenController.GettingWater();
+
+            }
         }
 
     }
@@ -193,35 +206,35 @@ public class ChickenStatus : MonoBehaviour
 
     void UpdateHunger()        //Constantly updating and checking if the hunger should go down
     {
-        tHunger -= Time.deltaTime;
-        if (tHunger <= 0 && hunger > 10)
+        timerHunger -= Time.deltaTime;
+        if (timerHunger <= 0 && hunger > 10)
         {
-            tHunger = 10;
-            // tHunger += 60 * 60;             // how long it should take before it drops, minute
+            timerHunger = 10;
+            // timerHunger += 60 * 60;             // how long it should take before it drops, minute
             hunger -= 10;
         }
     }
 
     void UpdateThirst()    //Constantly updating and checking if the thirst should go down
     {
-        tThirst -= Time.deltaTime;
-        if (tThirst <= 0)
+        timerThirst -= Time.deltaTime;
+        if (timerThirst <= 0)
         {
-            tThirst = 10;
+            timerThirst = 10;
             thirst -= 5;
-            // tThirst -= 60 * 5;           // how long it should take before it drops, minute
+            // timerThirst -= 60 * 5;           // how long it should take before it drops, minute
         }
     }
 
     void UpdateHappiness()             //Constantly updating and checking if the happiness should go down
     {
-        tHappiness -= Time.deltaTime;
-        if (tHappiness <= 0)
+        timerHappiness -= Time.deltaTime;
+        if (timerHappiness <= 0)
         {
-            tHappiness = 60;
+            timerHappiness = 60;
             happiness -= 10;
 
-            // tHappiness -= 60 * 15;           // how long it should take before it drops, minute
+            // timerHappiness -= 60 * 15;           // how long it should take before it drops, minute
         }
     }
 }

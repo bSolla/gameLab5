@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2562248997079129271}
   - component: {fileID: 2562248997079129268}
   - component: {fileID: 2562248997079129269}
-  - component: {fileID: 2562248997079129267}
   - component: {fileID: 7108951516015408636}
   - component: {fileID: 422778013}
   - component: {fileID: 3941364487644015285}
@@ -99,20 +98,6 @@ CapsuleCollider:
   m_Height: 1.368919
   m_Direction: 1
   m_Center: {x: 0, y: 0.6639145, z: 0.018896013}
---- !u!114 &2562248997079129267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2562248997079129264}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e7b5bc55671b1d42a8ed868557c1804, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  planeX: 5
-  planeZ: 5
 --- !u!114 &7108951516015408636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,9 +158,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b08a48e77ab354c977716a284bf3a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planeX: 0
+  planeZ: 0
   movementSpeed: 5
+  walkingPoints: []
   canMove: 1
   isLifted: 0
+  walkingToDoor: 0
 --- !u!1001 &1100102917679305247
 PrefabInstance:
   m_ObjectHideFlags: 0
