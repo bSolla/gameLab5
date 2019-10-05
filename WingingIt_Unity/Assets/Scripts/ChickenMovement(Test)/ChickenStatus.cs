@@ -123,6 +123,8 @@ public class ChickenStatus : MonoBehaviour
                 if (hit.collider == this.gameObject.GetComponent<Collider>())
                 {
                     menuUI.OpenMenu(this);
+                    //Camera.main.orthographicSize = 2;
+                    //Camera.main.GetComponent<CameraFollow>().startFollowing(gameObject.transform.position);
                 }
             }           
         }
