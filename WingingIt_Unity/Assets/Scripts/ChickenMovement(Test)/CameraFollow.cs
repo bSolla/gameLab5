@@ -40,7 +40,6 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log (following);
         if (transitioning)
         {
             if (following)
@@ -57,10 +56,6 @@ public class CameraFollow : MonoBehaviour
                 cam.orthographicSize = Mathf.Lerp (2, 7.91f, elapsed);
                 transform.rotation = Quaternion.Lerp (transform.rotation, originRotation, elapsed);
             }
-        }
-        else
-        {
-            return;
         }   
     }
 
@@ -86,9 +81,5 @@ public class CameraFollow : MonoBehaviour
     {
         elapsed = 0;
         following = false;
-        //cam.orthographicSize = 7.91f;
-        //transform.position = originPosition;
-        //transform.rotation = originRotation;
-
     }
 }
