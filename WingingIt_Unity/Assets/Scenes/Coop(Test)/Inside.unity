@@ -2651,6 +2651,8 @@ MonoBehaviour:
   originRotation: {x: 0, y: 0, z: 0, w: 0}
   following: 0
   target: {fileID: 0}
+  duration: 1
+  elapsed: 0
 --- !u!1001 &1120522339
 PrefabInstance:
   m_ObjectHideFlags: 0

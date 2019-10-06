@@ -11,6 +11,9 @@ public class CameraFollow : MonoBehaviour
     public bool following = false;
     public Transform target;
     Camera cam;
+    public float duration = 1f;
+    public float elapsed = 0f;
+    public bool transitioning = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,21 +21,27 @@ public class CameraFollow : MonoBehaviour
         originRotation = transform.rotation;
         following = false;
         cam = Camera.main;
+        transitioning = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (following)
+        if (transitioning)
         {
-            Debug.Log ("target: " + target);
-            followChicken();
-        }
-        else
-        {
-
-        }
-        
+            if (following)
+            {
+                Debug.Log ("target: " + target);
+                followChicken();
+                elapsed += Time.deltaTime / duration;
+                cam.orthographicSize = Mathf.Lerp (7.91f, 2f, elapsed);
+            }
+            else
+            {
+                elapsed += Time.deltaTime / duration;
+                cam.orthographicSize = Mathf.Lerp (2, 7.91f, elapsed);
+            }
+        }   
     }
 
     public void followChicken ()
@@ -46,14 +55,17 @@ public class CameraFollow : MonoBehaviour
     public void startFollowing(Transform targetToFollow)
     {
         following = true;
-        cam.orthographicSize = 2;
+        transitioning = true;
+        elapsed = 0;
+        //cam.orthographicSize = 2;
         target = targetToFollow;
     }
 
     public void stopFollowing()
     {
+        elapsed = 0;
         following = false;
-        cam.orthographicSize = 7.91f;
+        //cam.orthographicSize = 7.91f;
         transform.position = originPosition;
         transform.rotation = originRotation;
 
