@@ -12,10 +12,9 @@ GameObject:
   - component: {fileID: 2562248997079129271}
   - component: {fileID: 2562248997079129268}
   - component: {fileID: 2562248997079129269}
-  - component: {fileID: 7108951516015408636}
+  - component: {fileID: 112833716196955875}
+  - component: {fileID: 1379129168980753416}
   - component: {fileID: 422778013}
-  - component: {fileID: 3941364487644015285}
-  - component: {fileID: 8187594737821042068}
   m_Layer: 0
   m_Name: Chicken
   m_TagString: Chicken
@@ -34,7 +33,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.087, z: 0.822}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4091194680225050896}
+  - {fileID: 1289373002675813040}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -98,55 +97,7 @@ CapsuleCollider:
   m_Height: 1.368919
   m_Direction: 1
   m_Center: {x: 0, y: 0.6639145, z: 0.018896013}
---- !u!114 &7108951516015408636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2562248997079129264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ff1b6ce922276c44bfca4854f3e0dd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eggPrefab: {fileID: 0}
-  dropEgg: 0
---- !u!114 &422778013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2562248997079129264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81e6a039e704e1144901aa3401bea4cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currState: 0
-  hunger: 85
-  thirst: 70
-  happiness: 100
-  menuUI: {fileID: 0}
-  chickenName: Chonky Floofersen
---- !u!114 &3941364487644015285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2562248997079129264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af969e3a77f24ea41915fb7563636cf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stat: {fileID: 0}
-  timer: 4
-  pettable: 0
-  heartParticles: {fileID: 4091194680225050898}
---- !u!114 &8187594737821042068
+--- !u!114 &112833716196955875
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,7 +116,40 @@ MonoBehaviour:
   canMove: 1
   isLifted: 0
   walkingToDoor: 0
---- !u!1001 &1100102917679305247
+--- !u!114 &1379129168980753416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2562248997079129264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af969e3a77f24ea41915fb7563636cf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 4
+  pettable: 0
+  heartParticles: {fileID: 1289373002675813042}
+--- !u!114 &422778013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2562248997079129264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81e6a039e704e1144901aa3401bea4cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currState: 0
+  hunger: 85
+  thirst: 70
+  happiness: 100
+  menuUI: {fileID: 0}
+  chickenName: Chonky Floofersen
+--- !u!1001 &2766982372457257407
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -234,15 +218,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8629e9e66bc07f943b0cb990d377124a, type: 3}
---- !u!4 &4091194680225050896 stripped
+--- !u!4 &1289373002675813040 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3999915708043322127, guid: 8629e9e66bc07f943b0cb990d377124a,
     type: 3}
-  m_PrefabInstance: {fileID: 1100102917679305247}
+  m_PrefabInstance: {fileID: 2766982372457257407}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &4091194680225050898 stripped
+--- !u!198 &1289373002675813042 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 3999915708043322125, guid: 8629e9e66bc07f943b0cb990d377124a,
     type: 3}
-  m_PrefabInstance: {fileID: 1100102917679305247}
+  m_PrefabInstance: {fileID: 2766982372457257407}
   m_PrefabAsset: {fileID: 0}

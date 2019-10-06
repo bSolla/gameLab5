@@ -14,8 +14,8 @@ public class ChickenStatus : MonoBehaviour
     //                                V A R I A B L E S 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-    public enum State { Normal, Hungry, Thirsty, Sad };
-    public State currState = State.Normal;
+    public enum ChickenState { Normal, Hungry, Thirsty, Sad };
+    public ChickenState currState = ChickenState.Normal;
     public int hunger = 100, thirst = 100, happiness = 100;
     private float timerHunger, timerThirst, timerHappiness;
     bool updateState = true;
@@ -77,16 +77,16 @@ public class ChickenStatus : MonoBehaviour
 
         switch (currState)
         {
-            case State.Normal:
+            case ChickenState.Normal:
                 UpdateNormalState();
                 break;
-            case State.Hungry:
+            case ChickenState.Hungry:
                 UpdateHungryState();
                 break;
-            case State.Thirsty:
+            case ChickenState.Thirsty:
                 UpdateThirstyState();
                 break;
-            case State.Sad:
+            case ChickenState.Sad:
                 UpdateSadState();
                 break;
         }
@@ -142,16 +142,16 @@ public class ChickenStatus : MonoBehaviour
         // }
         if (updateState && hunger < 60)
         {
-            currState = State.Hungry;
+            currState = ChickenState.Hungry;
         }
         if (thirst < 50)
         {
-            currState = State.Thirsty;
+            currState = ChickenState.Thirsty;
             // chickenController.movingPoint();  //---------If its outside maybe going inside to eat (check if its currently in the same scene as the player)--------
         }
         if (happiness < 50)
         {
-            currState = State.Sad;
+            currState = ChickenState.Sad;
         }
     }
 
@@ -160,7 +160,7 @@ public class ChickenStatus : MonoBehaviour
         if (food == null)
         {
             chickenController.walkingToDoor = true;
-            currState = State.Normal;
+            currState = ChickenState.Normal;
             updateState = false;
         }
         else
@@ -172,7 +172,7 @@ public class ChickenStatus : MonoBehaviour
 
             if (hunger >= 100 || (food.avaliableFood <= 0 && hunger >= 50))
             {
-                currState = State.Normal;
+                currState = ChickenState.Normal;
             }
         }
     }
@@ -188,7 +188,7 @@ public class ChickenStatus : MonoBehaviour
         {
             if (thirst >= 100 || (water.waterAvaliable <= 0 && thirst >= 50))
             {
-                currState = State.Normal;
+                currState = ChickenState.Normal;
             }
             else
             {
@@ -202,7 +202,7 @@ public class ChickenStatus : MonoBehaviour
     {
         if (happiness > 50 || hunger<20 || thirst<20)
         {
-            currState = State.Normal;
+            currState = ChickenState.Normal;
         }
     }
 

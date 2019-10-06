@@ -65,7 +65,7 @@ public class Chicken_Controller : MonoBehaviour
 
     void Update()
     {
-        if(status.currState ==ChickenStatus.State.Normal && !isLifted)
+        if(status.currState ==ChickenStatus.ChickenState.Normal && !isLifted)
         {
             StartCoroutine(movingPoint());
             if (walkingToDoor)
@@ -128,7 +128,6 @@ public class Chicken_Controller : MonoBehaviour
                     target = DoorPoint;
                     canMove = true;
                     walkingToDoor = true;
-                    print("Change location -> passes the random number check -> the current location of the chicken is the same as the current scene");
                 }
             }
         }
