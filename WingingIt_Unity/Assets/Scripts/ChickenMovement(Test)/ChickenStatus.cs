@@ -67,6 +67,10 @@ public class ChickenStatus : MonoBehaviour
             food = FindObjectOfType<FoodBowl>();
             water = FindObjectOfType<WaterDispenser>();
         }
+        if (GameManager.instance.CurrentSceneName == "Outside") //Actually it has to be in the inside, so we have to change this in the new scene
+        {
+            food = FindObjectOfType<FoodBowl>();
+        }
 
         updateState = true;
     }
@@ -94,6 +98,7 @@ public class ChickenStatus : MonoBehaviour
         if (Input.GetMouseButtonUp(1))
         {
             print(currState);
+            print(food);
         }
 
         // if(isOpen)
@@ -157,20 +162,23 @@ public class ChickenStatus : MonoBehaviour
 
     void UpdateHungryState()
     {
-        if (food == null)
+        // if((GameManager.instance.currentSceneName == "Inside" && GameManager.instance.foodBoxAmount <= 0) || GameManager.instance.currentSceneName == "Outside" && GameManager.instance.foodVeggieAmount <= 0)
+        if(food.avaliableFood <= 0)
         {
+            print ("Is dis bich workn");
             chickenController.walkingToDoor = true;
-            currState = ChickenState.Normal;
+            // currState = ChickenState.Normal;
             updateState = false;
         }
         else
         {
-            if (food.avaliableFood > 0)
-            {
+            // if (food.avaliableFood >= 0)
+            // {
+                chickenController.canMove = true;
                 chickenController.GettingFood();
-            }
+            // }
 
-            if (hunger >= 100 || (food.avaliableFood <= 0 && hunger >= 50))
+            if (hunger >= 100 || ((food.avaliableFood <= 0 && hunger >= 80)))
             {
                 currState = ChickenState.Normal;
             }
@@ -181,7 +189,7 @@ public class ChickenStatus : MonoBehaviour
         // if()
         if (water == null)
         {
-            // chickenController.walkingToDoor = true;            
+            chickenController.walkingToDoor = true;            
             Debug.Log("There is no water in this scene");
         }
         else
@@ -192,6 +200,7 @@ public class ChickenStatus : MonoBehaviour
             }
             else
             {
+                chickenController.canMove = true;             
                 chickenController.GettingWater();
 
             }

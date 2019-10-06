@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     // S T A T E   V A R I A B L E S
 
     bool bushIsFull=true;
-    int foodAmount=50;
+    public int foodBoxAmount=50, foodVeggieAmount=50;
     int waterAmount;
 
     Chicken_Controller chickInBush;
@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
     {
         if (CurrentSceneName == "Inside")
         {
-            FindObjectOfType<FoodBowl>().avaliableFood = foodAmount;
+            FindObjectOfType<FoodBowl>().avaliableFood = foodBoxAmount;
             FindObjectOfType<FoodBowl>().AddFood(0);
         }
 
@@ -166,12 +166,15 @@ public class GameManager : MonoBehaviour
             {
                 cutMinigame = false;
                 
-                foodAmount += (int)cuttingScore / 5;    
-                FindObjectOfType<FoodBowl>().avaliableFood = foodAmount;
+                foodVeggieAmount += (int)cuttingScore / 5;
+                // print("Veggie food: " + (int)cuttingScore / 10);    
+                FindObjectOfType<FoodBowl>().avaliableFood = foodVeggieAmount;
                 FindObjectOfType<FoodBowl>().AddFood(0);               
             }
 
             FindObjectOfType<BerryBush>().bushFull = bushIsFull;
+            FindObjectOfType<FoodBowl>().avaliableFood = foodVeggieAmount;
+
             
             //waterAmount
         }
@@ -182,14 +185,14 @@ public class GameManager : MonoBehaviour
     {
         if (CurrentSceneName=="Inside")
         {
-            foodAmount = FindObjectOfType<FoodBowl>().avaliableFood;
+            foodBoxAmount = FindObjectOfType<FoodBowl>().avaliableFood;
 
         }
 
         if (CurrentSceneName=="Outside")
         {
             bushIsFull = FindObjectOfType<BerryBush>().bushFull;
-            foodAmount = FindObjectOfType<FoodBowl>().avaliableFood;
+            foodVeggieAmount = FindObjectOfType<FoodBowl>().avaliableFood;
 
             //waterAmount
         }
