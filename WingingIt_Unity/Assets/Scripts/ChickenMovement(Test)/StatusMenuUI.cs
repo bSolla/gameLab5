@@ -24,6 +24,8 @@ public class StatusMenuUI : MonoBehaviour
     public bool isMenuOpen;
 
     ChickenStatus currentChicken;
+    Camera cam;
+
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     //                                  M E T H O D S 
@@ -31,6 +33,8 @@ public class StatusMenuUI : MonoBehaviour
 
     void Start()
     {
+        cam = Camera.main;
+
         panel = transform.Find("Panel").gameObject;
 
         Panel.SetActive(false);
@@ -66,12 +70,16 @@ public class StatusMenuUI : MonoBehaviour
         nameText.text = currentChicken.chickenName;
         delay = 0.5f;
         isMenuOpen = true;
+        cam.GetComponent<CameraFollow>().startFollowing(currentChicken.transform);
+
     }
 
     void CloseMenu()
     {
         Panel.SetActive(false);
         isMenuOpen = false;
+        cam.GetComponent<CameraFollow>().stopFollowing();
+
 
     }
     
