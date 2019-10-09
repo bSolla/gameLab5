@@ -6,8 +6,9 @@ TagManager:
   tags:
   - Ground
   - Chicken
-  - Berry
+  - Egg
   - Door
+  - VegetableFeeder
   layers:
   - Default
   - TransparentFX

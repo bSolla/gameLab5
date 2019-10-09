@@ -5,11 +5,14 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Coop(Test)/StartMenu.unity
     guid: 078324154ac1d5146b56d71915f9c112
   - enabled: 1
     path: Assets/Scenes/Coop(Test)/Outside.unity
+    guid: b435c56e21085b4449453cee43db08a6
+  - enabled: 0
+    path: Assets/Scenes/Coop(Test)/Outside_001.unity
     guid: ec138754bd1d0394db2a76a59c2628ec
   - enabled: 1
     path: Assets/Scenes/Coop(Test)/Inside.unity

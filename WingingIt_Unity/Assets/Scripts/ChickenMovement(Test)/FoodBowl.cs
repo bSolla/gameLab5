@@ -8,7 +8,7 @@ public class FoodBowl : MonoBehaviour
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     public int avaliableFood = 5;
-    public GameObject food;
+    // public GameObject food;
     public Text foodAvaliableText;
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -16,22 +16,23 @@ public class FoodBowl : MonoBehaviour
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     void Update()
-    {     
-        if(avaliableFood <= 0)
-        {
-            food.SetActive(false);
-        }
-        else
-        {
-            food.SetActive(true);
-        }
+    {
+        foodAvaliableText.text = "Food: " + avaliableFood;
+        
+        // if(avaliableFood <= 0)
+        // {
+        //     food.SetActive(false);
+        // }
+        // else
+        // {
+        //     food.SetActive(true);
+        // }
 
-        if (Input.GetMouseButtonUp(0) && avaliableFood <= 100)
+        if (Input.GetMouseButtonUp(0) && avaliableFood < 100)
         {
             fillFood();
         }
     }
-
     void fillFood()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -41,11 +42,18 @@ public class FoodBowl : MonoBehaviour
         {
             if(hit.collider == col)
             {
-                GetComponent<ChangingScenes>().GoToScene("CuttingMinigame");
+                if(this.gameObject.tag == "VegetableFeeder")
+                {
+                    GetComponent<ChangingScenes>().GoToScene("CuttingMinigame");
+                }
+                else if(this.gameObject.name == "Feeder")
+                {
+                    avaliableFood += 10;
+
+                }
             }
         }
     }
-
     public void AddFood(int food)
     {
         avaliableFood += food;
@@ -53,6 +61,7 @@ public class FoodBowl : MonoBehaviour
         {
             avaliableFood = 100;
         }
-        foodAvaliableText.text = "Food: " + avaliableFood;
+        // foodAvaliableText.text = "Food: " + avaliableFood;
+
     }
 }
