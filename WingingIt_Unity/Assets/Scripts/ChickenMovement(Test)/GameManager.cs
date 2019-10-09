@@ -123,24 +123,24 @@ public class GameManager : MonoBehaviour
         if (CurrentSceneName == "Inside" || CurrentSceneName == "Outside")                 //Put the names of the scenes we are using here!!!!!!!
         {
             chickenGroup.SetActive(true);
+
+            foreach (GameObject chick in chickensList)
+            {
+                if (chick.GetComponent<Chicken_Controller>().CurrentLocation == CurrentSceneName)
+                {
+                    chick.GetComponent<Chicken_Controller>().ActivateChicken();
+                }
+                else
+                {
+                    chick.GetComponent<Chicken_Controller>().DeactivateChicken();
+                }
+
+                chick.GetComponent<ChickenStatus>().SearchReferences();
+            }
         }
         else
         {
             chickenGroup.SetActive(false);
-        }
-
-        foreach (GameObject chick in chickensList)
-        {
-            if (chick.GetComponent<Chicken_Controller>().CurrentLocation == CurrentSceneName)
-            {
-                chick.GetComponent<Chicken_Controller>().ActivateChicken();
-            }
-            else
-            {
-                chick.GetComponent<Chicken_Controller>().DeactivateChicken();
-            }
-
-            chick.GetComponent<ChickenStatus>().SearchReferences();
         }
     }
 
@@ -160,6 +160,7 @@ public class GameManager : MonoBehaviour
                 berryMinigame = false;
 
                 ChickInBush.GetComponent<ChickenStatus>().hunger += 30;         //Put the value we want to feed the chicken with the minigame
+                ChickInBush.transform.position = Vector3.zero;
             }
 
             if (cutMinigame)
@@ -197,6 +198,7 @@ public class GameManager : MonoBehaviour
             //waterAmount
         }
     }
+
     // returns a list of ChickenStatusValues for the chickens
     public List<ChickenStatusValues> GetChickenStatusList()
     {
