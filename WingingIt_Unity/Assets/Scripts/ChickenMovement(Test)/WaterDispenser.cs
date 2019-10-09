@@ -16,6 +16,7 @@ public class WaterDispenser : MonoBehaviour
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 public int waterAvaliable = 10;
 // public GameObject water;
+public int maxWaterAvaliable = 100;
 public Text waterAvaliableText;
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -35,9 +36,9 @@ public Text waterAvaliableText;
             // water.SetActive(false);
             waterAvaliable = 0;
         }
-        if(waterAvaliable > 100)
+        if(waterAvaliable > maxWaterAvaliable)
         {
-            waterAvaliable = 100;
+            waterAvaliable = maxWaterAvaliable;
         }
         fillWater();
     }

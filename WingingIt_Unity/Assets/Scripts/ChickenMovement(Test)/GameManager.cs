@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     public string currentSceneName;
     public string CurrentSceneName { get => currentSceneName;}
 
-    [HideInInspector]public int numberOfChickens = 2;
+    public int numberOfChickens = 8;
     public List<GameObject> chickensList;
 
     // S T A T E   V A R I A B L E S

@@ -16,6 +16,7 @@ public class EggPickUp : MonoBehaviour
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     public Collider eggCol;
+    bool hasClicked = false;
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 //                                                      F U N C T I O N S
@@ -23,7 +24,15 @@ public class EggPickUp : MonoBehaviour
 
     void Update()
     {
-        StartCoroutine(PickUpEgg());
+        if(eggCol != null)
+        {
+            StartCoroutine(PickUpEgg());
+        }
+        
+        if(hasClicked && eggCol == null)
+        {
+            hasClicked = false;
+        }
     }
 
     // An Ienumerator that gives player feedback for the pickup before destroying the egg.
@@ -32,12 +41,13 @@ public class EggPickUp : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         // EggCol is given by the EggDrop script.
-        if(eggCol != null && Physics.Raycast(ray, out hit, 100))   
+        if(eggCol != null && Physics.Raycast(ray, out hit, 100) && !hasClicked)   
         {
             // eggCol = GameObject.FindGameObjectWithTag("Egg").GetComponentInChildren<Collider>();;
             if(hit.collider == eggCol && Input.GetMouseButtonDown(0))
             {
-                print("I touch the egg");
+                // print("I touch the egg");
+                hasClicked = true;
                 eggCol.gameObject.transform.localScale*=2;
                 eggCol.gameObject.transform.position = new Vector3(0, 5, 0);
                 yield return new WaitForSeconds(1);

@@ -30,7 +30,7 @@ public class CameraController : MonoBehaviour
         
         if (Input.GetKeyUp (KeyCode.V))
         {
-            Debug.Log ("key v");
+            // Debug.Log ("key v");
             StartCoroutine (zoomTransition());
         }
 
@@ -54,7 +54,7 @@ public class CameraController : MonoBehaviour
             {
                 while (t < 1.0f)
                 { 
-                    Debug.Log ("moving cam to store");
+                    // Debug.Log ("moving cam to store");
                     t += Time.deltaTime * (Time.timeScale/transitionDuration);
                     transform.position = Vector3.Lerp (startPos, Store, t);
                     yield return 0;
@@ -65,7 +65,7 @@ public class CameraController : MonoBehaviour
             {
                 while (t < 1.0f)
                 { 
-                    Debug.Log ("moving cam to coop");
+                    // Debug.Log ("moving cam to coop");
                     t += Time.deltaTime * (Time.timeScale/transitionDuration);
                     transform.position = Vector3.Lerp (startPos, Coop, t);
                     yield return 0;

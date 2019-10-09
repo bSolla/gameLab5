@@ -132,6 +132,9 @@ public class ChickenStatus : MonoBehaviour
                 }
             }           
         }
+        if(happiness<0) happiness=0;
+        if(hunger<0) hunger=0;
+        if(thirst<0) thirst=0;
     }
 
 
@@ -165,8 +168,8 @@ public class ChickenStatus : MonoBehaviour
         // if((GameManager.instance.currentSceneName == "Inside" && GameManager.instance.foodBoxAmount <= 0) || GameManager.instance.currentSceneName == "Outside" && GameManager.instance.foodVeggieAmount <= 0)
         if(food.avaliableFood <= 0)
         {
-            print ("Is dis bich workn");
-            chickenController.walkingToDoor = true;
+            // print ("Is dis bich workn");
+            // chickenController.walkingToDoor = true;
             // currState = ChickenState.Normal;
             updateState = false;
         }
@@ -189,7 +192,7 @@ public class ChickenStatus : MonoBehaviour
         // if()
         if (water == null)
         {
-            chickenController.walkingToDoor = true;            
+            // chickenController.walkingToDoor = true;            
             Debug.Log("There is no water in this scene");
         }
         else
@@ -220,7 +223,7 @@ public class ChickenStatus : MonoBehaviour
         timerHunger -= Time.deltaTime;
         if (timerHunger <= 0 && hunger > 10)
         {
-            timerHunger = 10;
+            timerHunger = 30;
             // timerHunger += 60 * 60;             // how long it should take before it drops, minute
             hunger -= 10;
         }
@@ -231,7 +234,7 @@ public class ChickenStatus : MonoBehaviour
         timerThirst -= Time.deltaTime;
         if (timerThirst <= 0)
         {
-            timerThirst = 10;
+            timerThirst = 30;
             thirst -= 5;
             // timerThirst -= 60 * 5;           // how long it should take before it drops, minute
         }
@@ -242,7 +245,7 @@ public class ChickenStatus : MonoBehaviour
         timerHappiness -= Time.deltaTime;
         if (timerHappiness <= 0)
         {
-            timerHappiness = 60;
+            timerHappiness = 120;
             happiness -= 10;
 
             // timerHappiness -= 60 * 15;           // how long it should take before it drops, minute

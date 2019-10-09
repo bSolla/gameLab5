@@ -27,7 +27,7 @@ public class EggDrop : MonoBehaviour
 
     void Start()
     {
-        print (System.DateTime.Now);
+        // print (System.DateTime.Now);
         oldTime = DateTime.Now;
         
     }

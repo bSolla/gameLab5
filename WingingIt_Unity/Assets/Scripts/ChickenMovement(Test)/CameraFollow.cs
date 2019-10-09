@@ -47,7 +47,7 @@ public class CameraFollow : MonoBehaviour
         {
             if (following)
             {
-                Debug.Log ("target: " + target);
+                // Debug.Log ("target: " + target);
                 followChicken();
                 elapsed += Time.deltaTime / duration;
                 cam.orthographicSize = Mathf.Lerp (originalOrthographicSize, 2f, elapsed);
@@ -69,7 +69,7 @@ public class CameraFollow : MonoBehaviour
 
     public void followChicken ()
     {
-        Debug.Log ("following that chicken over there aww yeah");
+        // Debug.Log ("following that chicken over there aww yeah");
 
         //transform.position = Vector3.Lerp (transform.position, targetToFollow, Time.deltaTime * smooth);
         transform.LookAt(target);

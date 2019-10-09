@@ -9,6 +9,7 @@ public class FoodBowl : MonoBehaviour
 
     public int avaliableFood = 5;
     // public GameObject food;
+    public int maxAvaliableFood = 100;
     public Text foodAvaliableText;
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -28,7 +29,7 @@ public class FoodBowl : MonoBehaviour
         //     food.SetActive(true);
         // }
 
-        if (Input.GetMouseButtonUp(0) && avaliableFood < 100)
+        if (Input.GetMouseButtonUp(0) && avaliableFood < maxAvaliableFood)
         {
             fillFood();
         }
@@ -57,9 +58,9 @@ public class FoodBowl : MonoBehaviour
     public void AddFood(int food)
     {
         avaliableFood += food;
-        if (avaliableFood>100)
+        if (avaliableFood>maxAvaliableFood)
         {
-            avaliableFood = 100;
+            avaliableFood = maxAvaliableFood;
         }
         // foodAvaliableText.text = "Food: " + avaliableFood;
 
