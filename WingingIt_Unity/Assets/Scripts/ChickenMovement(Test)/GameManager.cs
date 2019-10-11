@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
     public bool CutMinigame { get => cutMinigame; set => cutMinigame = value; }
     public float CuttingScore { get => cuttingScore; set => cuttingScore = value; }
 
+    public interactionConfirmation intCon;
+
 
 
     /*To do:
@@ -65,6 +67,7 @@ public class GameManager : MonoBehaviour
     //When the game starts search the chickens in the first scene and add it to the list (this is only for testing the scenes we have now)
     private void Awake()
     {
+        intCon = GetComponent<interactionConfirmation>();
         if (instance == null)
         {
             instance = this;
@@ -186,14 +189,12 @@ public class GameManager : MonoBehaviour
         if (CurrentSceneName=="Inside")
         {
             foodBoxAmount = FindObjectOfType<FoodBowl>().avaliableFood;
-
         }
 
         if (CurrentSceneName=="Outside")
         {
             bushIsFull = FindObjectOfType<BerryBush>().bushFull;
             foodVeggieAmount = FindObjectOfType<FoodBowl>().avaliableFood;
-
             //waterAmount
         }
     }

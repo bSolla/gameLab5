@@ -11,11 +11,15 @@ public class FoodBowl : MonoBehaviour
     // public GameObject food;
     public int maxAvaliableFood = 100;
     public Text foodAvaliableText;
+    public interactionConfirmation intCon;
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     //                                  M E T H O D S 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
+    void Start()
+    {
+        intCon = GetComponent<interactionConfirmation>();
+    }
     void Update()
     {
         foodAvaliableText.text = "Food: " + avaliableFood;
@@ -33,6 +37,11 @@ public class FoodBowl : MonoBehaviour
         {
             fillFood();
         }
+
+        if (intCon.confirmed)
+        {
+            GetComponent<ChangingScenes>().GoToScene("CuttingMinigame");
+        }
     }
     void fillFood()
     {
@@ -45,7 +54,7 @@ public class FoodBowl : MonoBehaviour
             {
                 if(this.gameObject.tag == "VegetableFeeder")
                 {
-                    GetComponent<ChangingScenes>().GoToScene("CuttingMinigame");
+                    //GetComponent<ChangingScenes>().GoToScene("CuttingMinigame");
                 }
                 else if(this.gameObject.name == "Feeder")
                 {
