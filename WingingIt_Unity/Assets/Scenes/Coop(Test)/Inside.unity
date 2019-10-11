@@ -5677,25 +5677,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6374582812028331911, guid: 1b470f326d2870b45abc185014a4ad5b,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.24
-      objectReference: {fileID: 0}
     - target: {fileID: 8933451334184571409, guid: 1b470f326d2870b45abc185014a4ad5b,
         type: 3}
       propertyPath: foodBoxAmount
-      value: 200
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8933451334184571409, guid: 1b470f326d2870b45abc185014a4ad5b,
         type: 3}
       propertyPath: foodVeggieAmount
-      value: 200
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8933451334184571409, guid: 1b470f326d2870b45abc185014a4ad5b,
         type: 3}
       propertyPath: numberOfChickens
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8933451334184571409, guid: 1b470f326d2870b45abc185014a4ad5b,
+        type: 3}
+      propertyPath: waterAmount
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6374582812028331911, guid: 1b470f326d2870b45abc185014a4ad5b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.24
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b470f326d2870b45abc185014a4ad5b, type: 3}

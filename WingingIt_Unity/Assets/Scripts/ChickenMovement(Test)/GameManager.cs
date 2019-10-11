@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     bool bushIsFull=true;
     public int foodBoxAmount=50, foodVeggieAmount=50;
-    int waterAmount;
+    public int waterAmount;
 
     Chicken_Controller chickInBush;
     bool berryMinigame;
@@ -151,6 +151,8 @@ public class GameManager : MonoBehaviour
         {
             FindObjectOfType<FoodBowl>().avaliableFood = foodBoxAmount;
             FindObjectOfType<FoodBowl>().AddFood(0);
+
+            FindObjectOfType<WaterDispenser>().waterAvaliable = waterAmount;
         }
 
         if (CurrentSceneName == "Outside")
@@ -186,6 +188,7 @@ public class GameManager : MonoBehaviour
         if (CurrentSceneName=="Inside")
         {
             foodBoxAmount = FindObjectOfType<FoodBowl>().avaliableFood;
+            waterAmount = FindObjectOfType<WaterDispenser>().waterAvaliable;
 
         }
 

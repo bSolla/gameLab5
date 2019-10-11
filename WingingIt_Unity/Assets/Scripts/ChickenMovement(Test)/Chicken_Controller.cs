@@ -21,10 +21,11 @@ public class Chicken_Controller : MonoBehaviour
     public float movementSpeed = 5f;
     public GameObject[] walkingPoints;
 
-    Vector3 target;
+    [HideInInspector] public Vector3 target;
     ChickenStatus status;
     PettingController petting;
-    public bool canMove = true, isLifted = false;
+    ChickenUI chickenUI;
+    public bool canMove = true, isLifted = false, isLowStatus = false;
     float timePressed = 0;
 
 
@@ -59,6 +60,8 @@ public class Chicken_Controller : MonoBehaviour
 
         petting = GetComponent<PettingController>();
 
+        chickenUI = this.gameObject.transform.GetChild(1).gameObject.GetComponent<ChickenUI>();
+
         CacheDoor();
         transform.position = new Vector3(0,0,0);
 
@@ -84,11 +87,19 @@ public class Chicken_Controller : MonoBehaviour
             LiftChicken();
         }
         TryForChangingLocation();
+        // if(isLowStatus)
+        // {
+        //     AskingForHelp();
+            
+        // }
 
-        if(Input.GetMouseButtonUp(1))
+        if(Input.GetMouseButton(1))
         {
             print(door);
             print ("Door point: " + doorPoint);
+            print("Camera Rot" + Quaternion.LookRotation(Camera.main.transform.position - transform.position));
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Camera.main.transform.position - transform.position), 7f * Time.deltaTime);
+
         }
     }
 
@@ -180,26 +191,32 @@ public class Chicken_Controller : MonoBehaviour
         doorPoint = new Vector3(door.position.x, 0, door.position.z);
     }
 
-    void WalkToDoor(bool isInOtherScene)
+    public void WalkToDoor(bool isInOtherScene)
     {
             // print("ello m8");
 
         
         if (Vector3.Distance(transform.position, DoorPoint) < 1.0f || isInOtherScene)
         {
-            walkingToDoor = false;                
+            // walkingToDoor = false;                
             
             if(currentLocation == GameManager.instance.CurrentSceneName)
             {
+                print("Walking to door in same scene as camera");
                 DeactivateChicken();
 
             }
             else
             {
-                CacheDoor();
-                target = spawnPoint;
-                transform.position = target;
-                ActivateChicken();
+                if(isInOtherScene)
+                {
+                    CacheDoor();
+                    target = spawnPoint;
+                    transform.position = target;
+                    ActivateChicken();
+
+                }
+                
             }
 
             
@@ -221,10 +238,8 @@ public class Chicken_Controller : MonoBehaviour
         else
         {
             // print("ello bitch");
-
             // canMove = true;
             target = doorPoint;
-
             StartCoroutine(movingPoint());
 
             // if(canMove)
@@ -247,7 +262,7 @@ public class Chicken_Controller : MonoBehaviour
         {
             if(Vector3.Distance(transform.position, target) < 0.1f)
             {
-
+                
                 canMove = false;
                 float t = Random.Range(1, 10);
                 yield return new WaitForSeconds(t);
@@ -256,6 +271,7 @@ public class Chicken_Controller : MonoBehaviour
                     target = newWalkingpoint();
                 }
                 canMove = true;
+                // chickenUI.StopAskForHelpUI();
 
                 
             }
@@ -342,48 +358,7 @@ public class Chicken_Controller : MonoBehaviour
 
             if(newZ > 7f) newZ = -6.5f;
             if(newZ < -7f) newZ = -6.5f;
-        }
-        
-        
-
-        // if(GameManager.instance.CurrentSceneName == "Inside")
-        // {
-        //     if(newX > 4.8f)
-        //     {
-        //         newX = 4;
-        //     }
-        //     if(newX < -4.8f)
-        //     {
-        //         newX = -4;
-        //     }
-        //     if(newZ > 3.4f)
-        //     {
-        //         newZ = 3;
-        //     }
-        //     if(newZ < -5)
-        //     {
-        //         newZ = -4.5f;
-        //     }
-        // }
-        // if(GameManager.instance.CurrentSceneName == "Outside")
-        // {
-        //     if(newX > 2.3f)
-        //     {
-        //         newX = 2;
-        //     }
-        //     if(newX < -4.3f)
-        //     {
-        //         newX = -4;
-        //     }
-        //     if(newZ > 7f)
-        //     {
-        //         newZ = 6.5f;
-        //     }
-        //     if(newZ < -7)
-        //     {
-        //         newZ = -6.5f;
-        //     }
-        // }    
+        }   
         Vector3 newTarget = new Vector3(newX, 0.1f, newZ);
 
 
@@ -395,9 +370,8 @@ public class Chicken_Controller : MonoBehaviour
         // if (GameManager.instance.CurrentSceneName=="Inside")//-------------------------------------------------should be inside - change all the strings to Inside when we change the location
         // {
         //     if (currentLocation=="Inside" || currentLocation=="Outside")
-        if(currentLocation == GameManager.instance.CurrentSceneName)
-        {
-            walkingToDoor = false;
+        
+            // walkingToDoor = false;
             
             if (canMove)
             {
@@ -420,12 +394,11 @@ public class Chicken_Controller : MonoBehaviour
             //     currentLocation = "Inside";
             //     ActivateChicken();
             // }
-        }
-        else
-        {
-            // walkingToDoor = true;
-            WalkToDoor(true);
-        }
+        // else
+        // {
+        //     // walkingToDoor = true;
+            
+        // }
     }
     public void GettingWater()
     {
@@ -482,6 +455,75 @@ public class Chicken_Controller : MonoBehaviour
 
             
         }
+    }
+    public void AskingForHelp(int AskingForWhat)     //Hungry=0 - Thirsty=1  -  Sad=2
+    {
+        if(GameManager.instance.CurrentSceneName == currentLocation)
+        {
+            Quaternion lookAtCameraQ = Quaternion.LookRotation(Camera.main.transform.position - transform.position);
+            Vector3 lookAtCameraRotation = lookAtCameraQ.eulerAngles;
+            if(transform.rotation.eulerAngles == lookAtCameraRotation)
+            {
+                print ("Rotation is correct");
+                isLowStatus = true;
+                StopCoroutine(movingPoint());
+
+                chickenUI.AskForHelpUI(AskingForWhat);
+                StartCoroutine(DelayAskForHelp());
+                
+
+            }
+            else
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Camera.main.transform.position - transform.position), 20f * Time.deltaTime);
+                canMove = false;
+            }
+            // target = Camera.main.gameObject.transform.position;
+            
+            // StartCoroutine(movingPoint());
+            // isLowStatus=true;
+            // isLowStatus = false;
+        }
+        else
+        {
+            chickenUI.StopAskForHelpUI();
+        }
+
+
+    }
+    public IEnumerator DelayAskForHelp()
+    {
+        if(isLowStatus)
+        {   
+            yield return new WaitForSeconds(10);
+            print ("Delay, first wait");
+            
+            canMove=true;
+            target = transform.position;
+            chickenUI.StopAskForHelpUI();
+            StartCoroutine(movingPoint());
+            yield return new WaitForSeconds(10);
+            print ("Delay, second wait");
+
+            isLowStatus=false;
+
+            
+
+
+            
+
+            // StartCoroutine(movingPoint());
+
+
+        }
+        
+
+        
+
+
+        // chickenController.canMove = true;
+        // return;
+
     }
 
 }
