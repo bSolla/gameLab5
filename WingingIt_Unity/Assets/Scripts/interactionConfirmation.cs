@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                                      A U T H O R  &  N O T E S
+//                                    coded by Teresa, October 2019
+//  controls when you can interact with interactables and makes the speechbubble pop up over the interactables
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,11 +11,18 @@ using UnityEngine.UI;
 
 public class interactionConfirmation : MonoBehaviour
 {
+
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                                V A R I A B L E S 
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     public GameObject bubble;
     public bool confirmed = false;
     public bool uiActive = false;
 
-    // Start is called before the first frame update
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                                  M E T H O D S 
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
     void Start()
     {
         bubble.SetActive(false);
@@ -20,7 +32,7 @@ public class interactionConfirmation : MonoBehaviour
     void Update()
     {
         // need to make it so if you click elsewhere, the bubble disappears
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && (GameManager.instance.CurrentSceneName == "Outside" || GameManager.instance.CurrentSceneName == "Inside") )
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -44,8 +56,7 @@ public class interactionConfirmation : MonoBehaviour
                     disablebubble();
                     Debug.Log ("disabling bubble idk");
                 }
-            }
-            
+            } 
         }
     }
 
