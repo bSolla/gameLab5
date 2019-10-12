@@ -79,7 +79,7 @@ public class Chicken_Controller : MonoBehaviour
             }
             if (walkingToDoor)
             {
-                WalkToDoor(false);
+                WalkToDoor();
             }
         }
         if (!petting.pettable)
@@ -97,8 +97,8 @@ public class Chicken_Controller : MonoBehaviour
         {
             print(door);
             print ("Door point: " + doorPoint);
-            print("Camera Rot" + Quaternion.LookRotation(Camera.main.transform.position - transform.position));
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Camera.main.transform.position - transform.position), 7f * Time.deltaTime);
+            // print("Camera Rot" + Quaternion.LookRotation(Camera.main.transform.position - transform.position));
+            // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Camera.main.transform.position - transform.position), 7f * Time.deltaTime);
 
         }
     }
@@ -163,13 +163,16 @@ public class Chicken_Controller : MonoBehaviour
     {
         GetComponent<MeshRenderer>().enabled = false;
         GetComponent<CapsuleCollider>().enabled = false;
+        chickenUI.StopAskForHelpUI();
         canMove = false;
+
     }
 
         //Activate whatever you desactivate in the other method
     
     public void ActivateChicken()
     {
+        print("Activate");
         CacheDoor();
         // target = spawnPoint;
         // gameObject.transform.position = spawnPoint;
@@ -191,62 +194,85 @@ public class Chicken_Controller : MonoBehaviour
         doorPoint = new Vector3(door.position.x, 0, door.position.z);
     }
 
-    public void WalkToDoor(bool isInOtherScene)
+    public void WalkToDoor()
     {
-            // print("ello m8");
-
-        
-        if (Vector3.Distance(transform.position, DoorPoint) < 1.0f || isInOtherScene)
+        if(currentLocation == GameManager.instance.CurrentSceneName)
         {
-            // walkingToDoor = false;                
-            
-            if(currentLocation == GameManager.instance.CurrentSceneName)
+            if (Vector3.Distance(transform.position, DoorPoint) < 1.0f)
             {
+                
+            // walkingToDoor = false;
+                // print("ello m8");
+                walkingToDoor = false;
+            
+            
                 print("Walking to door in same scene as camera");
                 DeactivateChicken();
+                ChickenChangesScene();
+                return;
 
             }
             else
             {
-                if(isInOtherScene)
-                {
-                    CacheDoor();
-                    target = spawnPoint;
-                    transform.position = target;
-                    ActivateChicken();
-
-                }
-                
+                canMove = true;
+                target = doorPoint;
+                StartCoroutine(movingPoint());
             }
+        }
+        else
+        {
+            walkingToDoor = false;
+
+            CacheDoor();
+            target = spawnPoint;
+            transform.position = target;
+            ChickenChangesScene();
+
+            ActivateChicken();
+            return;
 
             
+        }
 
-            if (CurrentLocation == "Inside")
-            {
-                currentLocation = "Outside";
-            }
-            else
-            {
-                // walkingToDoor = false;
-                currentLocation = "Inside";
-            }
+        // if (CurrentLocation == "Inside")
+        // {
+        //     currentLocation = "Outside";
+        // }
+        // else
+        // {
+        //     // walkingToDoor = false;
+        //     currentLocation = "Inside";
+        // }
             // walkingToDoor = false;
 
             // canMove = false;
             // return;
-        }
-        else
-        {
+        // }
+        // else
+        // {
             // print("ello bitch");
             // canMove = true;
-            target = doorPoint;
-            StartCoroutine(movingPoint());
+            // target = doorPoint;
+            // StartCoroutine(movingPoint());
 
             // if(canMove)
             // {
             //     transform.position += doorPoint * 3 * Time.deltaTime;
             //     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(doorPoint - transform.position), 7f * Time.deltaTime);     
             // }
+        // }
+    }
+
+    void ChickenChangesScene()
+    {
+        if (CurrentLocation == "Inside")
+        {
+            currentLocation = "Outside";
+        }
+        else
+        {
+            // walkingToDoor = false;
+            currentLocation = "Inside";
         }
     }
 
@@ -372,7 +398,7 @@ public class Chicken_Controller : MonoBehaviour
         //     if (currentLocation=="Inside" || currentLocation=="Outside")
         
             // walkingToDoor = false;
-            
+            print("Getting Food");
             if (canMove)
             {
                 Vector3 moveDir = status.Food.transform.position - transform.position;

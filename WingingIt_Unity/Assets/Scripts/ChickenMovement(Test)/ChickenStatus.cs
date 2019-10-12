@@ -180,18 +180,20 @@ public class ChickenStatus : MonoBehaviour
         }
         else
         {
+            print ("Food: " + food);
             if(food.avaliableFood <= 0)
             {
-                print ("Is dis bich workn");
                 // chickenController.canMove=true
                 if(chickenController.currentLocation == GameManager.instance.CurrentSceneName)
                 {
+                    print ("Is dis bich workn");
+
                     chickenController.walkingToDoor = true;
                 }
-                else
-                {
-                    chickenController.WalkToDoor(true);
-                }
+                // else
+                // {
+                //     chickenController.walkingToDoor = true;
+                // }
                 // currState = ChickenState.Normal;
                 updateState = false;
             }
@@ -209,6 +211,8 @@ public class ChickenStatus : MonoBehaviour
         if (hunger >= 100 || ((food.avaliableFood <= 0 && hunger >= 80)))
         {
             currState = ChickenState.Normal;
+            // chickenUI.StopAskForHelpUI();
+
         }
         
 
@@ -234,22 +238,25 @@ public class ChickenStatus : MonoBehaviour
         }
         else
         {
-            if(water==null)
+            if(chickenController.currentLocation == "Outside")
             {
                 chickenController.walkingToDoor = true;
             }
             else
             {
-
-                if (thirst >= 100 || (water.waterAvaliable <= 0 && thirst >= 50))
+                if(chickenController.currentLocation == GameManager.instance.CurrentSceneName)
                 {
-                    currState = ChickenState.Normal;
-                }
-                else
-                {
-                    chickenController.canMove = true;             
-                    chickenController.GettingWater();
 
+                    if (thirst >= 100 || (water.waterAvaliable <= 0 && thirst >= 50))
+                    {
+                        currState = ChickenState.Normal;
+                    }
+                    else
+                    {
+                        chickenController.canMove = true;             
+                        chickenController.GettingWater();
+
+                    }
                 }
             }
         }
@@ -260,6 +267,8 @@ public class ChickenStatus : MonoBehaviour
         if (happiness > 50 || hunger<20 || thirst<20)
         {
             currState = ChickenState.Normal;
+            // chickenUI.StopAskForHelpUI();
+
         }
         if(!chickenController.isLowStatus)
         {
