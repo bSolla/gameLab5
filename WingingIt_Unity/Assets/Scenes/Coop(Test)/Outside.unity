@@ -1599,6 +1599,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbebd1d11034a7f478f003d226712390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originPosition: {x: 0, y: 0, z: 0}
+  originRotation: {x: 0, y: 0, z: 0, w: 0}
+  newRotation: {x: 0, y: 0, z: 0, w: 0}
+  following: 0
+  target: {fileID: 0}
+  duration: 1
+  elapsed: 0
+  transitioning: 0
 --- !u!1 &776924705
 GameObject:
   m_ObjectHideFlags: 0
@@ -2133,6 +2141,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 272db618bc735cf41bb12afa6a5a858b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hungerSlider: {fileID: 0}
+  thirstSlider: {fileID: 0}
+  happinessSlider: {fileID: 0}
+  isMenuOpen: 0
 --- !u!1001 &968396618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2494,6 +2506,42 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: c486b4a0044960e4c8f61f60a9b0f156, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0e8a53c8e60d5349b8eba261c91f99a, type: 3}
+--- !u!1 &1026356969 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8933451334184571408, guid: 1b470f326d2870b45abc185014a4ad5b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1512257703}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1026356970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026356969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455a9c50b59b1ba439f67fa5a894dfae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  commonExp: 20
+  rareExp: 50
+  legendaryExp: 100
+  eggPrefab: {fileID: 5169484645382410418, guid: 664ffd913ee225241bbe64f3b0274a47,
+    type: 3}
+  dropEgg: 0
+--- !u!114 &1026356971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026356969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7d2c7b044628e744804661b45aee753, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1046262247
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2605,7 +2653,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   avaliableFood: 50
-  food: {fileID: 0}
   foodAvaliableText: {fileID: 1940745279}
 --- !u!114 &1046262251
 MonoBehaviour:
@@ -3498,6 +3545,16 @@ PrefabInstance:
       propertyPath: chickensList.Array.size
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 6690190599524073280, guid: 1b470f326d2870b45abc185014a4ad5b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1661527560957211143, guid: 1b470f326d2870b45abc185014a4ad5b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2175949972437165102, guid: 1b470f326d2870b45abc185014a4ad5b,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -3735,7 +3792,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   avaliableFood: 5
-  food: {fileID: 0}
   foodAvaliableText: {fileID: 0}
 --- !u!1001 &1592966001
 PrefabInstance:

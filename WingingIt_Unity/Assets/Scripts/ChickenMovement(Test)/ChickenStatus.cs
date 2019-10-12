@@ -80,21 +80,23 @@ public class ChickenStatus : MonoBehaviour
 
     void Update()
     {
-
-        switch (currState)
+        if (GetComponent<MeshRenderer>().enabled) //The states only update when the chicken is in the same scene as the player, so it doen't try to eat the food when it is not there
         {
-            case ChickenState.Normal:
-                UpdateNormalState();
-                break;
-            case ChickenState.Hungry:
-                UpdateHungryState();
-                break;
-            case ChickenState.Thirsty:
-                UpdateThirstyState();
-                break;
-            case ChickenState.Sad:
-                UpdateSadState();
-                break;
+            switch (currState)
+            {
+                case ChickenState.Normal:
+                    UpdateNormalState();
+                    break;
+                case ChickenState.Hungry:
+                    UpdateHungryState();
+                    break;
+                case ChickenState.Thirsty:
+                    UpdateThirstyState();
+                    break;
+                case ChickenState.Sad:
+                    UpdateSadState();
+                    break;
+            }
         }
 
         if (Input.GetMouseButtonUp(1))

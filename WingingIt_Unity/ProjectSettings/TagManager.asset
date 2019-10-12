@@ -9,6 +9,7 @@ TagManager:
   - Egg
   - Door
   - VegetableFeeder
+  - Egg Button
   layers:
   - Default
   - TransparentFX

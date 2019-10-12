@@ -38,7 +38,7 @@ public class Chicken_Controller : MonoBehaviour
     public Vector3 DoorPoint { get => doorPoint; set => doorPoint = value; }
     Vector3 spawnPoint;
 
-    public string currentLocation;
+    string currentLocation;
     public string CurrentLocation { get => currentLocation;}
 
 
