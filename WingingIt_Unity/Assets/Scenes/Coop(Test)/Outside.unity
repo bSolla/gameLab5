@@ -1472,6 +1472,7 @@ GameObject:
   - component: {fileID: 767416185}
   - component: {fileID: 767416184}
   - component: {fileID: 767416186}
+  - component: {fileID: 767416187}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1655,6 +1656,22 @@ MonoBehaviour:
   duration: 1
   elapsed: 0
   transitioning: 0
+--- !u!114 &767416187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767416179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0946ac9fb9daac747b629d3733b56a17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  door: {fileID: 1811895675}
+  moveCam: 0
+  whichTarget: 0
+  currentScene: Outside
 --- !u!1 &776924705
 GameObject:
   m_ObjectHideFlags: 0
@@ -4489,18 +4506,24 @@ PrefabInstance:
       propertyPath: sceneName
       value: Inside
       objectReference: {fileID: 0}
-    - target: {fileID: 2554894253867597464, guid: 3d1446739ab99104b9c6c3d3636783fa,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7703915821741697237, guid: 3d1446739ab99104b9c6c3d3636783fa,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.438
       objectReference: {fileID: 0}
+    - target: {fileID: 2554894253867597464, guid: 3d1446739ab99104b9c6c3d3636783fa,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d1446739ab99104b9c6c3d3636783fa, type: 3}
+--- !u!4 &1811895675 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2554894253867597466, guid: 3d1446739ab99104b9c6c3d3636783fa,
+    type: 3}
+  m_PrefabInstance: {fileID: 1811895674}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1865960212
 GameObject:
   m_ObjectHideFlags: 0

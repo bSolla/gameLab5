@@ -2884,6 +2884,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d1446739ab99104b9c6c3d3636783fa, type: 3}
+--- !u!4 &1045024099 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2554894253867597466, guid: 3d1446739ab99104b9c6c3d3636783fa,
+    type: 3}
+  m_PrefabInstance: {fileID: 1045024098}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1060856561
 GameObject:
   m_ObjectHideFlags: 0
@@ -2899,6 +2905,7 @@ GameObject:
   - component: {fileID: 1060856566}
   - component: {fileID: 1060856567}
   - component: {fileID: 1060856568}
+  - component: {fileID: 1060856569}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2937,8 +2944,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 32
+  near clip plane: 0.1
+  far clip plane: 40
   field of view: 60
   orthographic: 1
   orthographic size: 7.91
@@ -3082,6 +3089,22 @@ MonoBehaviour:
   duration: 1
   elapsed: 0
   transitioning: 0
+--- !u!114 &1060856569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060856561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0946ac9fb9daac747b629d3733b56a17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  door: {fileID: 1045024099}
+  moveCam: 0
+  whichTarget: 0
+  currentScene: Inside
 --- !u!1001 &1120522339
 PrefabInstance:
   m_ObjectHideFlags: 0

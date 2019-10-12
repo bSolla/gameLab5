@@ -14,26 +14,33 @@ public class ChangingScenes : MonoBehaviour
     [SerializeField] string sceneName;
     [SerializeField] bool clickable = true;
 
+    CameraController cameraController;
+
+
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     //                                  M E T H O D S 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-   
+   private void Start()
+   {
+       cameraController = FindObjectOfType<CameraController>();
+   }
     private void Update()
     {
         if(clickable)
         {
-            CheckInput();
+            StartCoroutine(CheckInput());
         }
         
     }
 
     //This is for putting it in an object with collider
-    void CheckInput()
+    IEnumerator CheckInput()
     {
         if (Input.GetMouseButtonUp(0))
         {
+            
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);  //CHANGE THIS TO A BUTTON(?)
             RaycastHit hit;
             Collider col = this.gameObject.GetComponent<Collider>();
@@ -41,6 +48,11 @@ public class ChangingScenes : MonoBehaviour
             {
                 if (hit.collider == col)
                 {
+                    if(sceneName == "Outside" || sceneName =="Inside")
+                    {
+                        cameraController.startZoom();
+                        yield return new WaitForSeconds(1.5f);
+                    }
                     FindObjectOfType<GameManager>().SaveStatsBetweenScenes();
 
                     SceneManager.LoadScene(sceneName);
