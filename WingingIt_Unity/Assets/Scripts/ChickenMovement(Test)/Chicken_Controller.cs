@@ -24,7 +24,7 @@ public class Chicken_Controller : MonoBehaviour
     [HideInInspector] public Vector3 target;
     ChickenStatus status;
     PettingController petting;
-    ChickenUI chickenUI;
+    public ChickenUI chickenUI;
     public bool canMove = true, isLifted = false, isLowStatus = false;
     float timePressed = 0;
 
@@ -60,7 +60,7 @@ public class Chicken_Controller : MonoBehaviour
 
         petting = GetComponent<PettingController>();
 
-        chickenUI = this.gameObject.transform.GetChild(1).gameObject.GetComponent<ChickenUI>();
+        // chickenUI = this.gameObject.transform.GetChild(1).gameObject.GetComponent<ChickenUI>();
 
         CacheDoor();
         transform.position = new Vector3(0,0,0);

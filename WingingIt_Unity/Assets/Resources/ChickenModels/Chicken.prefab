@@ -208,6 +208,7 @@ MonoBehaviour:
   movementSpeed: 5
   walkingPoints: []
   target: {x: 0, y: 0, z: 0}
+  chickenUI: {fileID: 194272353060305259}
   canMove: 1
   isLifted: 0
   isLowStatus: 0

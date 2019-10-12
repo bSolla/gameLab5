@@ -9,14 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Coop(Test)/StartMenu.unity
     guid: 078324154ac1d5146b56d71915f9c112
   - enabled: 1
+    path: Assets/Scenes/Coop(Test)/Inside.unity
+    guid: 51474b6bdf4f01c43a866ed76e1e6c1a
+  - enabled: 1
     path: Assets/Scenes/Coop(Test)/Outside.unity
     guid: b435c56e21085b4449453cee43db08a6
   - enabled: 0
     path: Assets/Scenes/Coop(Test)/Outside_001.unity
     guid: ec138754bd1d0394db2a76a59c2628ec
-  - enabled: 1
-    path: Assets/Scenes/Coop(Test)/Inside.unity
-    guid: 51474b6bdf4f01c43a866ed76e1e6c1a
   - enabled: 1
     path: Assets/Scenes/CuttingFood/CuttingMinigame.unity
     guid: 6364bfbb3583cd748b74197ca4fa09dd
