@@ -11,11 +11,18 @@ public class FoodBowl : MonoBehaviour
     // public GameObject food;
     public int maxAvaliableFood = 100;
     public Text foodAvaliableText;
+    interactionConfirmation intCon;
+
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     //                                  M E T H O D S 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+   private void Start()
+   {
+        intCon = GetComponent<interactionConfirmation>();
+
+   }
     void Update()
     {
         foodAvaliableText.text = "Food: " + avaliableFood;
@@ -43,11 +50,11 @@ public class FoodBowl : MonoBehaviour
         {
             if(hit.collider == col)
             {
-                if(this.gameObject.tag == "VegetableFeeder")
-                {
-                    GetComponent<ChangingScenes>().GoToScene("CuttingMinigame");
-                }
-                else if(this.gameObject.name == "Feeder")
+                // if(this.gameObject.tag == "VegetableFeeder")
+                // {
+                //     GetComponent<ChangingScenes>().GoToScene("CuttingMinigame");
+                // }
+                if(this.gameObject.name == "Feeder")
                 {
                     avaliableFood += 10;
 
