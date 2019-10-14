@@ -44,6 +44,8 @@ public class Chicken_Controller : MonoBehaviour
     public string currentLocation;
     public string CurrentLocation { get => currentLocation;}
 
+    public GameObject chickenModel;
+
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     //                                  M E T H O D S 
@@ -61,6 +63,8 @@ public class Chicken_Controller : MonoBehaviour
         target = newWalkingpoint();
 
         petting = GetComponent<PettingController>();
+
+        chickenModel = transform.GetChild(2).gameObject;
 
         float timeNextCheck=10;
 
@@ -165,7 +169,8 @@ public class Chicken_Controller : MonoBehaviour
 //Deactivate the Mesh and make it stop moving
     public void DeactivateChicken()
     {
-        GetComponent<MeshRenderer>().enabled = false;
+        // GetComponent<MeshRenderer>().enabled = false;
+        chickenModel.SetActive(false);
         GetComponent<CapsuleCollider>().enabled = false;
         chickenUI.StopAskForHelpUI();
         canMove = false;
@@ -185,7 +190,8 @@ public class Chicken_Controller : MonoBehaviour
 
 
         canMove = true;
-        GetComponent<MeshRenderer>().enabled = true;
+        // GetComponent<MeshRenderer>().enabled = true;
+        chickenModel.SetActive(true);
         GetComponent<CapsuleCollider>().enabled = true;
     }
     void CacheDoor()
