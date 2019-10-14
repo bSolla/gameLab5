@@ -18,6 +18,7 @@ public class interactionConfirmation : MonoBehaviour
     public GameObject bubble;
     public bool confirmed = false;
     public bool uiActive = false;
+    bool isBerryBush = false;
 
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 //                                  M E T H O D S 
@@ -26,37 +27,80 @@ public class interactionConfirmation : MonoBehaviour
     void Start()
     {
         bubble.SetActive(false);
+        
+        if(transform.name == "berryBush")
+        {
+            isBerryBush = true;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         // need to make it so if you click elsewhere, the bubble disappears
-        if ((GameManager.instance.CurrentSceneName == "Outside" || GameManager.instance.CurrentSceneName == "Inside") && Input.GetMouseButtonUp(0))
+        if(isBerryBush)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, 100))
+            if(GetComponent<BerryBush>().chickLifted)
             {
-                if (hit.collider == this.gameObject.GetComponent<Collider>())
+                if (!uiActive)
                 {
-                    if (!uiActive)
+                    StartCoroutine (setBubbleActive());
+                }
+
+                if(Input.GetMouseButtonDown(0))
+                {
+
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit hit;
+
+                    if (Physics.Raycast(ray, out hit, 100))
                     {
-                        StartCoroutine (setBubbleActive());
-                    }
-                    if (uiActive)
-                    {
-                        Debug.Log ("clicked again");
-                        confirmed = true;
+                        if (hit.collider == this.gameObject.GetComponent<Collider>())
+                        {
+                            if (uiActive)
+                            {
+                                // Debug.Log ("clicked again");
+                                confirmed = true;
+                            }
+                        }
+                        else
+                        {
+                            disablebubble();
+                            // Debug.Log ("disabling bubble idk");
+                        }
                     }
                 }
-                else
+
+            }
+        }
+        else
+        {
+            if ((GameManager.instance.CurrentSceneName == "Outside" || GameManager.instance.CurrentSceneName == "Inside") && Input.GetMouseButtonUp(0))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, 100))
                 {
-                    disablebubble();
-                    Debug.Log ("disabling bubble idk");
-                }
-            } 
+                    if (hit.collider == this.gameObject.GetComponent<Collider>())
+                    {
+                        if (!uiActive)
+                        {
+                            StartCoroutine (setBubbleActive());
+                        }
+                        if (uiActive)
+                        {
+                            // Debug.Log ("clicked again");
+                            confirmed = true;
+                        }
+                    }
+                    else
+                    {
+                        disablebubble();
+                        // Debug.Log ("disabling bubble idk");
+                    }
+                } 
+            }
         }
     }
 

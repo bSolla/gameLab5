@@ -32,7 +32,7 @@ public class ChangingScenes : MonoBehaviour
    }
     private void Update()
     {
-        if(GameManager.instance.currentSceneName == "Inside" || GameManager.instance.currentSceneName == "Outside")
+        if((GameManager.instance.currentSceneName == "Inside" || GameManager.instance.currentSceneName == "Outside"))
         {
             if(intCon.confirmed)
             {
