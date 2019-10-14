@@ -1,6 +1,7 @@
 ﻿using Assets.Pixelation.Example.Scripts;
 using UnityEngine;
 
+
 namespace Assets.Pixelation.Scripts
 {
     [ExecuteInEditMode]
@@ -18,6 +19,7 @@ namespace Assets.Pixelation.Scripts
             material.SetVector("BlockCount", count);
             material.SetVector("BlockSize", size);
             Graphics.Blit(source, destination, material);
+            
         }
     }
 }

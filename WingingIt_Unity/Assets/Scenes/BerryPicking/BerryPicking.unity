@@ -130,6 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 130097373}
   - component: {fileID: 130097374}
+  - component: {fileID: 130097375}
   m_Layer: 0
   m_Name: BerryGameManager
   m_TagString: Manager
@@ -167,6 +168,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfPuzzlesPerLevel: 3
   endMessage: You got food!!
+--- !u!114 &130097375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130097372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6329f8ef7e6dd004c832d3376e49d8a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: 
 --- !u!1 &347949862
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,6 +193,7 @@ GameObject:
   - component: {fileID: 347949864}
   - component: {fileID: 347949863}
   - component: {fileID: 347949866}
+  - component: {fileID: 347949867}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -267,6 +282,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
+--- !u!114 &347949867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347949862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42cd8dcae69d178488f5efa28e7c7e78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: 4800000, guid: 95703b29f49b899499233ea7308bb800, type: 3}
+  BlockCount: 425
 --- !u!1 &464071601
 GameObject:
   m_ObjectHideFlags: 0

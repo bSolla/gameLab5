@@ -5,8 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - Berry
-  - Manager
+  - Chicken
+  - Egg
+  - Door
+  - VegetableFeeder
   layers:
   - Default
   - TransparentFX
