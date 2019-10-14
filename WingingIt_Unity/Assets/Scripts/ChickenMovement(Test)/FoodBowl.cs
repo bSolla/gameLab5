@@ -12,6 +12,7 @@ public class FoodBowl : MonoBehaviour
     public int maxAvaliableFood = 100;
     public Text foodAvaliableText;
     public interactionConfirmation intCon;
+    public GameManager gm;
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     //                                  M E T H O D S 
@@ -23,6 +24,7 @@ public class FoodBowl : MonoBehaviour
     void Update()
     {
         foodAvaliableText.text = "Food: " + avaliableFood;
+        Debug.Log ("current scene: " + gm.CurrentSceneName);
         
         // if(avaliableFood <= 0)
         // {
@@ -37,10 +39,13 @@ public class FoodBowl : MonoBehaviour
         {
             fillFood();
         }
-
-        if (intCon.confirmed)
+        if (intCon.confirmed && gm.CurrentSceneName == "Outside")
         {
             GetComponent<ChangingScenes>().GoToScene("CuttingMinigame");
+        }
+        else if (!intCon.confirmed)
+        {
+            Debug.Log ("can't interact with foodbowl yet");
         }
     }
     void fillFood()

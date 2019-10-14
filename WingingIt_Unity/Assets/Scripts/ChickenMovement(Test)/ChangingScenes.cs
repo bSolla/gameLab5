@@ -14,6 +14,7 @@ public class ChangingScenes : MonoBehaviour
     [SerializeField] string sceneName;
     [SerializeField] bool clickable = true;
     public interactionConfirmation intCon;
+    public GameManager gm;
 
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -30,19 +31,27 @@ public class ChangingScenes : MonoBehaviour
         {
             CheckInput();
         } */
-
-        if (intCon.confirmed)
+        if (gm)
         {
-            Debug.Log ("eyy the bool is confirmed boyyyee");
-            FindObjectOfType<GameManager>().SaveStatsBetweenScenes();
+            if (gm.CurrentSceneName == "Inside" || gm.CurrentSceneName == "Outside")
+            {
+                if (intCon.confirmed)
+                {
+                    Debug.Log ("eyy the bool is confirmed boyyyee");
+                    FindObjectOfType<GameManager>().SaveStatsBetweenScenes();
 
-            SceneManager.LoadScene(sceneName);
-            this.GetComponent<interactionConfirmation>().confirmed = false;
+                    SceneManager.LoadScene(sceneName);
+                    this.GetComponent<interactionConfirmation>().confirmed = false;
+                }
+                else
+                {
+                    Debug.Log ("you can't interact yet my dude");
+                }
+            }
         }
-        else
+        else if (gm == null)
         {
-            Debug.Log ("you can't interact yet my dude");
-
+            Debug.Log ("no game manager in this scene, doesn't need one either aww yeah");
         }
     }
         

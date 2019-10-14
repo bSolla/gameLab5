@@ -228,6 +228,7 @@ MonoBehaviour:
   sceneName: BerryPicking
   clickable: 1
   intCon: {fileID: 0}
+  gm: {fileID: 146372482}
 --- !u!114 &8231106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -553,6 +554,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 533784205}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &146372482 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8933451334184571409, guid: 1b470f326d2870b45abc185014a4ad5b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1512257703}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 082a170eaef472e4689b6832e25f0f7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &222155889 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: dd9493cdd44e34143a8389fdd2adda65,
@@ -826,6 +839,7 @@ MonoBehaviour:
   sceneName: BerryPicking
   clickable: 1
   intCon: {fileID: 0}
+  gm: {fileID: 146372482}
 --- !u!135 &273648818
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1617,6 +1631,7 @@ MonoBehaviour:
   sceneName: BerryPicking
   clickable: 1
   intCon: {fileID: 0}
+  gm: {fileID: 146372482}
 --- !u!135 &690639737
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2959,6 +2974,7 @@ MonoBehaviour:
   maxAvaliableFood: 100
   foodAvaliableText: {fileID: 1940745279}
   intCon: {fileID: 0}
+  gm: {fileID: 146372482}
 --- !u!114 &1046262251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2966,7 +2982,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1046262248}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6329f8ef7e6dd004c832d3376e49d8a7, type: 3}
   m_Name: 
@@ -2974,6 +2990,7 @@ MonoBehaviour:
   sceneName: CuttingMinigame
   clickable: 1
   intCon: {fileID: 0}
+  gm: {fileID: 146372482}
 --- !u!114 &1046262252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4530,6 +4547,7 @@ MonoBehaviour:
   maxAvaliableFood: 100
   foodAvaliableText: {fileID: 0}
   intCon: {fileID: 0}
+  gm: {fileID: 0}
 --- !u!1001 &1592966001
 PrefabInstance:
   m_ObjectHideFlags: 0
