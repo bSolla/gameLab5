@@ -42,13 +42,15 @@ public class FeederMovement : MonoBehaviour
     {
         if (col.tag == "Seeds")
         {
-            manager.score += manager.scoreGained;
+            
         }
     }
 
     void OnParticleCollision (GameObject other)
     {
         Debug.Log ("omg a seed touched me");
+        manager.score += manager.scoreGained;
+        //Destroy(other);
        /*  int numCollisionEvents = seeds.GetCollisionEvents (other, collisionEvents);
         Rigidbody2D rb = other.GetComponent<Rigidbody2D>();
         int i = 0;
