@@ -16,6 +16,7 @@ public class Chicken_Controller : MonoBehaviour
 
     // public float planeX, planeZ;
     // int currWalkPoint;
+    public string myName;
     public float planeX, planeZ;
     int currWalkPoint;
     public float movementSpeed = 5f;
@@ -28,6 +29,7 @@ public class Chicken_Controller : MonoBehaviour
     public bool canMove = true, isLifted = false, isLowStatus = false;
     float timePressed = 0;
 
+    public bool hasHome;
 
     //New things
     float timeBetweenChecks=30;

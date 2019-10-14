@@ -32,11 +32,13 @@ public class ChangingScenes : MonoBehaviour
    }
     private void Update()
     {
-        if(intCon.confirmed)
+        if(GameManager.instance.currentSceneName == "Inside" || GameManager.instance.currentSceneName == "Outside")
         {
-            StartCoroutine(CheckInput());
+            if(intCon.confirmed)
+            {
+                StartCoroutine(CheckInput());
+            }
         }
-        
     }
 
     //This is for putting it in an object with collider
@@ -65,11 +67,11 @@ public class ChangingScenes : MonoBehaviour
         // }        
         FindObjectOfType<GameManager>().SaveStatsBetweenScenes();
         
-        if(sceneName == "Outside" || sceneName =="Inside")
-        {
+        // if(sceneName == "Outside" || sceneName =="Inside")
+        // {
             cameraController.startZoom();
             yield return new WaitForSeconds(1.5f);
-        }
+        // }
 
         SceneManager.LoadScene(sceneName);
         intCon.confirmed = false;

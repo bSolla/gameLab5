@@ -49,9 +49,12 @@ public class CameraFollow : MonoBehaviour
             {
                 // Debug.Log ("target: " + target);
                 followChicken();
-                elapsed += Time.deltaTime / duration;
-                cam.orthographicSize = Mathf.Lerp (originalOrthographicSize, 2f, elapsed);
-                transform.rotation = Quaternion.Lerp (originRotation, newRotation, elapsed);
+                if(cam.orthographicSize != 2)
+                {
+                    elapsed += Time.deltaTime / duration;
+                    cam.orthographicSize = Mathf.Lerp (originalOrthographicSize, 2f, elapsed);
+                    transform.rotation = Quaternion.Lerp (originRotation, newRotation, elapsed);
+                }
             }
             else
             {
