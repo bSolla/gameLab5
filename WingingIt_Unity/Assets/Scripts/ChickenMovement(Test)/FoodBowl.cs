@@ -11,18 +11,16 @@ public class FoodBowl : MonoBehaviour
     // public GameObject food;
     public int maxAvaliableFood = 100;
     public Text foodAvaliableText;
-    interactionConfirmation intCon;
 
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     //                                  M E T H O D S 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-   private void Start()
-   {
-        intCon = GetComponent<interactionConfirmation>();
+//    private void Start()
+//    {
 
-   }
+//    }
     void Update()
     {
         foodAvaliableText.text = "Food: " + avaliableFood;
@@ -56,7 +54,7 @@ public class FoodBowl : MonoBehaviour
                 // }
                 if(this.gameObject.name == "Feeder")
                 {
-                    avaliableFood += 10;
+                    avaliableFood += 100;
 
                 }
             }

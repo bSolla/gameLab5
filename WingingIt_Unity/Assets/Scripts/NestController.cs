@@ -41,7 +41,7 @@ public GameObject[] nests;
     public void AssignHome ()
     {
         //looks for an empty nest and assigns a homeless chicken to it
-        Debug.Log ("assigning a home for a homeless chicken :3");
+        // Debug.Log ("assigning a home for a homeless chicken :3");
 
         foreach (GameObject nest in nests)
         {

@@ -168,7 +168,7 @@ public class GameManager : MonoBehaviour
             {
                 cutMinigame = false;
                 
-                foodVeggieAmount += (int)cuttingScore / 5;
+                foodVeggieAmount += (int)cuttingScore;
                 // print("Veggie food: " + (int)cuttingScore / 10);    
                 FindObjectOfType<FoodBowl>().avaliableFood = foodVeggieAmount;
                 FindObjectOfType<FoodBowl>().AddFood(0);               

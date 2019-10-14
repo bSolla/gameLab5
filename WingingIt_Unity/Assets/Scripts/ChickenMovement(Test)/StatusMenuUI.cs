@@ -50,6 +50,9 @@ public class StatusMenuUI : MonoBehaviour
             thirstSlider.value = currentChicken.thirst;
             happinessSlider.value = currentChicken.happiness;
 
+            currentChicken.GetComponent<Chicken_Controller>().LookAtPlayer();
+
+
             if (delay > 0)
             { delay -= Time.deltaTime; }
             else if (Input.GetMouseButtonUp(0))
@@ -79,6 +82,8 @@ public class StatusMenuUI : MonoBehaviour
         Panel.SetActive(false);
         isMenuOpen = false;
         cam.GetComponent<CameraFollow>().stopFollowing();
+        currentChicken.GetComponent<Chicken_Controller>().canMove = true;
+
 
 
     }
