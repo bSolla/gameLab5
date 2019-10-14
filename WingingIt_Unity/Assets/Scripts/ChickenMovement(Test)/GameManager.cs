@@ -42,6 +42,10 @@ public class GameManager : MonoBehaviour
     float cuttingScore;
     public bool CutMinigame { get => cutMinigame; set => cutMinigame = value; }
     public float CuttingScore { get => cuttingScore; set => cuttingScore = value; }
+    float pelletScore;
+    public float PelletScore { get => pelletScore; set => pelletScore = value; }
+    bool pelletMinigame;
+    public bool PelletMinigame { get => pelletMinigame; set => pelletMinigame = value; }
 
 
 
@@ -79,6 +83,13 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    private void Update ()
+    {
+        /* Debug.Log ("cuttingminigame: " + cutMinigame);
+        Debug.Log ("berry minigame: " + berryMinigame);
+        Debug.Log ("pellet minigame: " + pelletMinigame); */
     }
     // Caches the chicken group object and instantiates chickens inside it 
     public void InitializeAndCacheChildObjects()
@@ -170,6 +181,14 @@ public class GameManager : MonoBehaviour
                 // print("Veggie food: " + (int)cuttingScore / 10);    
                 FindObjectOfType<FoodBowl>().avaliableFood = foodVeggieAmount;
                 FindObjectOfType<FoodBowl>().AddFood(0);               
+            }
+
+            if (pelletMinigame)
+            {
+                pelletMinigame = false;
+                foodBoxAmount += (int)pelletScore / 6;
+                FindObjectOfType<FoodBowl>().avaliableFood = foodBoxAmount;
+                Debug.Log ("food amount: " + foodBoxAmount);
             }
 
             FindObjectOfType<BerryBush>().bushFull = bushIsFull;

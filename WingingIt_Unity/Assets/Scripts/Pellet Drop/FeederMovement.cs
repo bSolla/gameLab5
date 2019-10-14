@@ -21,9 +21,14 @@ public class FeederMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    
       if (Input.GetMouseButtonDown(0))
       {
-          following = true;
+          if (!manager.gameOver)
+          {
+              following = true;
+          }
+          
       }
 
       if (following)
