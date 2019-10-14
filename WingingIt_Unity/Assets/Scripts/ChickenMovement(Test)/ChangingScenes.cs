@@ -67,11 +67,11 @@ public class ChangingScenes : MonoBehaviour
         // }        
         FindObjectOfType<GameManager>().SaveStatsBetweenScenes();
         
-        // if(sceneName == "Outside" || sceneName =="Inside")
-        // {
+        if(sceneName == "Outside" || sceneName =="Inside")
+        {
             cameraController.startZoom();
             yield return new WaitForSeconds(1.5f);
-        // }
+        }
 
         SceneManager.LoadScene(sceneName);
         intCon.confirmed = false;

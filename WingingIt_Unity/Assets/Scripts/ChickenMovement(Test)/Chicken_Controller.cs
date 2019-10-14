@@ -62,6 +62,8 @@ public class Chicken_Controller : MonoBehaviour
 
         petting = GetComponent<PettingController>();
 
+        float timeNextCheck=10;
+
         // chickenUI = this.gameObject.transform.GetChild(1).gameObject.GetComponent<ChickenUI>();
 
         CacheDoor();
@@ -144,7 +146,7 @@ public class Chicken_Controller : MonoBehaviour
         if (Time.time > timeNextCheck && !isLifted)
         {
             timeNextCheck = Time.time + timeBetweenChecks;
-            float randomNum = Random.Range(1, 2);                 //Put more time, depending on how much time we want the chicken to wait until move
+            float randomNum = Random.Range(1, 5);                 //Put more time, depending on how much time we want the chicken to wait until move
 
             if (randomNum == 1)
             {

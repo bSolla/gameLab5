@@ -63,8 +63,8 @@ public class CameraController : MonoBehaviour
         float t = 0.0f;
         Vector3 startPos = transform.position;
         Quaternion startRot = transform.rotation;
-        if (currentScene == "Inside" || currentScene == "Outside")
-        {
+        // if (currentScene == "Inside" || currentScene == "Outside")
+        // {
             while (t < 1.0f)
             {
                 Debug.Log ("moving cam inside coop");
@@ -83,7 +83,7 @@ public class CameraController : MonoBehaviour
             }
             
             
-        }
+        // }
 
     }
 
