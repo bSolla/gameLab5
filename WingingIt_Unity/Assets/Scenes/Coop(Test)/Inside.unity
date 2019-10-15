@@ -6097,6 +6097,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1940837127}
   m_CullTransparentMesh: 0
+--- !u!1 &1982979228 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8933451334184571408, guid: 1b470f326d2870b45abc185014a4ad5b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1991114692}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1982979232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982979228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455a9c50b59b1ba439f67fa5a894dfae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  commonExp: 20
+  rareExp: 50
+  legendaryExp: 100
+  eggPrefab: {fileID: 5169484645382410418, guid: 664ffd913ee225241bbe64f3b0274a47,
+    type: 3}
+  dropTrans:
+  - {fileID: 1424970595}
+  - {fileID: 2062753972}
+  - {fileID: 1608800984}
+  - {fileID: 1725397932}
+  - {fileID: 365518098}
+  - {fileID: 1415916131}
+  - {fileID: 2032838276}
+  - {fileID: 969001433}
+  dropEgg: 0
 --- !u!1001 &1991114692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6788,6 +6821,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1851759229435378335, guid: 96f392a612d0d704fb6b61276d7cf5b6,
+        type: 3}
+      propertyPath: m_TagString
+      value: NestSpawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 1851759228262743385, guid: 96f392a612d0d704fb6b61276d7cf5b6,
+        type: 3}
+      propertyPath: m_TagString
+      value: NestSpawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 1851759228380640492, guid: 96f392a612d0d704fb6b61276d7cf5b6,
+        type: 3}
+      propertyPath: m_TagString
+      value: NestSpawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 1851759228388609516, guid: 96f392a612d0d704fb6b61276d7cf5b6,
+        type: 3}
+      propertyPath: m_TagString
+      value: NestSpawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 1851759228845818125, guid: 96f392a612d0d704fb6b61276d7cf5b6,
+        type: 3}
+      propertyPath: m_TagString
+      value: NestSpawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 1851759228884191037, guid: 96f392a612d0d704fb6b61276d7cf5b6,
+        type: 3}
+      propertyPath: m_TagString
+      value: NestSpawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 1851759229217922085, guid: 96f392a612d0d704fb6b61276d7cf5b6,
+        type: 3}
+      propertyPath: m_TagString
+      value: NestSpawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 1851759229904580182, guid: 96f392a612d0d704fb6b61276d7cf5b6,
+        type: 3}
+      propertyPath: m_TagString
+      value: NestSpawn
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96f392a612d0d704fb6b61276d7cf5b6, type: 3}

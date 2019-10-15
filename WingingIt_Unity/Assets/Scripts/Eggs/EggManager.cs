@@ -76,6 +76,7 @@ public class EggManager : MonoBehaviour
             LegendaryEggs[i].owned = false;
             i++;
         }
+        
     }
 
     //When you change scenes eggs disapear so the scripts thinks that there is an egg when its not, so each time a scene is loaded the bool is set to false
@@ -95,19 +96,30 @@ public class EggManager : MonoBehaviour
 
     void Update()
     {
-        CheckNewTime();
-
-        if (Input.GetMouseButtonDown(0))
+        if(GameManager.instance.currentSceneName == "Inside")
         {
-            if (eggPicked)
+            CheckNewTime();
+
+            if (Input.GetMouseButtonDown(0))
             {
-                Destroy(currentEgg);
-                eggPicked = false;
+                if (eggPicked)
+                {
+                    Destroy(currentEgg);
+                    eggPicked = false;
+                }
+                if (eggDroped)
+                {
+                    PickUpEgg();
+                }            
             }
-            if (eggDroped)
+            if(dropTrans[0] == null)
             {
-                PickUpEgg();
-            }            
+                GameObject[] nestObjects = GameObject.FindGameObjectsWithTag("NestSpawn");
+                for(int i = 0; i<nestObjects.Length; i++)
+                {
+                    dropTrans[i] = nestObjects[i].transform;
+                }
+            }
         }        
     }
 
