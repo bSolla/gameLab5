@@ -39,8 +39,8 @@ public class BerryMinigame : MonoBehaviour
 
         trail = Instantiate(trailPrefab, berryArray[0].transform.position, Quaternion.identity);
         trail.transform.parent = gameObject.transform;
-
-        berryGameManager = GameObject.FindWithTag("Manager").GetComponent<BerryGameManager>();
+        
+        berryGameManager = GetComponentInParent<BerryGameManager>();
 
         endOfPuzzleImage = GetComponentInChildren<EndImageLogic>();
         followMouseLine = GetComponentInChildren<LineRenderer>();
@@ -56,16 +56,14 @@ public class BerryMinigame : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             mousePressed = true;
+            if (currentBerry != 0)
+                followMouseLine.SetColors(Color.white, Color.white);
         }
         else if (Input.GetMouseButtonUp(0) && currentBerry < totalBerryCount)
         {
             mousePressed = false;
-            currentBerry = 0;
 
-            Destroy(trail);
-            trail = Instantiate(trailPrefab, berryArray[0].transform.position, Quaternion.identity);
-            trail.transform.parent = gameObject.transform;
-
+            berryGameManager.LosePoints();
             followMouseLine.SetColors(Color.clear, Color.clear);
         }
     }
