@@ -65,7 +65,7 @@ public class ChangingScenes : MonoBehaviour
         //         }
         //     }
         // }        
-        FindObjectOfType<GameManager>().SaveStatsBetweenScenes();
+        GameManager.instance.SaveStatsBetweenScenes();
         
         // if(sceneName == "Outside" || sceneName =="Inside")
         // {
@@ -82,7 +82,7 @@ public class ChangingScenes : MonoBehaviour
     public void GoToScene(string sceneName)
     {
         
-        FindObjectOfType<GameManager>().SaveStatsBetweenScenes();
+        GameManager.instance.SaveStatsBetweenScenes();
 
         SceneManager.LoadScene(sceneName);
     }
