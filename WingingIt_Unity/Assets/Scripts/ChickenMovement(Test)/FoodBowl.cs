@@ -9,12 +9,18 @@ public class FoodBowl : MonoBehaviour
 
     public int avaliableFood = 5;
     // public GameObject food;
+    public int maxAvaliableFood = 100;
     public Text foodAvaliableText;
+
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     //                                  M E T H O D S 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+//    private void Start()
+//    {
+
+//    }
     void Update()
     {
         foodAvaliableText.text = "Food: " + avaliableFood;
@@ -28,7 +34,7 @@ public class FoodBowl : MonoBehaviour
         //     food.SetActive(true);
         // }
 
-        if (Input.GetMouseButtonUp(0) && avaliableFood < 100)
+        if (Input.GetMouseButtonUp(0) && avaliableFood < maxAvaliableFood)
         {
             fillFood();
         }
@@ -42,13 +48,13 @@ public class FoodBowl : MonoBehaviour
         {
             if(hit.collider == col)
             {
-                if(this.gameObject.tag == "VegetableFeeder")
+                // if(this.gameObject.tag == "VegetableFeeder")
+                // {
+                //     GetComponent<ChangingScenes>().GoToScene("CuttingMinigame");
+                // }
+                if(this.gameObject.name == "Feeder")
                 {
-                    GetComponent<ChangingScenes>().GoToScene("CuttingMinigame");
-                }
-                else if(this.gameObject.name == "Feeder")
-                {
-                    avaliableFood += 10;
+                    avaliableFood += 100;
 
                 }
             }
@@ -57,9 +63,9 @@ public class FoodBowl : MonoBehaviour
     public void AddFood(int food)
     {
         avaliableFood += food;
-        if (avaliableFood>100)
+        if (avaliableFood>maxAvaliableFood)
         {
-            avaliableFood = 100;
+            avaliableFood = maxAvaliableFood;
         }
         // foodAvaliableText.text = "Food: " + avaliableFood;
 

@@ -22,13 +22,9 @@ public class WhatEgg : MonoBehaviour
     public Material[] commonMat, rareMat, legendaryMat;
 
 
-
-
-
-    // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    //                                                      F U N C T I O N S
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                                                      F U N C T I O N S
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     
     void Start()
@@ -40,17 +36,17 @@ public class WhatEgg : MonoBehaviour
 
         if(rndEggValue >= 0.4f)      //Common - 60% Drop rate
         {
-            print ("I dropped a common egg");
+            // print ("I dropped a common egg");
             whatEgg = 1;
         }
         if(rndEggValue > 0.1f && whatEgg < 0.4f)        // Rare - 30% Drop rate
         {
-            print ("I dropped a rare egg");
+            // print ("I dropped a rare egg");
             whatEgg = 2;
         }
         if(rndEggValue <= 0.1f)             //Legendary - 10% drop rate
         {
-            print ("I dropped a legendary egg");
+            // print ("I dropped a legendary egg");
             whatEgg = 3;
         }
 

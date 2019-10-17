@@ -17,7 +17,7 @@ public class EggDrop : MonoBehaviour
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     public DateTime currentTime, oldTime;
     public GameObject eggPrefab;
-    Vector3 dropTrans;
+    public Transform[] dropTrans;
     public bool dropEgg;
     
 
@@ -27,8 +27,9 @@ public class EggDrop : MonoBehaviour
 
     void Start()
     {
-        print (System.DateTime.Now);
-        oldTime = DateTime.Now;        
+        // print (System.DateTime.Now);
+        oldTime = DateTime.Now;
+        
     }
 
     void Update()
@@ -48,7 +49,7 @@ public class EggDrop : MonoBehaviour
     {
         // string currScene = GetComponent<GameManager>().currentSceneName;
         currentTime = DateTime.Now;
-        if(GameObject.FindGameObjectWithTag("Egg") == null && (GameManager.instance.CurrentSceneName == "Outside" || GameManager.instance.CurrentSceneName == "Inside"))
+        if(GameObject.FindGameObjectWithTag("Egg") == null && GameManager.instance.CurrentSceneName == "Inside")
         {
             if(oldTime.Date < currentTime.Date)
             {
@@ -75,15 +76,12 @@ public class EggDrop : MonoBehaviour
     // Instantiates an egg, also tells the EggPickUp script that this is the new egg.
     private void DropAnEgg()
     {
-
         dropEgg = false;
         oldTime = currentTime;
+        Vector3 myDropTrans = dropTrans[UnityEngine.Random.Range(0, GameManager.instance.numberOfChickens -1)].position;        
         
-        // dropTrans = GameObject.FindGameObjectWithTag("Chicken").transform.position;
-        dropTrans = this.gameObject.transform.GetChild(0).GetChild(0).gameObject.transform.position;
-        dropTrans = new Vector3 (dropTrans.x +2, 0.5f, dropTrans.z +2);
         
-        GameObject newEgg = Instantiate (eggPrefab, dropTrans, transform.rotation);
+        GameObject newEgg = Instantiate (eggPrefab, myDropTrans, transform.rotation);
         GetComponent<EggPickUp>().eggCol = newEgg.GetComponent<Collider>();
 
         

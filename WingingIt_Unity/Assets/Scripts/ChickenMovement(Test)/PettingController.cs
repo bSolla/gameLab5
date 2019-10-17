@@ -34,7 +34,10 @@ public class PettingController : MonoBehaviour
         if(stat.menuUI != null)
         {
             pettable = stat.menuUI.isMenuOpen;
-
+            if(pettable)
+            {
+                PetChicken();
+            }
         }
         
 
@@ -52,12 +55,29 @@ public class PettingController : MonoBehaviour
         }
     }
 
-    void OnMouseDrag()
+    // starts the timer if the chicken is pettable
+    void PetChicken()
     {
-        // starts the timer if the chicken is pettable
-        if (pettable)
+
+        if (Input.GetMouseButton(0))
         {
-            timer -= Time.deltaTime;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider == this.gameObject.GetComponent<Collider>())
+                {
+                   timer -= Time.deltaTime;
+                    
+                }
+            }
+            
         }
     }
+
+    // void OnMouseDrag()
+    // {
+        
+    // }
 }

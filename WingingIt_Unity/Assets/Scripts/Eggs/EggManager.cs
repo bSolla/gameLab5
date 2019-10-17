@@ -23,7 +23,7 @@ public class EggManager : MonoBehaviour
     //Kine variables
     public DateTime currentTime, oldTime;
     public GameObject eggPrefab;
-    Vector3 dropTrans;
+    public Transform[] dropTrans;
     public bool dropEgg;
 
     public EggInfo[] CommonEggs { get => commonEggs; set => commonEggs = value; }
@@ -37,7 +37,7 @@ public class EggManager : MonoBehaviour
 
     private void Awake()
     {
-        lm = GetComponent<LevelManager>();
+        lm = FindObjectOfType<LevelManager>();
 
         Material[] commonMaterials = Resources.LoadAll<Material>("Common Materials");
         Material[] rareMaterials = Resources.LoadAll<Material>("Rare Materials");
@@ -76,6 +76,7 @@ public class EggManager : MonoBehaviour
             LegendaryEggs[i].owned = false;
             i++;
         }
+        
     }
 
     //When you change scenes eggs disapear so the scripts thinks that there is an egg when its not, so each time a scene is loaded the bool is set to false
@@ -95,19 +96,30 @@ public class EggManager : MonoBehaviour
 
     void Update()
     {
-        CheckNewTime();
-
-        if (Input.GetMouseButtonDown(0))
+        if(GameManager.instance.currentSceneName == "Inside")
         {
-            if (eggPicked)
+            CheckNewTime();
+
+            if (Input.GetMouseButtonDown(0))
             {
-                Destroy(currentEgg);
-                eggPicked = false;
+                if (eggPicked)
+                {
+                    Destroy(currentEgg);
+                    eggPicked = false;
+                }
+                if (eggDroped)
+                {
+                    PickUpEgg();
+                }            
             }
-            if (eggDroped)
+            if(dropTrans[0] == null)
             {
-                PickUpEgg();
-            }            
+                GameObject[] nestObjects = GameObject.FindGameObjectsWithTag("NestSpawn");
+                for(int i = 0; i<nestObjects.Length; i++)
+                {
+                    dropTrans[i] = nestObjects[i].transform;
+                }
+            }
         }        
     }
 
@@ -223,10 +235,11 @@ public class EggManager : MonoBehaviour
         oldTime = currentTime;
 
         // dropTrans = GameObject.FindGameObjectWithTag("Chicken").transform.position;
-        dropTrans = this.gameObject.transform.GetChild(0).GetChild(0).gameObject.transform.position;
-        dropTrans = new Vector3(dropTrans.x + 2, 0.5f, dropTrans.z + 2);
+        // dropTrans = this.gameObject.transform.GetChild(0).GetChild(0).gameObject.transform.position;
+        // dropTrans = new Vector3(dropTrans.x + 2, 0.5f, dropTrans.z + 2);
+        Vector3 myDropTrans = dropTrans[UnityEngine.Random.Range(0, GameManager.instance.numberOfChickens -1)].position;        
 
-        GameObject newEgg = Instantiate(eggPrefab, dropTrans, transform.rotation);
+        GameObject newEgg = Instantiate(eggPrefab, myDropTrans, transform.rotation);
         eggInfo=newEgg.GetComponent<EggInfo>();
         ChooseRandomEgg();
         currentEgg = newEgg;        

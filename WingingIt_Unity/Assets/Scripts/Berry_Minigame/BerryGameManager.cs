@@ -58,6 +58,8 @@ public class BerryGameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             endOfGameText.text = endMessage;
+            yield return new WaitForSeconds(2f);
+
             GetComponent<ChangingScenes>().GoToScene("Outside");      //-----------------Go back to the coop, just for now, has to be changed
         }
     }

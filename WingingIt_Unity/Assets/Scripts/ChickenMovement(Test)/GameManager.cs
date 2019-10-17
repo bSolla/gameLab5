@@ -24,14 +24,14 @@ public class GameManager : MonoBehaviour
     public string currentSceneName;
     public string CurrentSceneName { get => currentSceneName;}
 
-    [HideInInspector]public int numberOfChickens = 2;
+    public int numberOfChickens;
     public List<GameObject> chickensList;
 
     // S T A T E   V A R I A B L E S
 
     bool bushIsFull=true;
     public int foodBoxAmount=50, foodVeggieAmount=50;
-    int waterAmount;
+    public int waterAmount;
 
     Chicken_Controller chickInBush;
     bool berryMinigame;
@@ -127,24 +127,24 @@ public class GameManager : MonoBehaviour
         if (CurrentSceneName == "Inside" || CurrentSceneName == "Outside")                 //Put the names of the scenes we are using here!!!!!!!
         {
             chickenGroup.SetActive(true);
-
-            foreach (GameObject chick in chickensList)
-            {
-                if (chick.GetComponent<Chicken_Controller>().CurrentLocation == CurrentSceneName)
-                {
-                    chick.GetComponent<Chicken_Controller>().ActivateChicken();
-                }
-                else
-                {
-                    chick.GetComponent<Chicken_Controller>().DeactivateChicken();
-                }
-
-                chick.GetComponent<ChickenStatus>().SearchReferences();
-            }
         }
         else
         {
             chickenGroup.SetActive(false);
+        }
+
+        foreach (GameObject chick in chickensList)
+        {
+            if (chick.GetComponent<Chicken_Controller>().CurrentLocation == CurrentSceneName)
+            {
+                chick.GetComponent<Chicken_Controller>().ActivateChicken();
+            }
+            else
+            {
+                chick.GetComponent<Chicken_Controller>().DeactivateChicken();
+            }
+
+            chick.GetComponent<ChickenStatus>().SearchReferences();
         }
     }
 
@@ -155,6 +155,8 @@ public class GameManager : MonoBehaviour
         {
             FindObjectOfType<FoodBowl>().avaliableFood = foodBoxAmount;
             FindObjectOfType<FoodBowl>().AddFood(0);
+
+            FindObjectOfType<WaterDispenser>().waterAvaliable = waterAmount;
         }
 
         if (CurrentSceneName == "Outside")
@@ -164,14 +166,13 @@ public class GameManager : MonoBehaviour
                 berryMinigame = false;
 
                 ChickInBush.GetComponent<ChickenStatus>().hunger += 30;         //Put the value we want to feed the chicken with the minigame
-                ChickInBush.transform.position = Vector3.zero;
             }
 
             if (cutMinigame)
             {
                 cutMinigame = false;
                 
-                foodVeggieAmount += (int)cuttingScore / 5;
+                foodVeggieAmount += (int)cuttingScore;
                 // print("Veggie food: " + (int)cuttingScore / 10);    
                 FindObjectOfType<FoodBowl>().avaliableFood = foodVeggieAmount;
                 FindObjectOfType<FoodBowl>().AddFood(0);               
@@ -191,6 +192,7 @@ public class GameManager : MonoBehaviour
         if (CurrentSceneName=="Inside")
         {
             foodBoxAmount = FindObjectOfType<FoodBowl>().avaliableFood;
+            waterAmount = FindObjectOfType<WaterDispenser>().waterAvaliable;
 
         }
 
@@ -202,7 +204,6 @@ public class GameManager : MonoBehaviour
             //waterAmount
         }
     }
-
     // returns a list of ChickenStatusValues for the chickens
     public List<ChickenStatusValues> GetChickenStatusList()
     {

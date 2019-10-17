@@ -14,45 +14,74 @@ public class ChangingScenes : MonoBehaviour
     [SerializeField] string sceneName;
     [SerializeField] bool clickable = true;
 
+    CameraController cameraController;
+    public interactionConfirmation intCon;
+
+
+
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     //                                  M E T H O D S 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-   
+   private void Start()
+   {
+       cameraController = FindObjectOfType<CameraController>();
+       intCon = GetComponent<interactionConfirmation>();
+
+   }
     private void Update()
     {
-        if(clickable)
+        if((GameManager.instance.currentSceneName == "Inside" || GameManager.instance.currentSceneName == "Outside"))
         {
-            CheckInput();
+            if(intCon.confirmed)
+            {
+                StartCoroutine(CheckInput());
+            }
         }
-        
     }
 
     //This is for putting it in an object with collider
-    void CheckInput()
+    IEnumerator CheckInput()
     {
-        if (Input.GetMouseButtonUp(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);  //CHANGE THIS TO A BUTTON(?)
-            RaycastHit hit;
-            Collider col = this.gameObject.GetComponent<Collider>();
-            if (Physics.Raycast(ray, out hit, 100))
-            {
-                if (hit.collider == col)
-                {
-                    FindObjectOfType<GameManager>().SaveStatsBetweenScenes();
+        // if (Input.GetMouseButtonUp(0))
+        // {
+            
+        //     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);  //CHANGE THIS TO A BUTTON(?)
+        //     RaycastHit hit;
+        //     Collider col = this.gameObject.GetComponent<Collider>();
+        //     if (Physics.Raycast(ray, out hit, 100))
+        //     {
+        //         if (hit.collider == col)
+        //         {
+        //             if(sceneName == "Outside" || sceneName =="Inside")
+        //             {
+        //                 cameraController.startZoom();
+        //                 yield return new WaitForSeconds(1.5f);
+        //             }
+        //             FindObjectOfType<GameManager>().SaveStatsBetweenScenes();
 
-                    SceneManager.LoadScene(sceneName);
-                }
-            }
-        }        
+        //             SceneManager.LoadScene(sceneName);
+        //         }
+        //     }
+        // }        
+        FindObjectOfType<GameManager>().SaveStatsBetweenScenes();
+        
+        if(sceneName == "Outside" || sceneName =="Inside")
+        {
+            cameraController.startZoom();
+            yield return new WaitForSeconds(1.5f);
+        }
+
+        SceneManager.LoadScene(sceneName);
+        intCon.confirmed = false;
     }
 
 
     //This is for using it in a button
     public void GoToScene(string sceneName)
     {
+        
         FindObjectOfType<GameManager>().SaveStatsBetweenScenes();
 
         SceneManager.LoadScene(sceneName);
