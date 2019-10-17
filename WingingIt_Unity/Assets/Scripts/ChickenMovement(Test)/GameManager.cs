@@ -114,6 +114,10 @@ public class GameManager : MonoBehaviour
 
         LoadStatsBetweenScenes();
         ActivateChickensToggle();
+
+
+        //<<<<<<<<<<<<<<<<<<     This is to make the level manager work while changing scenes     >>>>>>>>>>>>>>>>>>
+        GetComponent<LevelManager>().SearchText();
     }
 
 
