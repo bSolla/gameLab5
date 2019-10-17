@@ -234,6 +234,7 @@ public class Chicken_Controller : MonoBehaviour
         }
         else
         {
+            print("Changing scenes from the other side");
             walkingToDoor = false;
 
             CacheDoor();
@@ -361,19 +362,24 @@ public class Chicken_Controller : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (isLifted && Input.GetMouseButtonUp(0))
         {
             StartCoroutine(DelayLiftChicken());
             timePressed = 0;
             target= new Vector3(transform.position.x, 0.1f, transform.position.z);
 
             transform.position = target;
+            
         }
     }
     //This is a delay until the end of the frame so the menu doesn't open when you stop lifting the chicken
     IEnumerator DelayLiftChicken()
     {
         yield return new WaitForEndOfFrame();
+        if(Vector3.Distance(transform.position, doorPoint) <= 2.5f)
+        {
+            walkingToDoor = true;
+        }
         isLifted = false;
     }
 
