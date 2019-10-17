@@ -49,7 +49,7 @@ public class FoodBowl : MonoBehaviour
                 }
                 else if(this.gameObject.name == "Feeder")
                 {
-                    avaliableFood += 10;
+                    //avaliableFood += 10;
 
                 }
             }

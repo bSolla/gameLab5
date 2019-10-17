@@ -162,6 +162,14 @@ public class GameManager : MonoBehaviour
         {
             FindObjectOfType<FoodBowl>().avaliableFood = foodBoxAmount;
             FindObjectOfType<FoodBowl>().AddFood(0);
+
+            if (pelletMinigame)
+            {
+                pelletMinigame = false;
+                foodBoxAmount += (int)pelletScore;
+                FindObjectOfType<FoodBowl>().avaliableFood = foodBoxAmount;
+                Debug.Log ("food amount: " + foodBoxAmount);
+            }
         }
 
         if (CurrentSceneName == "Outside")
@@ -181,14 +189,6 @@ public class GameManager : MonoBehaviour
                 // print("Veggie food: " + (int)cuttingScore / 10);    
                 FindObjectOfType<FoodBowl>().avaliableFood = foodVeggieAmount;
                 FindObjectOfType<FoodBowl>().AddFood(0);               
-            }
-
-            if (pelletMinigame)
-            {
-                pelletMinigame = false;
-                foodBoxAmount += (int)pelletScore / 6;
-                FindObjectOfType<FoodBowl>().avaliableFood = foodBoxAmount;
-                Debug.Log ("food amount: " + foodBoxAmount);
             }
 
             FindObjectOfType<BerryBush>().bushFull = bushIsFull;
