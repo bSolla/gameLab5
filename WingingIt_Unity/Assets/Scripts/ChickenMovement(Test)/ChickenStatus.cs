@@ -227,7 +227,12 @@ public class ChickenStatus : MonoBehaviour
             // if(somethingIsWrong)
             // {
                 // somethingIsWrong = true;
-                // chickenController.walkingToDoor = true;            
+                // chickenController.walkingToDoor = true;
+                if(GameManager.instance.currentSceneName == "Inside")
+                {
+                    GameManager.instance.waterAmount = water.waterAvaliable;            
+
+                }
                 Debug.Log("There is no water in this scene");
                 // chickenController.StartCoroutine(SomethingIsWrong());
                 if(!chickenController.isLowStatus)
@@ -248,6 +253,7 @@ public class ChickenStatus : MonoBehaviour
             {
                 if(chickenController.currentLocation == GameManager.instance.CurrentSceneName)
                 {
+                    
 
                     if (thirst >= 100 || (water.waterAvaliable <= 0 && thirst >= 50))
                     {

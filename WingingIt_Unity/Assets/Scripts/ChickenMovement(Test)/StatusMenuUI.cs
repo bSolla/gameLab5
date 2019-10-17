@@ -36,7 +36,7 @@ public class StatusMenuUI : MonoBehaviour
     {
         cam = Camera.main;
 
-        panel = transform.Find("Panel").gameObject;
+        panel = transform.GetChild(0).gameObject;
 
         Panel.SetActive(false);
         isMenuOpen = false;
@@ -59,9 +59,15 @@ public class StatusMenuUI : MonoBehaviour
             if (delay > 0)
             { delay -= Time.deltaTime; }
             
-            else if (currentChicken.chickenName != null && Input.GetMouseButtonUp(0))
+            else if (Input.GetMouseButtonUp(0))
             {
-                CloseMenu();
+                if(currentChicken.chickenName != null )
+                {
+                    CloseMenu();
+
+                }
+                else
+                ChangeChickenName(currentChicken);
             }
         }
         if(hungerSlider == null || thirstSlider == null || happinessSlider == null || nameText == null)
@@ -116,5 +122,6 @@ public class StatusMenuUI : MonoBehaviour
         inputField.gameObject.SetActive(false);
         chick.chickenName = inputField.text;
         nameText.text = chick.chickenName;
+        inputField.text = null;
     }
 }
