@@ -19,7 +19,7 @@ public class SeedMovement : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
-            movement = new Vector2 (Random.Range (-10, 10f), 0);
+            movement = new Vector2 (Random.Range (-10, 10f), 6);
             timer += timeBetweenMovement;
         }
 

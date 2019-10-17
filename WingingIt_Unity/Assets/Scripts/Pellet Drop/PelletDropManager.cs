@@ -44,7 +44,7 @@ public class PelletDropManager : MonoBehaviour
             exitGameButton.gameObject.SetActive(true);
             feeder.following = false;
             gameOver = true;
-            particleSystem.SetActive(false);
+            particleSystem.gameObject.SetActive(false);
             GameManager.instance.PelletMinigame = true;
             GameManager.instance.PelletScore = finalScore;
 
