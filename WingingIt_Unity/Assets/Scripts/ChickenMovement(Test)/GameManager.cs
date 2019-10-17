@@ -86,12 +86,15 @@ public class GameManager : MonoBehaviour
         chickenGroup = gameObject.transform.GetChild(0).gameObject;
 
         chickensList = new List<GameObject>();
-        for (int i = 0; i < numberOfChickens; ++i)
-        {
+        // for (int i = 0; i < numberOfChickens; ++i)
+        // {
             GameObject chick = Resources.Load(CHICKEN_PREFAB_FOLDER) as GameObject;
             chickensList.Add(Instantiate(chick, chickenGroup.transform.position, chickenGroup.transform.rotation));
-            chickensList[i].transform.parent = chickenGroup.transform;
-        }
+            chickensList[0].transform.parent = chickenGroup.transform;
+            StatusMenuUI.FindObjectOfType<StatusMenuUI>().ChangeChickenName(chick.GetComponent<ChickenStatus>());
+
+
+        // }
 
         ActivateChickensToggle();
     }
@@ -242,5 +245,21 @@ public class GameManager : MonoBehaviour
 
             chickStatus.chickenName = chickenStatusValues[i].name;
         }
+    }
+    public void GetNewChicken()
+    {
+        GameObject chickenGroupObj = this.transform.GetChild(0).gameObject;
+        GameObject chick = Resources.Load(CHICKEN_PREFAB_FOLDER) as GameObject;
+        GameObject newChick = Instantiate(chick, chickenGroupObj.transform.position, chickenGroupObj.transform.rotation);
+        chickensList.Add(newChick);
+        numberOfChickens ++;
+        // chickensList.Add(Instantiate(chick, chickenGroupObj.transform.position, chickenGroupObj.transform.rotation));
+        // print(chick);
+        newChick.transform.parent = chickenGroupObj.transform;
+        
+        StatusMenuUI.FindObjectOfType<StatusMenuUI>().ChangeChickenName(chick.GetComponent<ChickenStatus>());
+
+        // ActivateChickensToggle();
+
     }
 }

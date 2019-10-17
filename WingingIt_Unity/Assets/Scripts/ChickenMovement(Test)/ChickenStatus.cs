@@ -56,6 +56,8 @@ public class ChickenStatus : MonoBehaviour
 
         petting = GetComponent<PettingController>();
 
+        chickenName = null;
+
     }
 
 

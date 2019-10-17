@@ -17,6 +17,7 @@ public class StatusMenuUI : MonoBehaviour
 
     public Slider hungerSlider, thirstSlider, happinessSlider;
     Text nameText;
+    public InputField inputField;
     GameObject panel;
     public GameObject Panel { get => panel;}
     float delay=0;
@@ -39,6 +40,8 @@ public class StatusMenuUI : MonoBehaviour
 
         Panel.SetActive(false);
         isMenuOpen = false;
+
+        // ChangeChickenName(g);
     }
 
     // Update is called once per frame
@@ -55,7 +58,8 @@ public class StatusMenuUI : MonoBehaviour
 
             if (delay > 0)
             { delay -= Time.deltaTime; }
-            else if (Input.GetMouseButtonUp(0))
+            
+            else if (currentChicken.chickenName != null && Input.GetMouseButtonUp(0))
             {
                 CloseMenu();
             }
@@ -94,5 +98,23 @@ public class StatusMenuUI : MonoBehaviour
         thirstSlider = panel.transform.GetChild(1).GetComponent<Slider>();
         happinessSlider = panel.transform.GetChild(2).GetComponent<Slider>();
         nameText = panel.transform.GetChild(3).GetComponent<Text>();
+    }
+    public void ChangeChickenName(ChickenStatus chick)
+    {
+        
+        OpenMenu(chick);
+        nameText.text = " ";
+        inputField.gameObject.SetActive(true);
+        // Time.timeScale = 0;
+
+
+    }
+    public void EnterChickenName()
+    {
+        // Time.timeScale = 1;
+        ChickenStatus chick = GameManager.instance.chickensList[GameManager.instance.chickensList.Count -1].GetComponent<ChickenStatus>();
+        inputField.gameObject.SetActive(false);
+        chick.chickenName = inputField.text;
+        nameText.text = chick.chickenName;
     }
 }
