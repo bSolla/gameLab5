@@ -44,7 +44,6 @@ public class GameManager : MonoBehaviour
     public float CuttingScore { get => cuttingScore; set => cuttingScore = value; }
 
 
-
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 //                                  M E T H O D S 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -67,8 +66,8 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-
-
+	
+	
     // Caches the chicken group object and instantiates chickens inside it 
     public void InitializeAndCacheChildObjects()
     {
@@ -85,7 +84,7 @@ public class GameManager : MonoBehaviour
         ActivateChickensToggle();
     }
 
-
+	
     // Destroys all chickens inside the chicken list 
     public void ClearChickenGroup()
     {
@@ -97,7 +96,7 @@ public class GameManager : MonoBehaviour
         chickensList.Clear();
     }
 
-
+	
     //Each time a level is load the manager checks if we are in the coop or not and activate the chickens if they are suposed to be there
     void OnLoadCallback(Scene scene, LoadSceneMode sceneMode)
     {
@@ -105,6 +104,10 @@ public class GameManager : MonoBehaviour
 
         LoadStatsBetweenScenes();
         ActivateChickensToggle();
+
+
+        //<<<<<<<<<<<<<<<<<<     This is to make the level manager work while changing scenes     >>>>>>>>>>>>>>>>>>
+        GetComponent<LevelManager>().SearchText();
     }
 
 
@@ -152,7 +155,7 @@ public class GameManager : MonoBehaviour
             {
                 berryMinigame = false;
 
-                // done in the berry manager
+				// done in the berry manager
                 //ChickInBush.GetComponent<ChickenStatus>().hunger += 30;         //Put the value we want to feed the chicken with the minigame
             }
 
@@ -160,7 +163,7 @@ public class GameManager : MonoBehaviour
             {
                 cutMinigame = false;
                 
-                foodVeggieAmount += (int)cuttingScore / 5;
+                foodVeggieAmount += (int)cuttingScore;
                 // print("Veggie food: " + (int)cuttingScore / 10);    
                 FindObjectOfType<FoodBowl>().avaliableFood = foodVeggieAmount;
                 FindObjectOfType<FoodBowl>().AddFood(0);               
@@ -192,6 +195,8 @@ public class GameManager : MonoBehaviour
             //waterAmount
         }
     }
+	
+	
     // returns a list of ChickenStatusValues for the chickens
     public List<ChickenStatusValues> GetChickenStatusList()
     {

@@ -5,11 +5,13 @@ using UnityEngine;
 public class BerryBush : MonoBehaviour
 {
     Chicken_Controller currentChick;
-    bool chickLifted;
+    public bool chickLifted;
     public bool bushFull;
+    interactionConfirmation intCon;
 
     private void Start()
     {
+        intCon = GetComponent<interactionConfirmation>();
         //We need to change the textures so there's no berrys in the bush
         //if (!bushFull)
         //{change to the non berry texture}
@@ -39,7 +41,8 @@ public class BerryBush : MonoBehaviour
             if (chickLifted && !currentChick.isLifted)
             {
                 bushFull = false; 
-                GetComponent<ChangingScenes>().GoToScene("BerryPicking");
+
+                // GetComponent<ChangingScenes>().GoToScene("BerryPicking");
             }
         }        
     }

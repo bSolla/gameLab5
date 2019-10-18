@@ -49,9 +49,9 @@ public Text waterAvaliableText;
         Collider col = this.gameObject.GetComponent<Collider>();
         if(Physics.Raycast(ray, out hit, 100))
         {
-            if(hit.collider == col && Input.GetMouseButtonUp(0) && waterAvaliable < 100)
+            if(hit.collider == col && Input.GetMouseButtonUp(0) && waterAvaliable < maxWaterAvaliable)
             {
-                waterAvaliable += 10;
+                waterAvaliable += 100;
             }
         }
     }

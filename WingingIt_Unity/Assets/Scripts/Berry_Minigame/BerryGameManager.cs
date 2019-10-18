@@ -70,7 +70,8 @@ public class BerryGameManager : MonoBehaviour
             endOfGameText.text = endMessage + cumulativePoints.ToString();
             yield return new WaitForSeconds(3f);
 
-            GameManager.instance.ChickInBush.GetComponent<ChickenStatus>().hunger += cumulativePoints;
+            //GameManager.instance.ChickInBush.GetComponent<ChickenStatus>().hunger += cumulativePoints;
+            GameManager.instance.foodVeggieAmount += cumulativePoints;
 
             GetComponent<ChangingScenes>().GoToScene("Outside");      //-----------------Go back to the coop, just for now, has to be changed
         }

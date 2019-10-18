@@ -44,6 +44,8 @@ public class Chicken_Controller : MonoBehaviour
     public string currentLocation;
     public string CurrentLocation { get => currentLocation;}
 
+    public GameObject chickenModel;
+
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     //                                  M E T H O D S 
@@ -52,6 +54,9 @@ public class Chicken_Controller : MonoBehaviour
     void Awake()
     {
         currentLocation = "Inside";
+
+        chickenModel = transform.GetChild(2).gameObject;
+
     }
 
     void Start()
@@ -61,6 +66,9 @@ public class Chicken_Controller : MonoBehaviour
         target = newWalkingpoint();
 
         petting = GetComponent<PettingController>();
+
+
+        float timeNextCheck=10;
 
         // chickenUI = this.gameObject.transform.GetChild(1).gameObject.GetComponent<ChickenUI>();
 
@@ -72,21 +80,22 @@ public class Chicken_Controller : MonoBehaviour
 
     void Update()
     {
-        if(!isLifted)
+        // if(!isLifted)
+        // {
+            
+        // }
+        if (!petting.pettable)
         {
-            if(status.currState ==ChickenStatus.ChickenState.Normal)
+            LiftChicken();
+            if(status.currState ==ChickenStatus.ChickenState.Normal && !walkingToDoor)
             {
-                StartCoroutine(movingPoint());
+                StartCoroutine(movingPoint(false));
                 
             }
             if (walkingToDoor)
             {
                 WalkToDoor();
             }
-        }
-        if (!petting.pettable)
-        {
-            LiftChicken();
         }
         TryForChangingLocation();
         // if(isLowStatus)
@@ -144,7 +153,7 @@ public class Chicken_Controller : MonoBehaviour
         if (Time.time > timeNextCheck && !isLifted)
         {
             timeNextCheck = Time.time + timeBetweenChecks;
-            float randomNum = Random.Range(1, 2);                 //Put more time, depending on how much time we want the chicken to wait until move
+            float randomNum = Random.Range(1, 5);                 //Put more time, depending on how much time we want the chicken to wait until move
 
             if (randomNum == 1)
             {
@@ -163,7 +172,8 @@ public class Chicken_Controller : MonoBehaviour
 //Deactivate the Mesh and make it stop moving
     public void DeactivateChicken()
     {
-        GetComponent<MeshRenderer>().enabled = false;
+        // GetComponent<MeshRenderer>().enabled = false;
+        chickenModel.SetActive(false);
         GetComponent<CapsuleCollider>().enabled = false;
         chickenUI.StopAskForHelpUI();
         canMove = false;
@@ -183,7 +193,8 @@ public class Chicken_Controller : MonoBehaviour
 
 
         canMove = true;
-        GetComponent<MeshRenderer>().enabled = true;
+        // GetComponent<MeshRenderer>().enabled = true;
+        chickenModel.SetActive(true);
         GetComponent<CapsuleCollider>().enabled = true;
     }
     void CacheDoor()
@@ -218,11 +229,12 @@ public class Chicken_Controller : MonoBehaviour
             {
                 canMove = true;
                 target = doorPoint;
-                StartCoroutine(movingPoint());
+                StartCoroutine(movingPoint(true));
             }
         }
         else
         {
+            print("Changing scenes from the other side");
             walkingToDoor = false;
 
             CacheDoor();
@@ -280,20 +292,25 @@ public class Chicken_Controller : MonoBehaviour
 
 
 
-    public IEnumerator movingPoint()
+    public IEnumerator movingPoint(bool MoveNow)
     {
         
         Vector3 moveDir = target - transform.position;
-        
+        float targetDist = Vector3.Distance(target, transform.position);
 
         if(canMove && currentLocation == GameManager.instance.CurrentSceneName)
         {
             if(Vector3.Distance(transform.position, target) < 0.1f)
             {
+                print("Moving point making a new move");
                 
-                canMove = false;
-                float t = Random.Range(1, 10);
-                yield return new WaitForSeconds(t);
+                
+                if(!MoveNow)
+                {
+                    canMove = false;
+                    float t = Random.Range(1, 10);
+                    yield return new WaitForSeconds(t);
+                }
                 if(!walkingToDoor)
                 {
                     target = newWalkingpoint();
@@ -304,10 +321,11 @@ public class Chicken_Controller : MonoBehaviour
                 
             }
 
-            transform.position += ((moveDir * 100) / 100) * Time.deltaTime;
+            transform.position += moveDir * Time.deltaTime;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target - transform.position), 7f * Time.deltaTime);
 
         }
+
 
     }
 
@@ -339,23 +357,29 @@ public class Chicken_Controller : MonoBehaviour
                 // Vector3 moveDir = hit.point;
 
                 transform.position = moveDir;
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Camera.main.transform.position - transform.position), 7f * Time.deltaTime);
+                // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Camera.main.transform.position - transform.position), 7f * Time.deltaTime);
+                LookAtPlayer();
             }
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (isLifted && Input.GetMouseButtonUp(0))
         {
             StartCoroutine(DelayLiftChicken());
             timePressed = 0;
             target= new Vector3(transform.position.x, 0.1f, transform.position.z);
 
             transform.position = target;
+            
         }
     }
     //This is a delay until the end of the frame so the menu doesn't open when you stop lifting the chicken
     IEnumerator DelayLiftChicken()
     {
         yield return new WaitForEndOfFrame();
+        if(Vector3.Distance(transform.position, doorPoint) <= 2.5f)
+        {
+            walkingToDoor = true;
+        }
         isLifted = false;
     }
 
@@ -465,7 +489,7 @@ public class Chicken_Controller : MonoBehaviour
         {
             // print("Collided");
             // canMove = true;
-            StartCoroutine(movingPoint());
+            StartCoroutine(movingPoint(true));
             // return;
 
             // newWalkingpoint();
@@ -479,7 +503,7 @@ public class Chicken_Controller : MonoBehaviour
             print ("There's a chicken in mah face");
 
             target = new Vector3 (Random.Range(target.x +2, target.x -2), 0 , Random.Range(target.z +2, target.z -2));
-            StartCoroutine(movingPoint());
+            StartCoroutine(movingPoint(true));
 
             
         }
@@ -494,7 +518,7 @@ public class Chicken_Controller : MonoBehaviour
             {
                 print ("Rotation is correct");
                 isLowStatus = true;
-                StopCoroutine(movingPoint());
+                StopCoroutine(movingPoint(false));
 
                 chickenUI.AskForHelpUI(AskingForWhat);
                 StartCoroutine(DelayAskForHelp());
@@ -503,8 +527,9 @@ public class Chicken_Controller : MonoBehaviour
             }
             else
             {
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Camera.main.transform.position - transform.position), 20f * Time.deltaTime);
-                canMove = false;
+                // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Camera.main.transform.position - transform.position), 20f * Time.deltaTime);
+                // canMove = false;
+                LookAtPlayer();
             }
             // target = Camera.main.gameObject.transform.position;
             
@@ -519,6 +544,12 @@ public class Chicken_Controller : MonoBehaviour
 
 
     }
+    public void LookAtPlayer()
+    {
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Camera.main.transform.position - transform.position), 20f * Time.deltaTime);
+        canMove = false;
+    }
+    
     public IEnumerator DelayAskForHelp()
     {
         if(isLowStatus)
@@ -529,7 +560,7 @@ public class Chicken_Controller : MonoBehaviour
             canMove=true;
             target = transform.position;
             chickenUI.StopAskForHelpUI();
-            StartCoroutine(movingPoint());
+            StartCoroutine(movingPoint(true));
             yield return new WaitForSeconds(10);
             print ("Delay, second wait");
 

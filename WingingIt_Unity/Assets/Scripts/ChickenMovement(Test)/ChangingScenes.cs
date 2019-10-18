@@ -32,7 +32,7 @@ public class ChangingScenes : MonoBehaviour
    }
     private void Update()
     {
-        if(GameManager.instance.currentSceneName == "Inside" || GameManager.instance.currentSceneName == "Outside")
+        if((GameManager.instance.currentSceneName == "Inside" || GameManager.instance.currentSceneName == "Outside"))
         {
             if(intCon.confirmed)
             {
@@ -65,13 +65,13 @@ public class ChangingScenes : MonoBehaviour
         //         }
         //     }
         // }        
-        GameManager.instance.SaveStatsBetweenScenes();
+        FindObjectOfType<GameManager>().SaveStatsBetweenScenes();
         
-        // if(sceneName == "Outside" || sceneName =="Inside")
-        // {
+        if(sceneName == "Outside" || sceneName =="Inside")
+        {
             cameraController.startZoom();
             yield return new WaitForSeconds(1.5f);
-        // }
+        }
 
         SceneManager.LoadScene(sceneName);
         intCon.confirmed = false;
@@ -82,7 +82,7 @@ public class ChangingScenes : MonoBehaviour
     public void GoToScene(string sceneName)
     {
         
-        GameManager.instance.SaveStatsBetweenScenes();
+        FindObjectOfType<GameManager>().SaveStatsBetweenScenes();
 
         SceneManager.LoadScene(sceneName);
     }
