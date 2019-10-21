@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour
     float necesaryExp=100;
 
     Text levelText;
-    GameObject lvUpImage;
+    public GameObject lvUpImage;
 
 
     // Start is called before the first frame update
@@ -27,10 +27,16 @@ public class LevelManager : MonoBehaviour
         levelText = GameObject.Find("Level Number").GetComponent<Text>();
         levelText.text = "" + currentLevel;
 
-        lvUpImage = GameObject.Find("Lv Up Image");
+        if(lvUpImage == null)
+        {
+            lvUpImage = GameObject.Find("Lv Up Image");
+
+        }
         lvUpImage.GetComponentInChildren<Button>().onClick.AddListener(CloseLvUpImage);
         
         lvUpImage.SetActive(false);
+        print("Hello im check");
+
     }
 
 

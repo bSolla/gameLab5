@@ -10,7 +10,6 @@ TagManager:
   - Door
   - VegetableFeeder
   - Egg Button
-  - NestSpawn
   layers:
   - Default
   - TransparentFX

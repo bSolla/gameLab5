@@ -67,12 +67,20 @@ public class StatusMenuUI : MonoBehaviour
 
                 }
                 else
-                ChangeChickenName(currentChicken);
+                {
+                    ChangeChickenName(currentChicken);
+
+                }
             }
         }
         if(hungerSlider == null || thirstSlider == null || happinessSlider == null || nameText == null)
         {
             FindSliders();
+        }
+
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            EnterChickenName();
         }
     }
 

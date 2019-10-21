@@ -34,32 +34,32 @@ public class FoodBowl : MonoBehaviour
         //     food.SetActive(true);
         // }
 
-        if (Input.GetMouseButtonUp(0) && avaliableFood < maxAvaliableFood)
-        {
-            fillFood();
-        }
+        // if (Input.GetMouseButtonUp(0) && avaliableFood < maxAvaliableFood)
+        // {
+        //     fillFood();
+        // }
     }
-    void fillFood()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        Collider col = this.gameObject.GetComponent<Collider>();
-        if(Physics.Raycast(ray, out hit, 100))
-        {
-            if(hit.collider == col)
-            {
-                // if(this.gameObject.tag == "VegetableFeeder")
-                // {
-                //     GetComponent<ChangingScenes>().GoToScene("CuttingMinigame");
-                // }
-                if(this.gameObject.name == "Feeder")
-                {
-                    avaliableFood += 100;
+    // void fillFood()
+    // {
+    //     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    //     RaycastHit hit;
+    //     Collider col = this.gameObject.GetComponent<Collider>();
+    //     if(Physics.Raycast(ray, out hit, 100))
+    //     {
+    //         if(hit.collider == col)
+    //         {
+    //             // if(this.gameObject.tag == "VegetableFeeder")
+    //             // {
+    //             //     GetComponent<ChangingScenes>().GoToScene("CuttingMinigame");
+    //             // }
+    //             // if(this.gameObject.name == "Feeder")
+    //             // {
+    //             //     avaliableFood += 100;
 
-                }
-            }
-        }
-    }
+    //             // }
+    //         }
+    //     }
+    // }
     public void AddFood(int food)
     {
         avaliableFood += food;

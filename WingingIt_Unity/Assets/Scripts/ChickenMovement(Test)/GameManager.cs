@@ -43,6 +43,11 @@ public class GameManager : MonoBehaviour
     public bool CutMinigame { get => cutMinigame; set => cutMinigame = value; }
     public float CuttingScore { get => cuttingScore; set => cuttingScore = value; }
 
+    float pelletScore;
+    public float PelletScore { get => pelletScore; set => pelletScore = value; }
+    bool pelletMinigame;
+    public bool PelletMinigame { get => pelletMinigame; set => pelletMinigame = value; }
+
 
 
     /*To do:
@@ -91,7 +96,7 @@ public class GameManager : MonoBehaviour
             GameObject chick = Resources.Load(CHICKEN_PREFAB_FOLDER) as GameObject;
             chickensList.Add(Instantiate(chick, chickenGroup.transform.position, chickenGroup.transform.rotation));
             chickensList[0].transform.parent = chickenGroup.transform;
-            StatusMenuUI.FindObjectOfType<StatusMenuUI>().ChangeChickenName(chick.GetComponent<ChickenStatus>());
+            // StatusMenuUI.FindObjectOfType<StatusMenuUI>().ChangeChickenName(chick.GetComponent<ChickenStatus>());
 
 
         // }
@@ -160,6 +165,14 @@ public class GameManager : MonoBehaviour
             FindObjectOfType<FoodBowl>().AddFood(0);
 
             FindObjectOfType<WaterDispenser>().waterAvaliable = waterAmount;
+
+            if (pelletMinigame)
+            {
+                pelletMinigame = false;
+                foodBoxAmount += (int)pelletScore;
+                FindObjectOfType<FoodBowl>().avaliableFood = foodBoxAmount;
+                Debug.Log ("food amount: " + foodBoxAmount);
+            }
         }
 
         if (CurrentSceneName == "Outside")
@@ -257,7 +270,7 @@ public class GameManager : MonoBehaviour
         // print(chick);
         newChick.transform.parent = chickenGroupObj.transform;
         
-        StatusMenuUI.FindObjectOfType<StatusMenuUI>().ChangeChickenName(chick.GetComponent<ChickenStatus>());
+        // StatusMenuUI.FindObjectOfType<StatusMenuUI>().ChangeChickenName(chick.GetComponent<ChickenStatus>());
 
         // ActivateChickensToggle();
 
