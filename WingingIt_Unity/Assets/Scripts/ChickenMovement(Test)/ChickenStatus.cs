@@ -57,6 +57,8 @@ public class ChickenStatus : MonoBehaviour
         petting = GetComponent<PettingController>();
 
         chickenName = null;
+        
+        SearchReferences();
 
     }
 
@@ -101,7 +103,7 @@ public class ChickenStatus : MonoBehaviour
         if (Input.GetMouseButtonUp(1))
         {
             print(currState);
-            print(food);
+            print("Food: " + food);
         }
 
         // if(isOpen)

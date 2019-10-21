@@ -104,14 +104,14 @@ public class Chicken_Controller : MonoBehaviour
             
         // }
 
-        if(Input.GetMouseButton(1))
-        {
-            print(door);
-            print ("Door point: " + doorPoint);
-            // print("Camera Rot" + Quaternion.LookRotation(Camera.main.transform.position - transform.position));
-            // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Camera.main.transform.position - transform.position), 7f * Time.deltaTime);
+        // if(Input.GetMouseButton(1))
+        // {
+        //     print(door);
+        //     print ("Door point: " + doorPoint);
+        //     // print("Camera Rot" + Quaternion.LookRotation(Camera.main.transform.position - transform.position));
+        //     // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Camera.main.transform.position - transform.position), 7f * Time.deltaTime);
 
-        }
+        // }
     }
 
 

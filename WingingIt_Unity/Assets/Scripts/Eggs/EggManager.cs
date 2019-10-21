@@ -98,7 +98,10 @@ public class EggManager : MonoBehaviour
     {
         if(GameManager.instance.currentSceneName == "Inside")
         {
-            CheckNewTime();
+            if(!eggDroped && DropTheEgg())
+            {
+                DropAnEgg();
+            }
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -194,36 +197,72 @@ public class EggManager : MonoBehaviour
 
 
     //Checks if its time to drop an egg
-    private void CheckNewTime()
+    // private void CheckNewTime()
+    // {
+    //     // string currScene = GetComponent<GameManager>().currentSceneName;
+    //     // currentTime = DateTime.Now;
+    //     if ( && GameManager.instance.CurrentSceneName == "Inside")
+    //     {
+    //         // if (oldTime.Date < currentTime.Date)
+    //         // {
+    //         //     return;
+    //         // }
+    //         // else
+    //         // {
+    //         //     if (oldTime.Hour < currentTime.Hour)
+    //         //     {
+    //         //         print ("Hour");
+    //         //         DropAnEgg();
+    //         //     }
+    //         //     else
+    //         //     {
+    //         //         if (currentTime.Minute - oldTime.Minute >= 0.1f || Input.GetKeyDown(KeyCode.E)) // ????????? Check this later
+    //         //         {
+    //         //             print ("Minute");
+
+    //         //             DropAnEgg();
+    //         //         }
+    //         //     }
+    //         // }
+            
+    //     }
+    // }
+    bool DropTheEgg()
     {
-        // string currScene = GetComponent<GameManager>().currentSceneName;
         currentTime = DateTime.Now;
-        if (!eggDroped && (GameManager.instance.CurrentSceneName == "Outside" || GameManager.instance.CurrentSceneName == "Inside"))
+        
+        if(Input.GetMouseButtonDown(1))
         {
-            if (oldTime.Date < currentTime.Date)
-            {
-                return;
-            }
-            else
-            {
-                if (oldTime.Hour < currentTime.Hour)
-                {
-                    DropAnEgg();
-                }
-                else
-                {
-                    if (currentTime.Minute - oldTime.Minute >= 0.9f || Input.GetKeyDown(KeyCode.E)) // ????????? Check this later
-                    {
-                        DropAnEgg();
-                    }
-                }
-            }
+            print("Curr minute: " + currentTime.Minute);
+            
+            print("old minute: " + oldTime.Minute);
         }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+          return true;  
+        }
+
+
+        if(oldTime.Hour < currentTime.Hour)
+        {
+            return true;
+        }
+        if(currentTime.Minute - oldTime.Minute > 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+        
     }
 
     //Instantiates an egg
     private void DropAnEgg()
     {
+        print(transform.name + " I have this script bitch");
         if(GameManager.instance.currentSceneName == "Inside")
         {
             if(dropTrans[0] == null)
