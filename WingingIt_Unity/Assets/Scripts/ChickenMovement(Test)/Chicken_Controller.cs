@@ -157,13 +157,13 @@ public class Chicken_Controller : MonoBehaviour
 
             if (randomNum == 1)
             {
-                if (CurrentLocation == GameManager.instance.CurrentSceneName)
-                {
+                // if (CurrentLocation == GameManager.instance.CurrentSceneName)
+                // {
                     target = DoorPoint;
                     canMove = true;
                     walkingToDoor = true;
                     print("Change location -> passes the random number check -> the current location of the chicken is the same as the current scene");
-                }
+                // }
             }
         }
     }

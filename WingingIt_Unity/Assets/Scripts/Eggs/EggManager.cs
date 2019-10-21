@@ -112,14 +112,7 @@ public class EggManager : MonoBehaviour
                     PickUpEgg();
                 }            
             }
-            if(dropTrans[0] == null)
-            {
-                GameObject[] nestObjects = GameObject.FindGameObjectsWithTag("NestSpawn");
-                for(int i = 0; i<nestObjects.Length; i++)
-                {
-                    dropTrans[i] = nestObjects[i].transform;
-                }
-            }
+            
         }        
     }
 
@@ -231,20 +224,32 @@ public class EggManager : MonoBehaviour
     //Instantiates an egg
     private void DropAnEgg()
     {
-        eggDroped=true;
-        oldTime = currentTime;
+        if(GameManager.instance.currentSceneName == "Inside")
+        {
+            if(dropTrans[0] == null)
+            {
+                GameObject[] nestObjects = GameObject.FindGameObjectsWithTag("NestSpawn");
+                for(int i = 0; i<nestObjects.Length; i++)
+                {
+                    dropTrans[i] = nestObjects[i].transform;
+                }
+            }
+            
+            eggDroped=true;
+            oldTime = currentTime;
 
-        // dropTrans = GameObject.FindGameObjectWithTag("Chicken").transform.position;
-        // dropTrans = this.gameObject.transform.GetChild(0).GetChild(0).gameObject.transform.position;
-        // dropTrans = new Vector3(dropTrans.x + 2, 0.5f, dropTrans.z + 2);
-        Vector3 myDropTrans = dropTrans[UnityEngine.Random.Range(0, GameManager.instance.numberOfChickens -1)].position;        
+            // dropTrans = GameObject.FindGameObjectWithTag("Chicken").transform.position;
+            // dropTrans = this.gameObject.transform.GetChild(0).GetChild(0).gameObject.transform.position;
+            // dropTrans = new Vector3(dropTrans.x + 2, 0.5f, dropTrans.z + 2);
+            Vector3 myDropTrans = dropTrans[UnityEngine.Random.Range(0, GameManager.instance.numberOfChickens -1)].position;        
 
-        GameObject newEgg = Instantiate(eggPrefab, myDropTrans, transform.rotation);
-        eggInfo=newEgg.GetComponent<EggInfo>();
-        ChooseRandomEgg();
-        currentEgg = newEgg;        
+            GameObject newEgg = Instantiate(eggPrefab, myDropTrans, transform.rotation);
+            eggInfo=newEgg.GetComponent<EggInfo>();
+            ChooseRandomEgg();
+            currentEgg = newEgg;        
 
-        //GetComponent<EggPickUp>().eggCol = newEgg.GetComponent<Collider>();
+            //GetComponent<EggPickUp>().eggCol = newEgg.GetComponent<Collider>();
+        }
     }
 
     

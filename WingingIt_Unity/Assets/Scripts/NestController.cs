@@ -19,10 +19,6 @@ public GameObject[] nests;
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 //                           M E T H O D S
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
@@ -34,8 +30,23 @@ public GameObject[] nests;
                 AssignHome();
             }
         }
+        if(Input.GetKeyDown(KeyCode.N))
+        {
+        }
         
 
+    }
+    void OnMouseDown()
+    {
+        CollectNewChicken();
+
+    }
+    void CollectNewChicken()
+    {
+        if(GameManager.instance.gameObject.GetComponent<LevelManager>().currentLevel > GameManager.instance.chickensList.Count)
+        {
+            GameManager.instance.GetNewChicken();
+        }
     }
 
     public void AssignHome ()

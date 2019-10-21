@@ -40,14 +40,12 @@ public class interactionConfirmation : MonoBehaviour
         // need to make it so if you click elsewhere, the bubble disappears
         if(isBerryBush)
         {
-            if(GetComponent<BerryBush>().chickLifted)
+            if(GetComponent<BerryBush>().chickLifted && !uiActive)
             {
-                if (!uiActive)
-                {
                     StartCoroutine (setBubbleActive());
-                }
+            }
 
-                if(Input.GetMouseButtonDown(0))
+                if(uiActive && Input.GetMouseButtonDown(0))
                 {
 
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -57,11 +55,11 @@ public class interactionConfirmation : MonoBehaviour
                     {
                         if (hit.collider == this.gameObject.GetComponent<Collider>())
                         {
-                            if (uiActive)
-                            {
+                            // if (uiActive)
+                            // {
                                 // Debug.Log ("clicked again");
                                 confirmed = true;
-                            }
+                            // }
                         }
                         else
                         {
@@ -71,7 +69,7 @@ public class interactionConfirmation : MonoBehaviour
                     }
                 }
 
-            }
+            
         }
         else
         {
@@ -115,5 +113,10 @@ public class interactionConfirmation : MonoBehaviour
     {
         bubble.SetActive(false);
         uiActive = false;
+        if(isBerryBush)
+        {
+            GetComponent<BerryBush>().chickLifted = false;
+
+        }
     }
 }

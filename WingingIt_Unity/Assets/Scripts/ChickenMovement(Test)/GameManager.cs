@@ -44,6 +44,20 @@ public class GameManager : MonoBehaviour
     public float CuttingScore { get => cuttingScore; set => cuttingScore = value; }
 
 
+
+    /*To do:
+     * 
+     * Save the amount of food and water each time we change scenes 
+     * 
+     * Save the state of the bush each time we change scenes
+     * 
+     * Make them be the same when we come back to the scene
+     * 
+     * Show the results of the minigammes (more food, bush empty...)            Everything done but water
+     */
+
+
+
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 //                                  M E T H O D S 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -66,25 +80,25 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-	
-	
     // Caches the chicken group object and instantiates chickens inside it 
     public void InitializeAndCacheChildObjects()
     {
         chickenGroup = gameObject.transform.GetChild(0).gameObject;
 
         chickensList = new List<GameObject>();
-        for (int i = 0; i < numberOfChickens; ++i)
-        {
+        // for (int i = 0; i < numberOfChickens; ++i)
+        // {
             GameObject chick = Resources.Load(CHICKEN_PREFAB_FOLDER) as GameObject;
             chickensList.Add(Instantiate(chick, chickenGroup.transform.position, chickenGroup.transform.rotation));
-            chickensList[i].transform.parent = chickenGroup.transform;
-        }
+            chickensList[0].transform.parent = chickenGroup.transform;
+            StatusMenuUI.FindObjectOfType<StatusMenuUI>().ChangeChickenName(chick.GetComponent<ChickenStatus>());
+
+
+        // }
 
         ActivateChickensToggle();
     }
 
-	
     // Destroys all chickens inside the chicken list 
     public void ClearChickenGroup()
     {
@@ -96,7 +110,6 @@ public class GameManager : MonoBehaviour
         chickensList.Clear();
     }
 
-	
     //Each time a level is load the manager checks if we are in the coop or not and activate the chickens if they are suposed to be there
     void OnLoadCallback(Scene scene, LoadSceneMode sceneMode)
     {
@@ -155,8 +168,7 @@ public class GameManager : MonoBehaviour
             {
                 berryMinigame = false;
 
-				// done in the berry manager
-                //ChickInBush.GetComponent<ChickenStatus>().hunger += 30;         //Put the value we want to feed the chicken with the minigame
+                ChickInBush.GetComponent<ChickenStatus>().hunger += 30;         //Put the value we want to feed the chicken with the minigame
             }
 
             if (cutMinigame)
@@ -195,8 +207,6 @@ public class GameManager : MonoBehaviour
             //waterAmount
         }
     }
-	
-	
     // returns a list of ChickenStatusValues for the chickens
     public List<ChickenStatusValues> GetChickenStatusList()
     {
@@ -235,5 +245,21 @@ public class GameManager : MonoBehaviour
 
             chickStatus.chickenName = chickenStatusValues[i].name;
         }
+    }
+    public void GetNewChicken()
+    {
+        GameObject chickenGroupObj = this.transform.GetChild(0).gameObject;
+        GameObject chick = Resources.Load(CHICKEN_PREFAB_FOLDER) as GameObject;
+        GameObject newChick = Instantiate(chick, chickenGroupObj.transform.position, chickenGroupObj.transform.rotation);
+        chickensList.Add(newChick);
+        numberOfChickens ++;
+        // chickensList.Add(Instantiate(chick, chickenGroupObj.transform.position, chickenGroupObj.transform.rotation));
+        // print(chick);
+        newChick.transform.parent = chickenGroupObj.transform;
+        
+        StatusMenuUI.FindObjectOfType<StatusMenuUI>().ChangeChickenName(chick.GetComponent<ChickenStatus>());
+
+        // ActivateChickensToggle();
+
     }
 }

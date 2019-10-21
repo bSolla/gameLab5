@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    int currentLevel=1;
+    public int currentLevel=1;
 
-    float currentExp=0;
+    public float currentExp=0;
     float necesaryExp=100;
 
     Text levelText;
@@ -57,6 +57,7 @@ public class LevelManager : MonoBehaviour
 
     void LevelUp()
     {
+        SearchText();
         currentLevel++;
         levelText.text = "" + currentLevel;
 

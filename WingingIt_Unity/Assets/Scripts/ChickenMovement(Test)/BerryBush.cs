@@ -26,10 +26,10 @@ public class BerryBush : MonoBehaviour
             {
                 chickLifted = true;
             }
-            else
-            {
-                chickLifted = false;
-            }
+            // else
+            // {
+            //     chickLifted = false;
+            // }
         }
     }
 
