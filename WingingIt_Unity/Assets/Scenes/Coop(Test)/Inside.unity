@@ -1785,7 +1785,8 @@ PrefabInstance:
       propertyPath: m_Text
       value: Legendary
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5041570725986700596, guid: 573ae69e3bb9c954bb43c66a983dc918, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 573ae69e3bb9c954bb43c66a983dc918, type: 3}
 --- !u!1001 &702608814
 PrefabInstance:
@@ -5437,61 +5438,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: NestHub
       objectReference: {fileID: 0}
-    - target: {fileID: 1851759229723895906, guid: 96f392a612d0d704fb6b61276d7cf5b6,
-        type: 3}
-      propertyPath: dropTrans.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1851759229723895906, guid: 96f392a612d0d704fb6b61276d7cf5b6,
-        type: 3}
-      propertyPath: dropTrans.Array.data[0]
-      value: 
-      objectReference: {fileID: 1424970595}
-    - target: {fileID: 1851759229723895906, guid: 96f392a612d0d704fb6b61276d7cf5b6,
-        type: 3}
-      propertyPath: dropTrans.Array.data[1]
-      value: 
-      objectReference: {fileID: 2062753972}
-    - target: {fileID: 1851759229723895906, guid: 96f392a612d0d704fb6b61276d7cf5b6,
-        type: 3}
-      propertyPath: dropTrans.Array.data[2]
-      value: 
-      objectReference: {fileID: 1608800984}
-    - target: {fileID: 1851759229723895906, guid: 96f392a612d0d704fb6b61276d7cf5b6,
-        type: 3}
-      propertyPath: dropTrans.Array.data[3]
-      value: 
-      objectReference: {fileID: 1725397932}
-    - target: {fileID: 1851759229723895906, guid: 96f392a612d0d704fb6b61276d7cf5b6,
-        type: 3}
-      propertyPath: dropTrans.Array.data[4]
-      value: 
-      objectReference: {fileID: 365518098}
-    - target: {fileID: 1851759229723895906, guid: 96f392a612d0d704fb6b61276d7cf5b6,
-        type: 3}
-      propertyPath: dropTrans.Array.data[5]
-      value: 
-      objectReference: {fileID: 1415916131}
-    - target: {fileID: 1851759229723895906, guid: 96f392a612d0d704fb6b61276d7cf5b6,
-        type: 3}
-      propertyPath: dropTrans.Array.data[6]
-      value: 
-      objectReference: {fileID: 2032838276}
-    - target: {fileID: 1851759229723895906, guid: 96f392a612d0d704fb6b61276d7cf5b6,
-        type: 3}
-      propertyPath: dropTrans.Array.data[7]
-      value: 
-      objectReference: {fileID: 969001433}
-    - target: {fileID: 1851759229723895906, guid: 96f392a612d0d704fb6b61276d7cf5b6,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1851759229723895909, guid: 96f392a612d0d704fb6b61276d7cf5b6,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6685718973391487090, guid: 96f392a612d0d704fb6b61276d7cf5b6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5547,65 +5493,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1851759229435378335, guid: 96f392a612d0d704fb6b61276d7cf5b6,
-        type: 3}
-      propertyPath: m_TagString
-      value: NestSpawn
-      objectReference: {fileID: 0}
-    - target: {fileID: 1851759228262743385, guid: 96f392a612d0d704fb6b61276d7cf5b6,
-        type: 3}
-      propertyPath: m_TagString
-      value: NestSpawn
-      objectReference: {fileID: 0}
-    - target: {fileID: 1851759228380640492, guid: 96f392a612d0d704fb6b61276d7cf5b6,
-        type: 3}
-      propertyPath: m_TagString
-      value: NestSpawn
-      objectReference: {fileID: 0}
-    - target: {fileID: 1851759228388609516, guid: 96f392a612d0d704fb6b61276d7cf5b6,
-        type: 3}
-      propertyPath: m_TagString
-      value: NestSpawn
-      objectReference: {fileID: 0}
-    - target: {fileID: 1851759228845818125, guid: 96f392a612d0d704fb6b61276d7cf5b6,
-        type: 3}
-      propertyPath: m_TagString
-      value: NestSpawn
-      objectReference: {fileID: 0}
-    - target: {fileID: 1851759228884191037, guid: 96f392a612d0d704fb6b61276d7cf5b6,
-        type: 3}
-      propertyPath: m_TagString
-      value: NestSpawn
-      objectReference: {fileID: 0}
-    - target: {fileID: 1851759229217922085, guid: 96f392a612d0d704fb6b61276d7cf5b6,
-        type: 3}
-      propertyPath: m_TagString
-      value: NestSpawn
-      objectReference: {fileID: 0}
-    - target: {fileID: 1851759229904580182, guid: 96f392a612d0d704fb6b61276d7cf5b6,
-        type: 3}
-      propertyPath: m_TagString
-      value: NestSpawn
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96f392a612d0d704fb6b61276d7cf5b6, type: 3}
---- !u!1 &1851759229799671695 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7679525921233056353, guid: 96f392a612d0d704fb6b61276d7cf5b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1851759229799671694}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1851759229799671696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1851759229799671695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 597ae8c576f25b349a3077a4290b4503, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chickenToAssign: {fileID: 0}
-  nests: []

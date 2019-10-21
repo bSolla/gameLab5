@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1851759228262743382}
   m_Layer: 0
   m_Name: EggSpawnPoint (2)
-  m_TagString: Untagged
+  m_TagString: NestSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 1851759228380640493}
   m_Layer: 0
   m_Name: EggSpawnPoint
-  m_TagString: Untagged
+  m_TagString: NestSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 1851759228388609517}
   m_Layer: 0
   m_Name: EggSpawnPoint (5)
-  m_TagString: Untagged
+  m_TagString: NestSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 1851759228845818122}
   m_Layer: 0
   m_Name: EggSpawnPoint (6)
-  m_TagString: Untagged
+  m_TagString: NestSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 1851759228884191034}
   m_Layer: 0
   m_Name: EggSpawnPoint (1)
-  m_TagString: Untagged
+  m_TagString: NestSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 1851759229217922082}
   m_Layer: 0
   m_Name: EggSpawnPoint (3)
-  m_TagString: Untagged
+  m_TagString: NestSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 1851759229435378332}
   m_Layer: 0
   m_Name: EggSpawnPoint (4)
-  m_TagString: Untagged
+  m_TagString: NestSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 1851759229904580183}
   m_Layer: 0
   m_Name: EggSpawnPoint (7)
-  m_TagString: Untagged
+  m_TagString: NestSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -252,7 +252,7 @@ GameObject:
   - component: {fileID: 8732801468091471106}
   - component: {fileID: 7241101559216376400}
   m_Layer: 0
-  m_Name: pCube3
+  m_Name: NestModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -328,8 +328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6685718973391487090}
   - component: {fileID: 1851759229723895911}
-  - component: {fileID: 1851759229723895906}
-  - component: {fileID: 1851759229723895909}
+  - component: {fileID: 1851759229799671696}
   m_Layer: 0
   m_Name: NestHub
   m_TagString: Untagged
@@ -373,7 +372,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8.000778, y: 1, z: 1.0000002}
   m_Center: {x: -2.0003884, y: 0.5, z: 0}
---- !u!114 &1851759229723895906
+--- !u!114 &1851759229799671696
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -382,23 +381,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7679525921233056353}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ff1b6ce922276c44bfca4854f3e0dd4, type: 3}
+  m_Script: {fileID: 11500000, guid: 597ae8c576f25b349a3077a4290b4503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eggPrefab: {fileID: 5169484645382410418, guid: 664ffd913ee225241bbe64f3b0274a47,
-    type: 3}
-  dropTrans: []
-  dropEgg: 0
---- !u!114 &1851759229723895909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7679525921233056353}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fb32b01135611d4b89c67f6c3507e71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eggCol: {fileID: 0}
+  chickenToAssign: {fileID: 0}
+  nests: []

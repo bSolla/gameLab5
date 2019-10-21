@@ -126,10 +126,10 @@ public class StatusMenuUI : MonoBehaviour
     public void EnterChickenName()
     {
         // Time.timeScale = 1;
-        ChickenStatus chick = GameManager.instance.chickensList[GameManager.instance.chickensList.Count -1].GetComponent<ChickenStatus>();
+        // ChickenStatus chick = GameManager.instance.chickensList[GameManager.instance.chickensList.Count -1].GetComponent<ChickenStatus>();
         inputField.gameObject.SetActive(false);
-        chick.chickenName = inputField.text;
-        nameText.text = chick.chickenName;
+        currentChicken.chickenName = inputField.text;
+        nameText.text = currentChicken.chickenName;
         inputField.text = null;
     }
 }
