@@ -214,9 +214,11 @@ MonoBehaviour:
   canMove: 1
   isLifted: 0
   isLowStatus: 0
+  isSleeping: 0
   hasHome: 0
   walkingToDoor: 0
   currentLocation: 
+  chickenModel: {fileID: 0}
 --- !u!114 &1379129168980753416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -443,6 +445,25 @@ MonoBehaviour:
   - {fileID: 21300000, guid: fc18bd68c029544419930918b69eeb9f, type: 3}
   - {fileID: 21300000, guid: fcb932c674930c441a193c4a3a3d32ff, type: 3}
   - {fileID: 21300000, guid: 5ca5d64031eb784419454e4b17396844, type: 3}
+--- !u!95 &7445775864139583558
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9214001764883630698}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7e1e996d8a22a4d45b23d7f353238b4f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &936564966171431779
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -525,16 +546,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.63818
       objectReference: {fileID: 0}
-    - target: {fileID: -1438514871319500463, guid: 092aed71de48778439463150f64de482,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: c6eb0552bdb71de4ba2cbed3f8ee1e21, type: 2}
     - target: {fileID: 5192188858039385122, guid: 092aed71de48778439463150f64de482,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: eb5f236ff5c587a459cc5c8b3ae142f1, type: 2}
+    - target: {fileID: -1438514871319500463, guid: 092aed71de48778439463150f64de482,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c6eb0552bdb71de4ba2cbed3f8ee1e21, type: 2}
     - target: {fileID: 7948071271580368374, guid: 092aed71de48778439463150f64de482,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -542,6 +563,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: eb5f236ff5c587a459cc5c8b3ae142f1, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 092aed71de48778439463150f64de482, type: 3}
+--- !u!1 &9214001764883630698 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 092aed71de48778439463150f64de482,
+    type: 3}
+  m_PrefabInstance: {fileID: 936564966171431779}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5297900096109738105 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 092aed71de48778439463150f64de482,
