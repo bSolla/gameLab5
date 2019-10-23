@@ -18,6 +18,7 @@ public class interactionConfirmation : MonoBehaviour
     public GameObject bubble;
     public bool confirmed = false;
     public bool uiActive = false;
+    public bool clickedOnObject = false;
     bool isBerryBush = false;
 
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -84,16 +85,20 @@ public class interactionConfirmation : MonoBehaviour
                     {
                         if (!uiActive)
                         {
+                            clickedOnObject = true;
                             StartCoroutine (setBubbleActive());
                         }
                         if (uiActive)
                         {
                             // Debug.Log ("clicked again");
+                            clickedOnObject = false;
                             confirmed = true;
                         }
                     }
                     else
                     {
+                        clickedOnObject = false;
+
                         disablebubble();
                         // Debug.Log ("disabling bubble idk");
                     }

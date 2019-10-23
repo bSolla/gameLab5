@@ -161,16 +161,16 @@ public class GameManager : MonoBehaviour
     {
         if (CurrentSceneName == "Inside")
         {
-            FindObjectOfType<FoodBowl>().avaliableFood = foodBoxAmount;
-            FindObjectOfType<FoodBowl>().AddFood(0);
+            FindObjectOfType<FoodBowl>().currentAmount = foodBoxAmount;
+            FindObjectOfType<FoodBowl>().AddAmount(0);
 
-            FindObjectOfType<WaterDispenser>().waterAvaliable = waterAmount;
+            FindObjectOfType<WaterDispenser>().currentAmount = waterAmount;
 
             if (pelletMinigame)
             {
                 pelletMinigame = false;
                 foodBoxAmount += (int)pelletScore;
-                FindObjectOfType<FoodBowl>().avaliableFood = foodBoxAmount;
+                FindObjectOfType<FoodBowl>().currentAmount = foodBoxAmount;
                 Debug.Log ("food amount: " + foodBoxAmount);
             }
         }
@@ -190,12 +190,12 @@ public class GameManager : MonoBehaviour
                 
                 foodVeggieAmount += (int)cuttingScore;
                 // print("Veggie food: " + (int)cuttingScore / 10);    
-                FindObjectOfType<FoodBowl>().avaliableFood = foodVeggieAmount;
-                FindObjectOfType<FoodBowl>().AddFood(0);               
+                FindObjectOfType<FoodBowl>().currentAmount = foodVeggieAmount;
+                FindObjectOfType<FoodBowl>().AddAmount(0);               
             }
 
             FindObjectOfType<BerryBush>().bushFull = bushIsFull;
-            FindObjectOfType<FoodBowl>().avaliableFood = foodVeggieAmount;
+            FindObjectOfType<FoodBowl>().currentAmount = foodVeggieAmount;
 
             
             //waterAmount
@@ -207,15 +207,15 @@ public class GameManager : MonoBehaviour
     {
         if (CurrentSceneName=="Inside")
         {
-            foodBoxAmount = FindObjectOfType<FoodBowl>().avaliableFood;
-            waterAmount = FindObjectOfType<WaterDispenser>().waterAvaliable;
+            foodBoxAmount = FindObjectOfType<FoodBowl>().currentAmount;
+            waterAmount = FindObjectOfType<WaterDispenser>().currentAmount;
 
         }
 
         if (CurrentSceneName=="Outside")
         {
             bushIsFull = FindObjectOfType<BerryBush>().bushFull;
-            foodVeggieAmount = FindObjectOfType<FoodBowl>().avaliableFood;
+            foodVeggieAmount = FindObjectOfType<FoodBowl>().currentAmount;
 
             //waterAmount
         }

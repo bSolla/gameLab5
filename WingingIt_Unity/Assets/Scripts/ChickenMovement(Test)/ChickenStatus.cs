@@ -172,7 +172,7 @@ public class ChickenStatus : MonoBehaviour
         if((GameManager.instance.foodBoxAmount<=0 && GameManager.instance.foodVeggieAmount <= 0))
         {
             
-            if(!chickenController.isLowStatus && food.avaliableFood <= 0)
+            if(!chickenController.isLowStatus && food.currentAmount <= 0)
             {
                 chickenController.AskingForHelp(0);
                 print("Low Status");
@@ -183,7 +183,7 @@ public class ChickenStatus : MonoBehaviour
         else
         {
             print ("Food: " + food);
-            if(food.avaliableFood <= 0)
+            if(food.currentAmount <= 0)
             {
                 // chickenController.canMove=true
                 if(chickenController.currentLocation == GameManager.instance.CurrentSceneName)
@@ -201,8 +201,6 @@ public class ChickenStatus : MonoBehaviour
             }
             else
             {
-                // if (food.avaliableFood >= 0)
-                // {
                 if(chickenController.currentLocation == GameManager.instance.CurrentSceneName)
                 {
                     chickenController.canMove = true;
@@ -210,7 +208,7 @@ public class ChickenStatus : MonoBehaviour
                 }
             }
         }
-        if (hunger >= 100 || ((food.avaliableFood <= 0 && hunger >= 80)))
+        if (hunger >= 100 || ((food.currentAmount <= 0 && hunger >= 80)))
         {
             currState = ChickenState.Normal;
             // chickenUI.StopAskForHelpUI();
@@ -230,7 +228,7 @@ public class ChickenStatus : MonoBehaviour
                 // chickenController.walkingToDoor = true;
                 if(GameManager.instance.currentSceneName == "Inside")
                 {
-                    GameManager.instance.waterAmount = water.waterAvaliable;            
+                    GameManager.instance.waterAmount = water.currentAmount;            
 
                 }
                 Debug.Log("There is no water in this scene");
@@ -255,7 +253,7 @@ public class ChickenStatus : MonoBehaviour
                 {
                     
 
-                    if (thirst >= 100 || (water.waterAvaliable <= 0 && thirst >= 50))
+                    if (thirst >= 100 || (water.currentAmount <= 0 && thirst >= 50))
                     {
                         currState = ChickenState.Normal;
                     }

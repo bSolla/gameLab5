@@ -435,10 +435,10 @@ public class Chicken_Controller : MonoBehaviour
                     transform.rotation = Quaternion.LookRotation(moveDir);
 
                 }
-                if (status.Food.avaliableFood > 0 && Vector3.Distance(transform.position, status.Food.transform.position) < 1f)
+                if (status.Food.currentAmount > 0 && Vector3.Distance(transform.position, status.Food.transform.position) < 1f)
                 {
                     status.hunger++;
-                    status.Food.AddFood(-1);
+                    status.Food.AddAmount(-1);
                 }
             }
             // else
@@ -467,12 +467,12 @@ public class Chicken_Controller : MonoBehaviour
                     transform.rotation = Quaternion.LookRotation(status.Water.transform.position);
 
                 }
-                else if(status.Water.waterAvaliable > 0 && Vector3.Distance(transform.position, status.Water.transform.position) < 4.0f)
+                else if(status.Water.currentAmount > 0 && Vector3.Distance(transform.position, status.Water.transform.position) < 4.0f)
                 {
                 // print ("Here");
 
                     status.thirst ++;
-                    status.Water.waterAvaliable --;
+                    status.Water.currentAmount --;
                 }
        
             }
