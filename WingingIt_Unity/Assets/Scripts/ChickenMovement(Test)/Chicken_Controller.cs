@@ -26,8 +26,10 @@ public class Chicken_Controller : MonoBehaviour
     ChickenStatus status;
     PettingController petting;
     public ChickenUI chickenUI;
-    public bool canMove = true, isLifted = false, isLowStatus = false;
+    public bool canMove = true, isLifted = false, isLowStatus = false, isSleeping = false;
+    public int sleeping;
     float timePressed = 0;
+    Vector3 perchPoint;
 
     public bool hasHome;
 
@@ -84,7 +86,7 @@ public class Chicken_Controller : MonoBehaviour
         // {
             
         // }
-        if (!petting.pettable)
+        if (!petting.pettable || sleeping == 0 || !status.menuUI.isMenuOpen)
         {
             LiftChicken();
             if(status.currState ==ChickenStatus.ChickenState.Normal && !walkingToDoor)
@@ -98,6 +100,14 @@ public class Chicken_Controller : MonoBehaviour
             }
         }
         TryForChangingLocation();
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            sleeping = 1;
+        }
+        if(sleeping == 1)
+        {
+            GoToSleep();
+        }
         // if(isLowStatus)
         // {
         //     AskingForHelp();
@@ -311,7 +321,7 @@ public class Chicken_Controller : MonoBehaviour
                     float t = Random.Range(1, 10);
                     yield return new WaitForSeconds(t);
                 }
-                if(!walkingToDoor)
+                if(!walkingToDoor && sleeping == 0)
                 {
                     target = newWalkingpoint();
                 }
@@ -321,8 +331,12 @@ public class Chicken_Controller : MonoBehaviour
                 
             }
 
-            transform.position += moveDir * Time.deltaTime;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target - transform.position), 7f * Time.deltaTime);
+            transform.position += moveDir.normalized * 2 * Time.deltaTime;
+            if(sleeping < 2)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target - transform.position), 7f * Time.deltaTime);
+                
+            }
 
         }
 
@@ -380,6 +394,26 @@ public class Chicken_Controller : MonoBehaviour
         {
             walkingToDoor = true;
         }
+        // else
+        // {
+        //     if(GameManager.instance.currentSceneName == "Inside")
+        //     {
+        //         if(perchPoint == null)
+        //         {
+        //             perchPoint = GameObject.FindGameObjectWithTag("Perch").transform.position;
+
+        //         }
+        //         else
+        //         {
+        //             if(Vector3.Distance(transform.position, perchPoint) <= 2f)
+        //             {
+        //                 sleeping = 1;
+
+        //             }
+        //         }
+                
+        //     }
+        // }
         isLifted = false;
     }
 
@@ -507,6 +541,14 @@ public class Chicken_Controller : MonoBehaviour
 
             
         }
+        if(col.gameObject.tag == "Perch")
+        {
+            print("Hit Perch");
+            if(sleeping == 0)
+            {
+                sleeping = 1;
+            }
+        }
     }
     public void AskingForHelp(int AskingForWhat)     //Hungry=0 - Thirsty=1  -  Sad=2
     {
@@ -542,6 +584,42 @@ public class Chicken_Controller : MonoBehaviour
             chickenUI.StopAskForHelpUI();
         }
 
+
+    }
+    void GoToSleep()
+    {
+        GameObject perchTarget = GameObject.Find("PerchPoints");
+        target = perchTarget.transform.position;
+        movingPoint(true);
+        print(target);
+
+        if(Vector3.Distance(transform.position, target) <= 0.2f && sleeping == 1)
+        {
+            Vector3 newRot = new Vector3(0,0,0);
+            transform.rotation = Quaternion.Euler(0,0,0);
+
+            // isSleeping = true;
+            sleeping = 2;
+            StartCoroutine(Sleeping());
+
+        }
+
+    }
+    IEnumerator Sleeping()
+    {
+        Animator anim = transform.GetComponentInChildren<Animator>();
+        print(anim);
+        GameObject.Find("SleepParticles").GetComponentInChildren<ParticleSystem>().Play();
+
+        anim.SetBool("isSleepAnim", true);
+        yield return new WaitForSeconds(10);
+        anim.SetBool("isSleepAnim", false);
+        GameObject.Find("SleepParticles").GetComponentInChildren<ParticleSystem>().Stop();
+
+        yield return new WaitForSeconds(0.5f);
+        // isSleeping = false;
+        sleeping = 0;
+        movingPoint(false);
 
     }
     public void LookAtPlayer()
