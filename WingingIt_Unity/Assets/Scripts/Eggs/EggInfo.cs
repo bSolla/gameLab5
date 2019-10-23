@@ -5,6 +5,8 @@ using UnityEngine;
 public class EggInfo : MonoBehaviour
 {
     public Material eggMaterial;
+    EggManager eggManager;
+
 
     public enum EggType { Common, Rare, Legendary};
     public EggType type;
@@ -15,6 +17,14 @@ public class EggInfo : MonoBehaviour
     private void Start()
     {
         GetComponentInChildren<Renderer>().material=eggMaterial;
+        eggManager = FindObjectOfType<EggManager>();
+    }
+    private void Update()
+    {
+        if(eggManager.currentEgg == null)
+        {
+            eggManager.currentEgg = this.gameObject;
+        }
     }
 
 }
