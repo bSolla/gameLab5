@@ -12,7 +12,7 @@ public class EggManager : MonoBehaviour
     bool eggDroped;
     bool eggPicked;
     EggInfo eggInfo;
-    GameObject currentEgg;
+    [HideInInspector] public GameObject currentEgg;
 
     LevelManager lm;
 
@@ -107,10 +107,12 @@ public class EggManager : MonoBehaviour
             {
                 if (eggPicked)
                 {
+        
+                    
                     Destroy(currentEgg);
                     eggPicked = false;
                 }
-                if (eggDroped)
+                if (eggDroped  && !lm.lvUpImage.activeInHierarchy)
                 {
                     PickUpEgg();
                 }            
@@ -136,6 +138,7 @@ public class EggManager : MonoBehaviour
 
                 EggInfo info = currentEgg.GetComponent<EggInfo>();
                 AddToColection(info);
+                oldTime = currentTime;
 
                 switch (info.type)
                 {
@@ -239,7 +242,7 @@ public class EggManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-          return true;  
+            return true;  
         }
 
 
@@ -247,7 +250,7 @@ public class EggManager : MonoBehaviour
         {
             return true;
         }
-        if(currentTime.Minute - oldTime.Minute > 1)
+        if(currentTime.Minute - oldTime.Minute >= 1)
         {
             return true;
         }
@@ -275,7 +278,6 @@ public class EggManager : MonoBehaviour
             }
             
             eggDroped=true;
-            oldTime = currentTime;
 
             // dropTrans = GameObject.FindGameObjectWithTag("Chicken").transform.position;
             // dropTrans = this.gameObject.transform.GetChild(0).GetChild(0).gameObject.transform.position;

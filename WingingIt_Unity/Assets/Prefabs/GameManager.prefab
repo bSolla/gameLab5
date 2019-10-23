@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8933451334184571414}
   - component: {fileID: 8933451334184571409}
   - component: {fileID: 4221390657849830244}
+  - component: {fileID: 2489152607408209385}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -67,6 +68,33 @@ MonoBehaviour:
   currentLevel: 1
   currentExp: 0
   lvUpImage: {fileID: 0}
+--- !u!114 &2489152607408209385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8933451334184571408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455a9c50b59b1ba439f67fa5a894dfae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentEgg: {fileID: 0}
+  commonExp: 20
+  rareExp: 50
+  legendaryExp: 100
+  eggPrefab: {fileID: 0}
+  dropTrans:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  dropEgg: 0
 --- !u!1 &8933451334696015888
 GameObject:
   m_ObjectHideFlags: 0

@@ -53,7 +53,7 @@ public class interactionConfirmation : MonoBehaviour
 
                     if (Physics.Raycast(ray, out hit, 100))
                     {
-                        if (hit.collider == this.gameObject.GetComponent<BoxCollider>())
+                        if (hit.collider == this.gameObject.GetComponent<BoxCollider>() || hit.collider == bubble.GetComponent<Collider>())
                         {
                             // if (uiActive)
                             // {
@@ -80,7 +80,7 @@ public class interactionConfirmation : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hit, 100))
                 {
-                    if (hit.collider == this.gameObject.GetComponent<Collider>())
+                    if (hit.collider == this.gameObject.GetComponent<Collider>() || hit.collider == bubble.GetComponent<Collider>())
                     {
                         if (!uiActive)
                         {

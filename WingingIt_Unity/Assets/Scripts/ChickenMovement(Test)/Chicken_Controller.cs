@@ -396,23 +396,23 @@ public class Chicken_Controller : MonoBehaviour
         }
         // else
         // {
-        //     if(GameManager.instance.currentSceneName == "Inside")
-        //     {
-        //         if(perchPoint == null)
-        //         {
-        //             perchPoint = GameObject.FindGameObjectWithTag("Perch").transform.position;
+            if(GameManager.instance.currentSceneName == "Inside")
+            {
+                if(perchPoint == null)
+                {
+                    perchPoint = GameObject.FindGameObjectWithTag("Perch").transform.position;
 
-        //         }
-        //         else
-        //         {
-        //             if(Vector3.Distance(transform.position, perchPoint) <= 2f)
-        //             {
-        //                 sleeping = 1;
+                }
+                // else
+                // {
+                    if(Vector3.Distance(transform.position, perchPoint) <= 4f)
+                    {
+                        sleeping = 1;
 
-        //             }
-        //         }
+                    }
+                // }
                 
-        //     }
+            }
         // }
         isLifted = false;
     }
@@ -530,6 +530,17 @@ public class Chicken_Controller : MonoBehaviour
         }
         
     }
+    void OnTriggerEnter(Collider col)
+    {
+        if(col.gameObject.tag == "Perch")
+        {
+            print("Hit Perch");
+            if(sleeping == 0)
+            {
+                sleeping = 1;
+            }
+        }
+    }
     void OnCollisionStay (Collision col)
     {
         if(col.gameObject.tag == "Chicken")
@@ -541,14 +552,7 @@ public class Chicken_Controller : MonoBehaviour
 
             
         }
-        if(col.gameObject.tag == "Perch")
-        {
-            print("Hit Perch");
-            if(sleeping == 0)
-            {
-                sleeping = 1;
-            }
-        }
+        
     }
     public void AskingForHelp(int AskingForWhat)     //Hungry=0 - Thirsty=1  -  Sad=2
     {

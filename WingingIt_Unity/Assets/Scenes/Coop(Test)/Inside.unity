@@ -315,6 +315,7 @@ GameObject:
   - component: {fileID: 162468654}
   - component: {fileID: 162468656}
   - component: {fileID: 162468655}
+  - component: {fileID: 162468657}
   m_Layer: 5
   m_Name: BubbleDoor
   m_TagString: Untagged
@@ -379,6 +380,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 162468653}
   m_CullTransparentMesh: 0
+--- !u!135 &162468657
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162468653}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.86
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &163568812
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,6 +496,7 @@ GameObject:
   - component: {fileID: 172466156}
   - component: {fileID: 172466158}
   - component: {fileID: 172466157}
+  - component: {fileID: 172466159}
   m_Layer: 5
   m_Name: BubbleFeeder
   m_TagString: Untagged
@@ -546,6 +561,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 172466155}
   m_CullTransparentMesh: 0
+--- !u!135 &172466159
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172466155}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.86
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &212513133
 GameObject:
   m_ObjectHideFlags: 0
@@ -1965,7 +1993,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 702608815}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 7.117343, y: 2.8166664, z: 5.5172696}
@@ -4982,6 +5010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 455a9c50b59b1ba439f67fa5a894dfae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentEgg: {fileID: 0}
   commonExp: 100
   rareExp: 140
   legendaryExp: 180
@@ -5093,6 +5122,7 @@ PrefabInstance:
     - {fileID: 6690190599524073280, guid: 1b470f326d2870b45abc185014a4ad5b, type: 3}
     - {fileID: 1661527560957211143, guid: 1b470f326d2870b45abc185014a4ad5b, type: 3}
     - {fileID: 4524656455730733267, guid: 1b470f326d2870b45abc185014a4ad5b, type: 3}
+    - {fileID: 2489152607408209385, guid: 1b470f326d2870b45abc185014a4ad5b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1b470f326d2870b45abc185014a4ad5b, type: 3}
 --- !u!4 &2032838276 stripped
 Transform:
