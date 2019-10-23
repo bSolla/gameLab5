@@ -30,8 +30,8 @@ public class GameManager : MonoBehaviour
     // S T A T E   V A R I A B L E S
 
     bool bushIsFull=true;
-    public int foodBoxAmount=50, foodVeggieAmount=50;
-    public int waterAmount;
+    public int foodBoxAmount = 85, foodVeggieAmount = 85;
+    public int waterAmount = 85;
 
     Chicken_Controller chickInBush;
     bool berryMinigame;
@@ -47,20 +47,6 @@ public class GameManager : MonoBehaviour
     public float PelletScore { get => pelletScore; set => pelletScore = value; }
     bool pelletMinigame;
     public bool PelletMinigame { get => pelletMinigame; set => pelletMinigame = value; }
-
-
-
-    /*To do:
-     * 
-     * Save the amount of food and water each time we change scenes 
-     * 
-     * Save the state of the bush each time we change scenes
-     * 
-     * Make them be the same when we come back to the scene
-     * 
-     * Show the results of the minigammes (more food, bush empty...)            Everything done but water
-     */
-
 
 
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -85,6 +71,8 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+
     // Caches the chicken group object and instantiates chickens inside it 
     public void InitializeAndCacheChildObjects()
     {
@@ -104,6 +92,7 @@ public class GameManager : MonoBehaviour
         ActivateChickensToggle();
     }
 
+
     // Destroys all chickens inside the chicken list 
     public void ClearChickenGroup()
     {
@@ -114,6 +103,7 @@ public class GameManager : MonoBehaviour
 
         chickensList.Clear();
     }
+
 
     //Each time a level is load the manager checks if we are in the coop or not and activate the chickens if they are suposed to be there
     void OnLoadCallback(Scene scene, LoadSceneMode sceneMode)
@@ -161,16 +151,16 @@ public class GameManager : MonoBehaviour
     {
         if (CurrentSceneName == "Inside")
         {
-            FindObjectOfType<FoodBowl>().avaliableFood = foodBoxAmount;
-            FindObjectOfType<FoodBowl>().AddFood(0);
+            FindObjectOfType<FoodBowl>().currentAmount = foodBoxAmount;
+            FindObjectOfType<FoodBowl>().AddAmount(0);
 
-            FindObjectOfType<WaterDispenser>().waterAvaliable = waterAmount;
+            FindObjectOfType<WaterDispenser>().currentAmount = waterAmount;
 
             if (pelletMinigame)
             {
                 pelletMinigame = false;
                 foodBoxAmount += (int)pelletScore;
-                FindObjectOfType<FoodBowl>().avaliableFood = foodBoxAmount;
+                FindObjectOfType<FoodBowl>().currentAmount = foodBoxAmount;
                 Debug.Log ("food amount: " + foodBoxAmount);
             }
         }
@@ -190,12 +180,12 @@ public class GameManager : MonoBehaviour
                 
                 foodVeggieAmount += (int)cuttingScore;
                 // print("Veggie food: " + (int)cuttingScore / 10);    
-                FindObjectOfType<FoodBowl>().avaliableFood = foodVeggieAmount;
-                FindObjectOfType<FoodBowl>().AddFood(0);               
+                FindObjectOfType<FoodBowl>().currentAmount = foodVeggieAmount;
+                FindObjectOfType<FoodBowl>().AddAmount(0);               
             }
 
             FindObjectOfType<BerryBush>().bushFull = bushIsFull;
-            FindObjectOfType<FoodBowl>().avaliableFood = foodVeggieAmount;
+            FindObjectOfType<FoodBowl>().currentAmount = foodVeggieAmount;
 
             
             //waterAmount
@@ -207,19 +197,21 @@ public class GameManager : MonoBehaviour
     {
         if (CurrentSceneName=="Inside")
         {
-            foodBoxAmount = FindObjectOfType<FoodBowl>().avaliableFood;
-            waterAmount = FindObjectOfType<WaterDispenser>().waterAvaliable;
+            foodBoxAmount = FindObjectOfType<FoodBowl>().currentAmount;
+            waterAmount = FindObjectOfType<WaterDispenser>().currentAmount;
 
         }
 
         if (CurrentSceneName=="Outside")
         {
             bushIsFull = FindObjectOfType<BerryBush>().bushFull;
-            foodVeggieAmount = FindObjectOfType<FoodBowl>().avaliableFood;
+            foodVeggieAmount = FindObjectOfType<FoodBowl>().currentAmount;
 
             //waterAmount
         }
     }
+
+
     // returns a list of ChickenStatusValues for the chickens
     public List<ChickenStatusValues> GetChickenStatusList()
     {
@@ -259,6 +251,8 @@ public class GameManager : MonoBehaviour
             chickStatus.chickenName = chickenStatusValues[i].name;
         }
     }
+
+
     public void GetNewChicken()
     {
         GameObject chickenGroupObj = this.transform.GetChild(0).gameObject;
