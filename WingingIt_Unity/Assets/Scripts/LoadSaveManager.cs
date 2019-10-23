@@ -90,7 +90,10 @@ public class LoadSaveManager : MonoBehaviour
         file.Close();
     }
 
-
+    public void DoLoad()            //For button
+    {
+        Load();
+    }
     public bool Load()
     {
         bool exists = File.Exists(SAVE_NAME);
