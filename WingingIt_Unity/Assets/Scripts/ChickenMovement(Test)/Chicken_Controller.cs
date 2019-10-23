@@ -612,7 +612,7 @@ public class Chicken_Controller : MonoBehaviour
         GameObject.Find("SleepParticles").GetComponentInChildren<ParticleSystem>().Play();
 
         anim.SetBool("isSleepAnim", true);
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(10);
         anim.SetBool("isSleepAnim", false);
         GameObject.Find("SleepParticles").GetComponentInChildren<ParticleSystem>().Stop();
 
