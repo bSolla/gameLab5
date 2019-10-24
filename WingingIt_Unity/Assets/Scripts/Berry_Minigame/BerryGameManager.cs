@@ -23,7 +23,12 @@ public class BerryGameManager : MonoBehaviour
     ParticleSystem endOfPuzzleParticles;
 
     Text endOfGameText;
-    [SerializeField] string endMessage = "You got food!!";
+    [SerializeField] string endMessage = "Food amount: ";
+
+    Text points;
+    int currentPoints = 0;
+    int cumulativePoints = 0;
+
 
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 //                                  M E T H O D S 
@@ -34,8 +39,10 @@ public class BerryGameManager : MonoBehaviour
         endOfPuzzleParticles = GetComponentInChildren<ParticleSystem>();
         endOfPuzzleParticles.playbackSpeed = 2f;
 
-        endOfGameText = GetComponentInChildren<Text>();
+        Text[] textArray = GetComponentsInChildren<Text>();
+        endOfGameText = textArray[0];
         endOfGameText.text = "";
+        points = textArray[1];
 
         StartMinigame();
     }
@@ -47,7 +54,9 @@ public class BerryGameManager : MonoBehaviour
     IEnumerator ChangeCurrentPuzzle(GameObject currentPuzzle)
     {
         endOfPuzzleParticles.Play();
-        
+
+        cumulativePoints += currentPoints;
+
         yield return new WaitForSeconds(3.0f);
 
         Destroy(currentPuzzle);
@@ -57,8 +66,12 @@ public class BerryGameManager : MonoBehaviour
         else
         {
             yield return new WaitForSeconds(0.5f);
-            endOfGameText.text = endMessage;
-            yield return new WaitForSeconds(2f);
+
+            endOfGameText.text = endMessage + cumulativePoints.ToString();
+            yield return new WaitForSeconds(3f);
+
+            //GameManager.instance.ChickInBush.GetComponent<ChickenStatus>().hunger += cumulativePoints;
+            GameManager.instance.foodVeggieAmount += cumulativePoints;
 
             GetComponent<ChangingScenes>().GoToScene("Outside");      //-----------------Go back to the coop, just for now, has to be changed
         }
@@ -72,7 +85,10 @@ public class BerryGameManager : MonoBehaviour
         int puzzleNumber = Random.Range(1, numberOfPuzzlesPerLevel + 1);
         GameObject berryMinigame = Resources.Load(levelsFolderPath + currentLevel + "/" + puzzleNumber) as GameObject;
 
-        Instantiate(berryMinigame, transform.position, transform.rotation);
+        Instantiate(berryMinigame, transform.position, transform.rotation, gameObject.transform);
+
+        currentPoints = 10 * currentLevel + 5;
+        points.text = currentPoints.ToString();
 
         currentLevel++;
     }
@@ -82,5 +98,15 @@ public class BerryGameManager : MonoBehaviour
     public void EndMiniGame(GameObject currentPuzzle)
     {
         StartCoroutine(ChangeCurrentPuzzle(currentPuzzle));
+    }
+
+
+    public void LosePoints()
+    {
+        if (currentPoints > 5)
+        {
+            currentPoints--;
+            points.text = currentPoints.ToString();
+        }
     }
 }

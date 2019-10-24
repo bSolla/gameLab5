@@ -171,7 +171,8 @@ public class GameManager : MonoBehaviour
             {
                 berryMinigame = false;
 
-                ChickInBush.GetComponent<ChickenStatus>().hunger += 30;         //Put the value we want to feed the chicken with the minigame
+                // done in the berry manager
+                //ChickInBush.GetComponent<ChickenStatus>().hunger += 30;
             }
 
             if (cutMinigame)
