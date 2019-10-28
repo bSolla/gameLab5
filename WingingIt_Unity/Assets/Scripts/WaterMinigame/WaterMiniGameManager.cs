@@ -44,8 +44,8 @@ public class WaterMiniGameManager : MonoBehaviour
             waterer.following = false;
             gameOver = true;
             particleSystem.gameObject.SetActive(false);
-            //GameManager.instance.WaterMinigame = true;
-            //GameManager.instance.WaterScore = finalScore;
+            GameManager.instance.WaterMinigame = true;
+            GameManager.instance.WaterScore = finalScore;
 
         }
     }

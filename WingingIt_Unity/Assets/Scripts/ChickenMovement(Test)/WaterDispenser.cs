@@ -40,7 +40,7 @@ public Text waterAvaliableText;
         {
             waterAvaliable = maxWaterAvaliable;
         }
-        fillWater();
+        //fillWater();
     }
     private void fillWater()
     {
@@ -53,6 +53,15 @@ public Text waterAvaliableText;
             {
                 waterAvaliable += 100;
             }
+        }
+    }
+
+    public void AddWater(int water)
+    {
+        waterAvaliable += water;
+        if (waterAvaliable > maxWaterAvaliable)
+        {
+            waterAvaliable = maxWaterAvaliable;
         }
     }
 }

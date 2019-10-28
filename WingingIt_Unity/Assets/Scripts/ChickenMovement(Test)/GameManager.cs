@@ -160,14 +160,16 @@ public class GameManager : MonoBehaviour
         {
             FindObjectOfType<FoodBowl>().avaliableFood = foodBoxAmount;
             FindObjectOfType<FoodBowl>().AddFood(0);
+            FindObjectOfType<WaterDispenser>().waterAvaliable = waterAmount;
+            FindObjectOfType<WaterDispenser>().AddWater(0);
 
             if (waterMinigame)
             {
                 waterMinigame = false;
                 
-                waterAmount += (int)waterScore;
-                // print("Veggie food: " + (int)cuttingScore / 10);    
+                waterAmount += (int)waterScore;    
                 FindObjectOfType<WaterDispenser>().waterAvaliable = waterAmount;
+                Debug.Log ("water amount: " + waterAmount);
                 //FindObjectOfType<WaterDispenser>().AddFood(0);               
             }
             //FindObjectOfType<WaterDispenser>().waterAvaliable = waterAmount;
