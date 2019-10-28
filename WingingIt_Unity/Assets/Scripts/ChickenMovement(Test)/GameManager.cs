@@ -49,6 +49,12 @@ public class GameManager : MonoBehaviour
     public bool PelletMinigame { get => pelletMinigame; set => pelletMinigame = value; }
 
 
+    bool waterMinigame;
+    float waterScore;
+    public bool WaterMinigame { get => waterMinigame; set => waterMinigame = value; }
+    public float WaterScore { get => waterScore; set => waterScore = value; }
+
+
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 //                                  M E T H O D S 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -161,7 +167,16 @@ public class GameManager : MonoBehaviour
                 pelletMinigame = false;
                 foodBoxAmount += (int)pelletScore;
                 FindObjectOfType<FoodBowl>().currentAmount = foodBoxAmount;
-                Debug.Log ("food amount: " + foodBoxAmount);
+                // Debug.Log ("food amount: " + foodBoxAmount);
+            }
+            if (waterMinigame)
+            {
+                waterMinigame = false;
+                
+                waterAmount += (int)waterScore;    
+                FindObjectOfType<WaterDispenser>().AddWater(waterAmount);
+                // Debug.Log ("water amount: " + waterAmount);
+                //FindObjectOfType<WaterDispenser>().AddFood(0);               
             }
         }
 

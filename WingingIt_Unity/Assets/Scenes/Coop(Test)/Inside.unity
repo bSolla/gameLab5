@@ -3568,6 +3568,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc6b80bb3e8551b439b8cb2c2af22736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1120522346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120522340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6329f8ef7e6dd004c832d3376e49d8a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: WaterMinigame
+  clickable: 1
+  intCon: {fileID: 1120522344}
 --- !u!1 &1169444453
 GameObject:
   m_ObjectHideFlags: 0
@@ -5673,7 +5688,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1906987790}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -5713,7 +5728,7 @@ SphereCollider:
   m_GameObject: {fileID: 1906987790}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.76
   m_Center: {x: 0, y: 0, z: 0}
@@ -5881,6 +5896,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -3.24
       objectReference: {fileID: 0}
+    - target: {fileID: 4221390657849830244, guid: 1b470f326d2870b45abc185014a4ad5b,
+        type: 3}
+      propertyPath: lvUpImage
+      value: 
+      objectReference: {fileID: 2038422040}
     - target: {fileID: 413030102736331545, guid: 1b470f326d2870b45abc185014a4ad5b,
         type: 3}
       propertyPath: dropTrans.Array.data[0]
@@ -6054,6 +6074,12 @@ PrefabInstance:
 --- !u!224 &2038422039 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 855124603254248369, guid: a1232983063ecd14a9c1adae43199d8e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2038422038}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2038422040 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 855124603736016033, guid: a1232983063ecd14a9c1adae43199d8e,
     type: 3}
   m_PrefabInstance: {fileID: 2038422038}
   m_PrefabAsset: {fileID: 0}

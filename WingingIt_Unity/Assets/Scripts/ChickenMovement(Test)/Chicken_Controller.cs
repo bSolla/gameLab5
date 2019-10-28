@@ -208,6 +208,7 @@ public class Chicken_Controller : MonoBehaviour
         // GetComponent<MeshRenderer>().enabled = true;
         chickenModel.SetActive(true);
         GetComponent<CapsuleCollider>().enabled = true;
+        
     }
     void CacheDoor()
     {

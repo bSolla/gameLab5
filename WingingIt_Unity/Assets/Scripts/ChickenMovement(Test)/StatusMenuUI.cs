@@ -76,6 +76,10 @@ public class StatusMenuUI : MonoBehaviour
             {
                 ChangeChickenName(currentChicken);
             }
+            else
+            {
+                EnterChickenName();
+            }
         }
         if(hungerSlider == null || thirstSlider == null || happinessSlider == null || nameText == null)
         {

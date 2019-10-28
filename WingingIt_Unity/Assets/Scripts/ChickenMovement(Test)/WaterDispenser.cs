@@ -50,4 +50,12 @@ public class WaterDispenser : BaseBowl
             }
         }
     }
+    public void AddWater(int water)
+    {
+        // waterAvaliable += water;
+        // if (waterAvaliable > maxWaterAvaliable)
+        // {
+            AddAmount(water);
+    // }
+    }
 }
