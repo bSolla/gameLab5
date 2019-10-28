@@ -43,6 +43,11 @@ public class GameManager : MonoBehaviour
     public bool CutMinigame { get => cutMinigame; set => cutMinigame = value; }
     public float CuttingScore { get => cuttingScore; set => cuttingScore = value; }
 
+    bool waterMinigame;
+    float waterScore;
+    public bool WaterMinigame { get => waterMinigame; set => waterMinigame = value; }
+    public float WaterScore { get => waterScore; set => waterScore = value; }
+
 
 
     /*To do:
@@ -156,7 +161,16 @@ public class GameManager : MonoBehaviour
             FindObjectOfType<FoodBowl>().avaliableFood = foodBoxAmount;
             FindObjectOfType<FoodBowl>().AddFood(0);
 
-            FindObjectOfType<WaterDispenser>().waterAvaliable = waterAmount;
+            if (waterMinigame)
+            {
+                waterMinigame = false;
+                
+                waterAmount += (int)waterScore;
+                // print("Veggie food: " + (int)cuttingScore / 10);    
+                FindObjectOfType<WaterDispenser>().waterAvaliable = waterAmount;
+                //FindObjectOfType<WaterDispenser>().AddFood(0);               
+            }
+            //FindObjectOfType<WaterDispenser>().waterAvaliable = waterAmount;
         }
 
         if (CurrentSceneName == "Outside")

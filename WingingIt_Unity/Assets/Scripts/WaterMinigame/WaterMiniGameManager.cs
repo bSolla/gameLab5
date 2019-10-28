@@ -38,7 +38,7 @@ public class WaterMiniGameManager : MonoBehaviour
             timeLeft.gameObject.SetActive (false);
             scoreText.gameObject.SetActive (false);
             finalScoreText.gameObject.SetActive(true);
-            finalScore = score / 10;
+            finalScore = score / 24;
             finalScoreText.text = ("Water gained: " + finalScore.ToString());
             exitGameButton.gameObject.SetActive(true);
             waterer.following = false;

@@ -154,8 +154,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 101, y: -32}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 161.31, y: -32}
+  m_SizeDelta: {x: 280.62, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &57721187
 MonoBehaviour:
@@ -3870,7 +3870,7 @@ ParticleSystem:
     m_Bounce:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -3974,7 +3974,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     minKillSpeed: 0
-    maxKillSpeed: 4
+    maxKillSpeed: 3
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
