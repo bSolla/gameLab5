@@ -2126,6 +2126,26 @@ PrefabInstance:
       propertyPath: m_Text
       value: Legendary
       objectReference: {fileID: 0}
+    - target: {fileID: 6917850401498004664, guid: 573ae69e3bb9c954bb43c66a983dc918,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.399994
+      objectReference: {fileID: 0}
+    - target: {fileID: 6917850401640610287, guid: 573ae69e3bb9c954bb43c66a983dc918,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 30.200012
+      objectReference: {fileID: 0}
+    - target: {fileID: 6917850400782349665, guid: 573ae69e3bb9c954bb43c66a983dc918,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.000061035156
+      objectReference: {fileID: 0}
+    - target: {fileID: 6917850400782349665, guid: 573ae69e3bb9c954bb43c66a983dc918,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000030517578
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 573ae69e3bb9c954bb43c66a983dc918, type: 3}
 --- !u!1 &641404585
@@ -5891,11 +5911,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6374582812028331911, guid: 1b470f326d2870b45abc185014a4ad5b,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.24
-      objectReference: {fileID: 0}
     - target: {fileID: 4221390657849830244, guid: 1b470f326d2870b45abc185014a4ad5b,
         type: 3}
       propertyPath: lvUpImage
@@ -5941,6 +5956,11 @@ PrefabInstance:
       propertyPath: dropTrans.Array.data[7]
       value: 
       objectReference: {fileID: 969001433}
+    - target: {fileID: 6374582812028331911, guid: 1b470f326d2870b45abc185014a4ad5b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.24
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6690190599524073280, guid: 1b470f326d2870b45abc185014a4ad5b, type: 3}
     - {fileID: 1661527560957211143, guid: 1b470f326d2870b45abc185014a4ad5b, type: 3}
