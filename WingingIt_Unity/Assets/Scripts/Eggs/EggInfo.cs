@@ -7,6 +7,7 @@ public class EggInfo : MonoBehaviour
     public Material eggMaterial;
     EggManager eggManager;
 
+
     public enum EggType { Common, Rare, Legendary};
     public EggType type;
     public int eggNum;

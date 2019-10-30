@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1851759228262743382}
   m_Layer: 0
   m_Name: EggSpawnPoint (2)
-  m_TagString: NestSpawn
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 1851759228380640493}
   m_Layer: 0
   m_Name: EggSpawnPoint
-  m_TagString: NestSpawn
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 1851759228388609517}
   m_Layer: 0
   m_Name: EggSpawnPoint (5)
-  m_TagString: NestSpawn
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 1851759228845818122}
   m_Layer: 0
   m_Name: EggSpawnPoint (6)
-  m_TagString: NestSpawn
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 1851759228884191034}
   m_Layer: 0
   m_Name: EggSpawnPoint (1)
-  m_TagString: NestSpawn
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 1851759229217922082}
   m_Layer: 0
   m_Name: EggSpawnPoint (3)
-  m_TagString: NestSpawn
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 1851759229435378332}
   m_Layer: 0
   m_Name: EggSpawnPoint (4)
-  m_TagString: NestSpawn
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 1851759229904580183}
   m_Layer: 0
   m_Name: EggSpawnPoint (7)
-  m_TagString: NestSpawn
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -252,7 +252,7 @@ GameObject:
   - component: {fileID: 8732801468091471106}
   - component: {fileID: 7241101559216376400}
   m_Layer: 0
-  m_Name: NestModel
+  m_Name: pCube3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

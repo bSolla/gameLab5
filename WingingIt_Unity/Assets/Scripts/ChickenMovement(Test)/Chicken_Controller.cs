@@ -26,10 +26,11 @@ public class Chicken_Controller : MonoBehaviour
     ChickenStatus status;
     PettingController petting;
     public ChickenUI chickenUI;
-    public bool canMove = true, isLifted = false, isLowStatus = false, isSleeping = false;
+    public bool canMove = true, isLifted = false, isLowStatus = false;
     public int sleeping;
+    public Transform perchPoint;
+
     float timePressed = 0;
-    Vector3 perchPoint;
 
     public bool hasHome;
 
@@ -100,6 +101,7 @@ public class Chicken_Controller : MonoBehaviour
             }
         }
         TryForChangingLocation();
+
         if(Input.GetKeyDown(KeyCode.S))
         {
             sleeping = 1;
@@ -206,6 +208,7 @@ public class Chicken_Controller : MonoBehaviour
         // GetComponent<MeshRenderer>().enabled = true;
         chickenModel.SetActive(true);
         GetComponent<CapsuleCollider>().enabled = true;
+        
     }
     void CacheDoor()
     {
@@ -321,7 +324,7 @@ public class Chicken_Controller : MonoBehaviour
                     float t = Random.Range(1, 10);
                     yield return new WaitForSeconds(t);
                 }
-                if(!walkingToDoor && sleeping == 0)
+                if(!walkingToDoor  && sleeping == 0)
                 {
                     target = newWalkingpoint();
                 }
@@ -337,7 +340,6 @@ public class Chicken_Controller : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target - transform.position), 7f * Time.deltaTime);
                 
             }
-
         }
 
 
@@ -373,6 +375,14 @@ public class Chicken_Controller : MonoBehaviour
                 transform.position = moveDir;
                 // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Camera.main.transform.position - transform.position), 7f * Time.deltaTime);
                 LookAtPlayer();
+                if(GameManager.instance.currentSceneName == "Inside")
+                {
+                    if(perchPoint == null)
+                    {
+                        perchPoint = GameObject.FindGameObjectWithTag("Perch").transform;
+
+                    }
+                }
             }
         }
 
@@ -394,30 +404,26 @@ public class Chicken_Controller : MonoBehaviour
         {
             walkingToDoor = true;
         }
-        // else
-        // {
-            if(GameManager.instance.currentSceneName == "Inside")
-            {
-                if(perchPoint == null)
+        if(GameManager.instance.currentSceneName == "Inside")
+        {
+            // if(perchPoint == null)
+            // {
+            //     perchPoint = GameObject.FindGameObjectWithTag("Perch").transform.position;
+
+            // }
+            // // else
+            // {
+                if(Vector3.Distance(transform.position, perchPoint.position) <= 4f)
                 {
-                    perchPoint = GameObject.FindGameObjectWithTag("Perch").transform.position;
+                    sleeping = 1;
 
                 }
-                // else
-                // {
-                    if(Vector3.Distance(transform.position, perchPoint) <= 4f)
-                    {
-                        sleeping = 1;
-
-                    }
-                // }
-                
-            }
+            // }
+            
+        }
         // }
         isLifted = false;
     }
-
-
 
     public Vector3 newWalkingpoint()
     {
@@ -469,10 +475,10 @@ public class Chicken_Controller : MonoBehaviour
                     transform.rotation = Quaternion.LookRotation(moveDir);
 
                 }
-                if (status.Food.avaliableFood > 0 && Vector3.Distance(transform.position, status.Food.transform.position) < 1f)
+                if (status.Food.currentAmount > 0 && Vector3.Distance(transform.position, status.Food.transform.position) < 1f)
                 {
                     status.hunger++;
-                    status.Food.AddFood(-1);
+                    status.Food.AddAmount(-1);
                 }
             }
             // else
@@ -501,12 +507,12 @@ public class Chicken_Controller : MonoBehaviour
                     transform.rotation = Quaternion.LookRotation(status.Water.transform.position);
 
                 }
-                else if(status.Water.waterAvaliable > 0 && Vector3.Distance(transform.position, status.Water.transform.position) < 4.0f)
+                else if(status.Water.currentAmount > 0 && Vector3.Distance(transform.position, status.Water.transform.position) < 4.0f)
                 {
                 // print ("Here");
 
                     status.thirst ++;
-                    status.Water.waterAvaliable --;
+                    status.Water.currentAmount --;
                 }
        
             }
@@ -552,7 +558,6 @@ public class Chicken_Controller : MonoBehaviour
 
             
         }
-        
     }
     public void AskingForHelp(int AskingForWhat)     //Hungry=0 - Thirsty=1  -  Sad=2
     {
@@ -590,8 +595,18 @@ public class Chicken_Controller : MonoBehaviour
 
 
     }
+    public void LookAtPlayer()
+    {
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Camera.main.transform.position - transform.position), 20f * Time.deltaTime);
+        if(sleeping < 1)
+        {
+            canMove = false;
+
+        }
+    }
     void GoToSleep()
     {
+        canMove = true;
         GameObject perchTarget = GameObject.Find("PerchPoints");
         target = perchTarget.transform.position;
         movingPoint(true);
@@ -625,11 +640,6 @@ public class Chicken_Controller : MonoBehaviour
         sleeping = 0;
         movingPoint(false);
 
-    }
-    public void LookAtPlayer()
-    {
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Camera.main.transform.position - transform.position), 20f * Time.deltaTime);
-        canMove = false;
     }
     
     public IEnumerator DelayAskForHelp()

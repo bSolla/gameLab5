@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8933451334184571414}
   - component: {fileID: 8933451334184571409}
   - component: {fileID: 4221390657849830244}
-  - component: {fileID: 2489152607408209385}
+  - component: {fileID: 413030102736331545}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -48,11 +48,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chickenGroup: {fileID: 8933451334696015888}
   currentSceneName: 
-  numberOfChickens: 2
+  numberOfChickens: 1
   chickensList: []
-  foodBoxAmount: 50
-  foodVeggieAmount: 50
-  waterAmount: 0
+  foodBoxAmount: 85
+  foodVeggieAmount: 85
+  waterAmount: 85
 --- !u!114 &4221390657849830244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
   currentLevel: 1
   currentExp: 0
   lvUpImage: {fileID: 0}
---- !u!114 &2489152607408209385
+--- !u!114 &413030102736331545
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -80,11 +80,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 455a9c50b59b1ba439f67fa5a894dfae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentEgg: {fileID: 0}
   commonExp: 20
   rareExp: 50
   legendaryExp: 100
-  eggPrefab: {fileID: 0}
+  eggPrefab: {fileID: 5169484645382410418, guid: 664ffd913ee225241bbe64f3b0274a47,
+    type: 3}
   dropTrans:
   - {fileID: 0}
   - {fileID: 0}

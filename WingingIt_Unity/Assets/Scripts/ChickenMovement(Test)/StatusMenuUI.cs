@@ -66,11 +66,19 @@ public class StatusMenuUI : MonoBehaviour
                     CloseMenu();
 
                 }
-                else
-                {
-                    ChangeChickenName(currentChicken);
+                // else
+                // {
+                //     ChangeChickenName(currentChicken);
 
-                }
+                // }
+            }
+            if(currentChicken.chickenName == null)
+            {
+                ChangeChickenName(currentChicken);
+            }
+            else
+            {
+                EnterChickenName();
             }
         }
         if(hungerSlider == null || thirstSlider == null || happinessSlider == null || nameText == null)
@@ -116,7 +124,7 @@ public class StatusMenuUI : MonoBehaviour
     public void ChangeChickenName(ChickenStatus chick)
     {
         
-        OpenMenu(chick);
+        // OpenMenu(chick);
         nameText.text = " ";
         inputField.gameObject.SetActive(true);
         // Time.timeScale = 0;

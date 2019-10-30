@@ -18,6 +18,7 @@ public class interactionConfirmation : MonoBehaviour
     public GameObject bubble;
     public bool confirmed = false;
     public bool uiActive = false;
+    public bool clickedOnObject = false;
     bool isBerryBush = false;
 
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -33,6 +34,7 @@ public class interactionConfirmation : MonoBehaviour
             isBerryBush = true;
         }
     }
+
 
     // Update is called once per frame
     void Update()
@@ -53,7 +55,7 @@ public class interactionConfirmation : MonoBehaviour
 
                     if (Physics.Raycast(ray, out hit, 100))
                     {
-                        if (hit.collider == this.gameObject.GetComponent<BoxCollider>() || hit.collider == bubble.GetComponent<Collider>())
+                        if (hit.collider == this.gameObject.GetComponent<Collider>() || hit.collider == bubble.GetComponent<Collider>())
                         {
                             // if (uiActive)
                             // {
@@ -84,16 +86,20 @@ public class interactionConfirmation : MonoBehaviour
                     {
                         if (!uiActive)
                         {
+                            clickedOnObject = true;
                             StartCoroutine (setBubbleActive());
                         }
                         if (uiActive)
                         {
                             // Debug.Log ("clicked again");
+                            clickedOnObject = false;
                             confirmed = true;
                         }
                     }
                     else
                     {
+                        clickedOnObject = false;
+
                         disablebubble();
                         // Debug.Log ("disabling bubble idk");
                     }
@@ -102,6 +108,7 @@ public class interactionConfirmation : MonoBehaviour
         }
     }
 
+
     IEnumerator setBubbleActive()
     {
         Debug.Log ("activating bubble");
@@ -109,6 +116,8 @@ public class interactionConfirmation : MonoBehaviour
         yield return new WaitForSeconds (0.5f);
         uiActive = true;
     }
+
+
     void disablebubble()
     {
         bubble.SetActive(false);
