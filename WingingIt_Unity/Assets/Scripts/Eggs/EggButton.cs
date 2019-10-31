@@ -14,6 +14,13 @@ public class EggButton : MonoBehaviour
     //I need to do this because with the add listener i cant pass a reference of the material to the other script
     void CallOtherMethod()
     {
-        FindObjectOfType<EggColection>().ShowEgg(GetComponentInChildren<MeshRenderer>().material);
+        EggColection col=FindObjectOfType<EggColection>();
+        if (col.showingEgg)
+        {
+            col.bigEgg.SetActive(false);
+            col.showingEgg = false;
+        }
+        else { col.ShowEgg(GetComponentInChildren<MeshRenderer>().material); }
+        
     }
 }

@@ -9,11 +9,11 @@ public class EggColection : MonoBehaviour
 
     [SerializeField] GameObject eggButton;
 
-    [SerializeField] GameObject bigEgg;
+    public GameObject bigEgg;
 
     Transform subpanel;
 
-    bool showingEgg;
+    public bool showingEgg;
     float timeHolding;
 
     // Start is called before the first frame update

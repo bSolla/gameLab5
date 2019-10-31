@@ -12,8 +12,7 @@ public class EggManager : MonoBehaviour
     bool eggDroped;
     bool eggPicked;
     EggInfo eggInfo;
-    [HideInInspector] public GameObject currentEgg;
-    
+    [HideInInspector] public GameObject currentEgg;    
 
     LevelManager lm;
 
@@ -24,8 +23,8 @@ public class EggManager : MonoBehaviour
     //Kine variables
     public DateTime currentTime, oldTime;
     public GameObject eggPrefab;
-    public Transform[] dropTrans;
-    public bool dropEgg;
+    Transform[] dropTrans;
+
 
     public EggInfo[] CommonEggs { get => commonEggs; set => commonEggs = value; }
     public EggInfo[] RareEggs { get => rareEggs; set => rareEggs = value; }
@@ -38,8 +37,6 @@ public class EggManager : MonoBehaviour
 
     private void Awake()
     {
-        lm = FindObjectOfType<LevelManager>();
-
         Material[] commonMaterials = Resources.LoadAll<Material>("Common Materials");
         Material[] rareMaterials = Resources.LoadAll<Material>("Rare Materials");
         Material[] legendaryMaterials = Resources.LoadAll<Material>("Legendary Materials");
@@ -51,10 +48,12 @@ public class EggManager : MonoBehaviour
         int i = 0; 
         foreach (Material mat in commonMaterials)
         {
-            CommonEggs[i] = new EggInfo();
-            CommonEggs[i].eggMaterial = mat;
-            CommonEggs[i].type = EggInfo.EggType.Common;
-            CommonEggs[i].owned = false;
+            CommonEggs[i] = new EggInfo()
+            {
+                eggMaterial = mat,
+                type = EggInfo.EggType.Common,
+                owned = false,
+            };
             i++;
         }
 
@@ -77,21 +76,42 @@ public class EggManager : MonoBehaviour
             LegendaryEggs[i].owned = false;
             i++;
         }
-        
     }
 
     //When you change scenes eggs disapear so the scripts thinks that there is an egg when its not, so each time a scene is loaded the bool is set to false
-    private void OnLevelWasLoaded(int level)  //Maybe better if this is done in another way
-    {
+     public void RefreshScene()  //Maybe better if we call this from the gm, I dont want to do it now because it may overwritte
+     {
         eggDroped = false; //If we make the eggs apears always in the nest we can just remove this method but I'll keep ot here for now
         eggPicked = false;
+
+        if (GameManager.instance.CurrentSceneName=="Inside")
+        {
+            SearchSpawnPoints();
+        }
+     }
+
+
+    void SearchSpawnPoints()
+    {
+        GameObject[] nestObjects = GameObject.FindGameObjectsWithTag("NestSpawn");
+        dropTrans = new Transform[nestObjects.Length];
+        for (int i = 0; i < nestObjects.Length; i++)
+        {
+                dropTrans[i] = nestObjects[i].transform;
+        }
     }
 
-    
     void Start()
     {
         print(System.DateTime.Now);
         oldTime = DateTime.Now;
+
+        if (GameManager.instance.CurrentSceneName == "Inside")
+        {
+            SearchSpawnPoints();
+        }
+
+        lm = GetComponent<LevelManager>();
     }
 
 
@@ -111,7 +131,8 @@ public class EggManager : MonoBehaviour
                     Destroy(currentEgg);
                     eggPicked = false;
                 }
-                if (eggDroped  && !lm.lvUpImage.activeInHierarchy)
+
+                if (eggDroped  && !lm.LvUpImage.activeInHierarchy)
                 {
                     PickUpEgg();
                 }            
@@ -195,9 +216,6 @@ public class EggManager : MonoBehaviour
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<        E G G   D R O P   M E T H O D S      >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
-        //I think i did a mesh with something while i was copping the script because it spawns the egg always in the same place and when there are still eggs in the scene
-
-
     //Checks if its time to drop an egg
     // private void CheckNewTime()
     // {
@@ -229,6 +247,7 @@ public class EggManager : MonoBehaviour
             
     //     }
     // }
+
     bool DropTheEgg()
     {
         currentTime = DateTime.Now;
@@ -264,33 +283,25 @@ public class EggManager : MonoBehaviour
     //Instantiates an egg
     private void DropAnEgg()
     {
-        print(transform.name + " I have this script bitch");
-        if(GameManager.instance.currentSceneName == "Inside")
-        {
-            if(dropTrans[0] == null)
-            {
-                GameObject[] nestObjects = GameObject.FindGameObjectsWithTag("NestSpawn");
-                for(int i = 0; i<nestObjects.Length; i++)
-                {
-                    dropTrans[i] = nestObjects[i].transform;
-                }
-            }
             
             eggDroped=true;
-            // oldTime = currentTime;
+        // oldTime = currentTime;
 
-            // dropTrans = GameObject.FindGameObjectWithTag("Chicken").transform.position;
-            // dropTrans = this.gameObject.transform.GetChild(0).GetChild(0).gameObject.transform.position;
-            // dropTrans = new Vector3(dropTrans.x + 2, 0.5f, dropTrans.z + 2);
-            Vector3 myDropTrans = dropTrans[UnityEngine.Random.Range(0, GameManager.instance.numberOfChickens -1)].position;        
+        // dropTrans = GameObject.FindGameObjectWithTag("Chicken").transform.position;
+        // dropTrans = this.gameObject.transform.GetChild(0).GetChild(0).gameObject.transform.position;
+        // dropTrans = new Vector3(dropTrans.x + 2, 0.5f, dropTrans.z + 2);
 
-            GameObject newEgg = Instantiate(eggPrefab, myDropTrans, transform.rotation);
-            eggInfo=newEgg.GetComponent<EggInfo>();
-            ChooseRandomEgg();
-            currentEgg = newEgg;        
+        int num = UnityEngine.Random.Range(0, GameManager.instance.numberOfChickens - 1);
+        print(num);
+        Vector3 myDropTrans = dropTrans[num].position;        
+
+        GameObject newEgg = Instantiate(eggPrefab, myDropTrans, transform.rotation);
+        eggInfo=newEgg.GetComponent<EggInfo>();
+        ChooseRandomEgg();
+        currentEgg = newEgg;        
 
             //GetComponent<EggPickUp>().eggCol = newEgg.GetComponent<Collider>();
-        }
+        
     }
 
     

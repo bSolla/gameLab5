@@ -11,13 +11,16 @@ public class LevelManager : MonoBehaviour
     float necesaryExp=100;
 
     Text levelText;
-    public GameObject lvUpImage;
+    GameObject lvUpImage;
+
+    public GameObject LvUpImage { get => lvUpImage;}
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //Should get the experience and the level from the loading script
+        SearchText();
     }
 
     //<<<<<<<<<<<<<<<<<<<<  When a scene is loaded (if is inside or outside) we have to call the Search Text method form the GM   >>>>>>>>>>>>>>>>>>>>>>
@@ -27,16 +30,11 @@ public class LevelManager : MonoBehaviour
         levelText = GameObject.Find("Level Number").GetComponent<Text>();
         levelText.text = "" + currentLevel;
 
-        if(lvUpImage == null)
-        {
-            lvUpImage = GameObject.Find("Lv Up Image");
+        lvUpImage = GameObject.Find("Canvas/LevelUpUI/Lv Up Image"); print(lvUpImage);
 
-        }
         lvUpImage.GetComponentInChildren<Button>().onClick.AddListener(CloseLvUpImage);
         
         lvUpImage.SetActive(false);
-        print("Hello im check");
-
     }
 
 
@@ -67,7 +65,7 @@ public class LevelManager : MonoBehaviour
         currentLevel++;
         levelText.text = "" + currentLevel;
 
-        lvUpImage.SetActive(true);
+        LvUpImage.SetActive(true);
         print("LEVEL UP now you are "+ currentLevel);
         //Whatever this should unlook like custom assets....
     }

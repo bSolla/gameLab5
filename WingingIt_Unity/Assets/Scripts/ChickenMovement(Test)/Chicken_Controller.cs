@@ -315,8 +315,6 @@ public class Chicken_Controller : MonoBehaviour
         {
             if(Vector3.Distance(transform.position, target) < 0.1f)
             {
-                print("Moving point making a new move");
-                
                 
                 if(!MoveNow)
                 {
@@ -464,7 +462,6 @@ public class Chicken_Controller : MonoBehaviour
         //     if (currentLocation=="Inside" || currentLocation=="Outside")
         
             // walkingToDoor = false;
-            print("Getting Food");
             if (canMove)
             {
                 Vector3 moveDir = status.Food.transform.position - transform.position;

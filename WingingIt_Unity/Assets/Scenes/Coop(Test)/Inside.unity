@@ -2146,7 +2146,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.000030517578
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5041570725986700596, guid: 573ae69e3bb9c954bb43c66a983dc918, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 573ae69e3bb9c954bb43c66a983dc918, type: 3}
 --- !u!1 &641404585
 GameObject:
@@ -5916,6 +5917,11 @@ PrefabInstance:
       propertyPath: lvUpImage
       value: 
       objectReference: {fileID: 2038422040}
+    - target: {fileID: 6374582812028331911, guid: 1b470f326d2870b45abc185014a4ad5b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.24
+      objectReference: {fileID: 0}
     - target: {fileID: 413030102736331545, guid: 1b470f326d2870b45abc185014a4ad5b,
         type: 3}
       propertyPath: dropTrans.Array.data[0]
@@ -5956,11 +5962,6 @@ PrefabInstance:
       propertyPath: dropTrans.Array.data[7]
       value: 
       objectReference: {fileID: 969001433}
-    - target: {fileID: 6374582812028331911, guid: 1b470f326d2870b45abc185014a4ad5b,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.24
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6690190599524073280, guid: 1b470f326d2870b45abc185014a4ad5b, type: 3}
     - {fileID: 1661527560957211143, guid: 1b470f326d2870b45abc185014a4ad5b, type: 3}
@@ -6550,11 +6551,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1851759229435378335, guid: 96f392a612d0d704fb6b61276d7cf5b6,
-        type: 3}
-      propertyPath: m_TagString
-      value: NestSpawn
-      objectReference: {fileID: 0}
     - target: {fileID: 1851759228262743385, guid: 96f392a612d0d704fb6b61276d7cf5b6,
         type: 3}
       propertyPath: m_TagString
@@ -6581,6 +6577,11 @@ PrefabInstance:
       value: NestSpawn
       objectReference: {fileID: 0}
     - target: {fileID: 1851759229217922085, guid: 96f392a612d0d704fb6b61276d7cf5b6,
+        type: 3}
+      propertyPath: m_TagString
+      value: NestSpawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 1851759229435378335, guid: 96f392a612d0d704fb6b61276d7cf5b6,
         type: 3}
       propertyPath: m_TagString
       value: NestSpawn
