@@ -184,7 +184,6 @@ public class Chicken_Controller : MonoBehaviour
     
     public void ActivateChicken()
     {
-        print("Activate");
         CacheDoor();
         // target = spawnPoint;
         // gameObject.transform.position = spawnPoint;
@@ -301,10 +300,7 @@ public class Chicken_Controller : MonoBehaviour
         if(canMove && currentLocation == GameManager.instance.CurrentSceneName)
         {
             if(Vector3.Distance(transform.position, target) < 0.1f)
-            {
-                print("Moving point making a new move");
-                
-                
+            {                
                 if(!MoveNow)
                 {
                     canMove = false;
@@ -424,7 +420,6 @@ public class Chicken_Controller : MonoBehaviour
         //     if (currentLocation=="Inside" || currentLocation=="Outside")
         
             // walkingToDoor = false;
-            print("Getting Food");
             if (canMove)
             {
                 Vector3 moveDir = status.Food.transform.position - transform.position;

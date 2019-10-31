@@ -42,8 +42,12 @@ public class ChangingScenes : MonoBehaviour
     }
 
     //This is for putting it in an object with collider
+    bool isRunning = false;
     IEnumerator CheckInput()
     {
+        if (isRunning)
+            yield break;
+        isRunning = true;
         // if (Input.GetMouseButtonUp(0))
         // {
             
@@ -75,6 +79,8 @@ public class ChangingScenes : MonoBehaviour
 
         SceneManager.LoadScene(sceneName);
         intCon.confirmed = false;
+
+        isRunning = false;
     }
 
 

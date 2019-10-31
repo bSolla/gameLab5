@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class LevelManager : MonoBehaviour
 {
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    //                                V A R I A B L E S 
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
     public int currentLevel=1;
 
     public float currentExp=0;
@@ -13,10 +18,17 @@ public class LevelManager : MonoBehaviour
     Text levelText;
     public GameObject lvUpImage;
 
+    LevelReguards lr;
 
-    // Start is called before the first frame update
+
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    //                                  M E T H O D S 
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
     void Start()
     {
+        lr = GetComponent<LevelReguards>();
+
         //Should get the experience and the level from the loading script
     }
 
@@ -35,16 +47,10 @@ public class LevelManager : MonoBehaviour
         lvUpImage.GetComponentInChildren<Button>().onClick.AddListener(CloseLvUpImage);
         
         lvUpImage.SetActive(false);
-        print("Hello im check");
 
     }
 
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
 
     public void AddExp(float exp)
@@ -60,7 +66,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-
+    //Remember to show the sprites of the reguards
     void LevelUp()
     {
         SearchText();
@@ -69,7 +75,14 @@ public class LevelManager : MonoBehaviour
 
         lvUpImage.SetActive(true);
         print("LEVEL UP now you are "+ currentLevel);
+
         //Whatever this should unlook like custom assets....
+        List<LevelReguards.Reguard> rgList = lr.GetReguards(currentLevel);
+
+        foreach (LevelReguards.Reguard rg in rgList)
+        {
+            print(rg.lv); print(rg.type);
+        }
     }
 
     void CloseLvUpImage()

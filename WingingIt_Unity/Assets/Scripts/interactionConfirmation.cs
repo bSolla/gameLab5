@@ -104,7 +104,6 @@ public class interactionConfirmation : MonoBehaviour
 
     IEnumerator setBubbleActive()
     {
-        Debug.Log ("activating bubble");
         bubble.SetActive(true);
         yield return new WaitForSeconds (0.5f);
         uiActive = true;

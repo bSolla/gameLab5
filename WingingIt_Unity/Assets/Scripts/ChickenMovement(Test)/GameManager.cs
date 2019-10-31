@@ -83,6 +83,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(this.gameObject);
+            Destroy(this);
         }
     }
     // Caches the chicken group object and instantiates chickens inside it 

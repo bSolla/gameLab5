@@ -184,7 +184,6 @@ public class ChickenStatus : MonoBehaviour
         }
         else
         {
-            print ("Food: " + food);
             if(food.avaliableFood <= 0)
             {
                 // chickenController.canMove=true

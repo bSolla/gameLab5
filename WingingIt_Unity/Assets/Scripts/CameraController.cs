@@ -18,7 +18,6 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         cam = GetComponent<Camera>();
-        print("Start Camera");
         transitionDuration=1.5f;
         // Coop = new Vector3 (CoopTarget.position.x, CoopTarget.position.y, -4);
         // // Store = new Vector3 (StoreTarget.position.x, StoreTarget.position.y, -4);
@@ -67,7 +66,6 @@ public class CameraController : MonoBehaviour
         // {
             while (t < 1.0f)
             {
-                Debug.Log ("moving cam inside coop");
                 t += Time.deltaTime * (Time.timeScale/transitionDuration);
                 // transform.position = Vector3.Lerp (startPos, door.position * 0.1f, t);
                 
