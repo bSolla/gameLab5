@@ -197,13 +197,13 @@ public class GameManager : MonoBehaviour
                 cutMinigame = false;
                 
                 foodVeggieAmount += (int)cuttingScore;
-                // print("Veggie food: " + (int)cuttingScore / 10);    
-                FindObjectOfType<FoodBowl>().currentAmount = foodVeggieAmount;
-                FindObjectOfType<FoodBowl>().AddAmount(0);               
+                //// print("Veggie food: " + (int)cuttingScore / 10);    
+                //FindObjectOfType<FoodBowl>().currentAmount = foodVeggieAmount;
+                //FindObjectOfType<FoodBowl>().AddAmount(0);               
             }
 
             FindObjectOfType<BerryBush>().bushFull = bushIsFull;
-            FindObjectOfType<FoodBowl>().currentAmount = foodVeggieAmount;
+            FindObjectOfType<VeggieBowl>().currentAmount = foodVeggieAmount;
 
             
             //waterAmount
@@ -223,7 +223,7 @@ public class GameManager : MonoBehaviour
         if (CurrentSceneName=="Outside")
         {
             bushIsFull = FindObjectOfType<BerryBush>().bushFull;
-            foodVeggieAmount = FindObjectOfType<FoodBowl>().currentAmount;
+            //foodVeggieAmount = FindObjectOfType<FoodBowl>().currentAmount;
 
             //waterAmount
         }
