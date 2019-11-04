@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 112833716196955875}
   - component: {fileID: 1379129168980753416}
   - component: {fileID: 422778013}
+  - component: {fileID: 6848104415206053247}
   m_Layer: 0
   m_Name: Chicken
   m_TagString: Chicken
@@ -213,8 +214,6 @@ MonoBehaviour:
   chickenUI: {fileID: 194272353060305259}
   canMove: 1
   isLifted: 0
-  isLowStatus: 0
-  isSleeping: 0
   hasHome: 0
   walkingToDoor: 0
   currentLocation: 
@@ -253,6 +252,21 @@ MonoBehaviour:
   happiness: 100
   menuUI: {fileID: 0}
   chickenName: Chonky Floofersen
+--- !u!114 &6848104415206053247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2562248997079129264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62cd3835ca895b14cb7a149263c154ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perchTarget: {fileID: 0}
+  sleeping: 0
+  isSleeping: 0
 --- !u!1 &3736237851264577464
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,16 +560,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.63818
       objectReference: {fileID: 0}
-    - target: {fileID: 5192188858039385122, guid: 092aed71de48778439463150f64de482,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: eb5f236ff5c587a459cc5c8b3ae142f1, type: 2}
     - target: {fileID: -1438514871319500463, guid: 092aed71de48778439463150f64de482,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c6eb0552bdb71de4ba2cbed3f8ee1e21, type: 2}
+    - target: {fileID: 5192188858039385122, guid: 092aed71de48778439463150f64de482,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: eb5f236ff5c587a459cc5c8b3ae142f1, type: 2}
     - target: {fileID: 7948071271580368374, guid: 092aed71de48778439463150f64de482,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

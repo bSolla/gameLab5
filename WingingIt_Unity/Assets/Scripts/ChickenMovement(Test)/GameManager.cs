@@ -122,8 +122,6 @@ public class GameManager : MonoBehaviour
 
         //<<<<<<<<<<<<<<<<<<     This is to make the level manager work while changing scenes     >>>>>>>>>>>>>>>>>>
         GetComponent<LevelManager>().SearchText();
-
-        GetComponent<EggManager>().RefreshScene();
     }
 
 

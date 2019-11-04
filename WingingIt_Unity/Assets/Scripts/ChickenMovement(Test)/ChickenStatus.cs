@@ -26,9 +26,9 @@ public class ChickenStatus : MonoBehaviour
     // public DateTime currTime, lastTime;
     public string chickenName;
     bool isOpen;
-    bool askForHelp;
 
     Chicken_Controller chickenController;
+    AskForHelp askForHelp;
     FoodBowl food;
     WaterDispenser water;
     public FoodBowl Food { get => food; }
@@ -51,6 +51,7 @@ public class ChickenStatus : MonoBehaviour
         // gm = FindObjectOfType<GameManager>();
 
         chickenController = GetComponent<Chicken_Controller>();
+        askForHelp = GetComponent<AskForHelp>();
 
         timerHunger = 10;
 
@@ -174,10 +175,10 @@ public class ChickenStatus : MonoBehaviour
         if((GameManager.instance.foodBoxAmount<=0 && GameManager.instance.foodVeggieAmount <= 0))
         {
             
-            if(!chickenController.isLowStatus && food.currentAmount <= 0)
+            if(!askForHelp.isLowStatus && food.currentAmount <= 0)
             {
-                chickenController.AskingForHelp(0);
-                print("Low Status");
+                askForHelp.AskingForHelp(0);
+                // print("Low Status");
 
             // chickenController.canMove = false;
             }
@@ -235,12 +236,12 @@ public class ChickenStatus : MonoBehaviour
                     GameManager.instance.waterAmount = water.currentAmount;            
 
                 }
-                Debug.Log("There is no water in this scene");
+                // Debug.Log("There is no water in this scene");
                 // chickenController.StartCoroutine(SomethingIsWrong());
-                if(!chickenController.isLowStatus)
+                if(!askForHelp.isLowStatus)
                 {
-                    chickenController.AskingForHelp(1);
-                    print("Low Status");
+                    askForHelp.AskingForHelp(1);
+                    // print("Low Status");
 
                 // chickenController.canMove = false;
                 }
@@ -280,10 +281,10 @@ public class ChickenStatus : MonoBehaviour
             // chickenUI.StopAskForHelpUI();
 
         }
-        if(!chickenController.isLowStatus)
+        if(!askForHelp.isLowStatus)
         {
-            chickenController.AskingForHelp(2);
-            print("Low Status");
+            askForHelp.AskingForHelp(2);
+            // print("Low Status");
 
         // chickenController.canMove = false;
         }

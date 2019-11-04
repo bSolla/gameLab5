@@ -24,7 +24,7 @@ public class StatusMenuUI : MonoBehaviour
 
     public bool isMenuOpen;
 
-    ChickenStatus currentChicken;
+    public ChickenStatus currentChicken;
     Camera cam;
 
 
@@ -49,16 +49,35 @@ public class StatusMenuUI : MonoBehaviour
     {
         if (Panel.activeSelf)
         {
-            hungerSlider.value = currentChicken.hunger;
-            thirstSlider.value = currentChicken.thirst;
-            happinessSlider.value = currentChicken.happiness;
-
             currentChicken.GetComponent<Chicken_Controller>().LookAtPlayer();
 
+        //     // hungerSlider.value = currentChicken.hunger;
+        //     // thirstSlider.value = currentChicken.thirst;
+        //     // happinessSlider.value = currentChicken.happiness;
 
+        //     // currentChicken.GetComponent<Chicken_Controller>().LookAtPlayer();
+
+
+        //     // if (delay > 0)
+        //     // { delay -= Time.deltaTime; }
+            
+        //     // else if (Input.GetMouseButtonUp(0))
+        //     // {
+        //     //     if(currentChicken.chickenName != null )
+        //     //     {
+        //     //         CloseMenu();
+
+        //     //     }
+        //     //     // else
+        //     //     // {
+        //     //     //     ChangeChickenName(currentChicken);
+
+        //     //     // }
+        //     // }
+            
             if (delay > 0)
             { delay -= Time.deltaTime; }
-            
+                
             else if (Input.GetMouseButtonUp(0))
             {
                 if(currentChicken.chickenName != null )
@@ -72,15 +91,7 @@ public class StatusMenuUI : MonoBehaviour
 
                 // }
             }
-            if(currentChicken.chickenName == null)
-            {
-                ChangeChickenName(currentChicken);
-            }
-            else
-            {
-                EnterChickenName();
-            }
-        }
+    }
         if(hungerSlider == null || thirstSlider == null || happinessSlider == null || nameText == null)
         {
             FindSliders();
@@ -96,7 +107,23 @@ public class StatusMenuUI : MonoBehaviour
     {
         currentChicken = chick;
         Panel.SetActive(true);
-        nameText.text = currentChicken.chickenName;
+
+        hungerSlider.value = currentChicken.hunger;
+        thirstSlider.value = currentChicken.thirst;
+        happinessSlider.value = currentChicken.happiness;
+
+        if(currentChicken.chickenName == null)
+        {
+            ChangeChickenName(currentChicken);
+        }
+        else
+        {
+            inputField.gameObject.SetActive(false);
+            
+            nameText.text = currentChicken.chickenName;
+            
+        }
+
         delay = 0.5f;
         isMenuOpen = true;
         cam.GetComponent<CameraFollow>().startFollowing(currentChicken.transform);
@@ -121,10 +148,11 @@ public class StatusMenuUI : MonoBehaviour
         happinessSlider = panel.transform.GetChild(2).GetComponent<Slider>();
         nameText = panel.transform.GetChild(3).GetComponent<Text>();
     }
-    public void ChangeChickenName(ChickenStatus chick)
+    void ChangeChickenName(ChickenStatus chick)
     {
         
         // OpenMenu(chick);
+        print ("ChangeChickenName");
         nameText.text = " ";
         inputField.gameObject.SetActive(true);
         // Time.timeScale = 0;
@@ -135,9 +163,14 @@ public class StatusMenuUI : MonoBehaviour
     {
         // Time.timeScale = 1;
         // ChickenStatus chick = GameManager.instance.chickensList[GameManager.instance.chickensList.Count -1].GetComponent<ChickenStatus>();
+        // if(inputField.gameObject.activeSelf)
+        // {
         inputField.gameObject.SetActive(false);
         currentChicken.chickenName = inputField.text;
-        nameText.text = currentChicken.chickenName;
         inputField.text = null;
+            
+
+        // }
+        nameText.text = currentChicken.chickenName;
     }
 }
