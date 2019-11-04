@@ -132,7 +132,7 @@ public class EggManager : MonoBehaviour
                     eggPicked = false;
                 }
 
-                if (eggDroped  && !lm.LvUpImage.activeInHierarchy)
+                if (eggDroped  && !lm.lvUpImage.activeInHierarchy)
                 {
                     PickUpEgg();
                 }            

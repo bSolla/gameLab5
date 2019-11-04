@@ -11,16 +11,19 @@ public class LevelManager : MonoBehaviour
     float necesaryExp=100;
 
     Text levelText;
-    GameObject lvUpImage;
+    public GameObject lvUpImage;
 
-    public GameObject LvUpImage { get => lvUpImage;}
+    // public GameObject LvUpImage { get => lvUpImage;}
+
+    LevelReguards lr;
 
 
-    // Start is called before the first frame update
-    void Awake()
+
+    void Start()
     {
+        lr = GetComponent<LevelReguards>();
+
         //Should get the experience and the level from the loading script
-        SearchText();
     }
 
     //<<<<<<<<<<<<<<<<<<<<  When a scene is loaded (if is inside or outside) we have to call the Search Text method form the GM   >>>>>>>>>>>>>>>>>>>>>>
@@ -30,18 +33,14 @@ public class LevelManager : MonoBehaviour
         levelText = GameObject.Find("Level Number").GetComponent<Text>();
         levelText.text = "" + currentLevel;
 
-        lvUpImage = GameObject.Find("Canvas/LevelUpUI/Lv Up Image"); print(lvUpImage);
+        if(lvUpImage == null)
+        {
+            lvUpImage = GameObject.Find("Lv Up Image");
 
+        }
         lvUpImage.GetComponentInChildren<Button>().onClick.AddListener(CloseLvUpImage);
         
         lvUpImage.SetActive(false);
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
 
@@ -65,9 +64,16 @@ public class LevelManager : MonoBehaviour
         currentLevel++;
         levelText.text = "" + currentLevel;
 
-        LvUpImage.SetActive(true);
+        lvUpImage.SetActive(true);
         print("LEVEL UP now you are "+ currentLevel);
         //Whatever this should unlook like custom assets....
+         //Whatever this should unlook like custom assets....
+        List<LevelReguards.Reguard> rgList = lr.GetReguards(currentLevel);
+
+        foreach (LevelReguards.Reguard rg in rgList)
+        {
+            print(rg.lv); print(rg.type);
+        }
     }
 
     void CloseLvUpImage()
